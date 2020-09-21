@@ -11,7 +11,11 @@ const App: React.FC = () => {
   return (
     <ThemeProvider theme={useDarkTheme ? THEME_DARK : THEME_LIGHT}>
       <GlobalStyles />
-      <Button variant="primary" onClick={() => setUseDarkTheme((s) => !s)}>
+      <Button
+        variant="primary"
+        size="lg"
+        onClick={() => setUseDarkTheme((s) => !s)}
+      >
         {useDarkTheme ? "Light" : "Dark"} theme
       </Button>
       <Router>
