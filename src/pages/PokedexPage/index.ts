@@ -1,1 +1,1 @@
-export { default } from "./PokedexPage";
+export { default } from "./PokedexPageContainer";
