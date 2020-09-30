@@ -6,46 +6,50 @@ import { useParams } from "react-router-dom";
 import { getIdFromUrl } from "helpers/strings";
 import React, { useEffect, useState } from "react";
 
+interface iState {
+  pokemonList: KeyValue[];
+  sortedData: KeyValue[];
+  offset: number;
+}
+
 const LIST_LIMIT = 30;
 
 const PokedexPageContainer: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const { data } = useQuery(id, getGeneration);
 
-  const [offset, setOffset] = useState<number>(0);
-  const [sortedData, setSortedData] = useState<KeyValue[]>([]);
-  const [pokemonList, setPokemonList] = useState<KeyValue[]>([]);
+  const [state, setState] = useState<iState>({
+    pokemonList: [],
+    sortedData: [],
+    offset: 0,
+  });
 
-  const updatePokemonList = () => {
-    if (sortedData.length) {
-      setPokemonList(sortedData.slice(offset, offset + LIST_LIMIT));
-    }
-  };
-
-  const onLoadMoreClick = () => {
-    setOffset((s) => s + LIST_LIMIT);
-  };
+  const updatePokemonList = () =>
+    setState((s) => ({
+      ...s,
+      pokemonList: s.sortedData.slice(s.offset, s.offset + LIST_LIMIT),
+    }));
 
   useEffect(() => {
     if (data) {
-      setSortedData(
-        data.pokemon_species.sort(
+      setState((s) => ({
+        ...s,
+        sortedData: data.pokemon_species.sort(
           (a, b) => +getIdFromUrl(a.url) - +getIdFromUrl(b.url)
-        )
-      );
+        ),
+      }));
     }
   }, [data]);
 
-  useEffect(updatePokemonList, [sortedData, offset]);
-
-  useEffect(() => {
-    if (pokemonList.length) {
-      console.log(pokemonList);
-    }
-  }, [pokemonList]);
+  useEffect(updatePokemonList, [state.sortedData, state.offset]);
 
   return (
-    <PokedexPage onLoadMoreClick={onLoadMoreClick} pokemon={pokemonList} />
+    <PokedexPage
+      onLoadMoreClick={() =>
+        setState((s) => ({ ...s, offset: s.offset + LIST_LIMIT }))
+      }
+      pokemon={state.pokemonList}
+    />
   );
 };
 
