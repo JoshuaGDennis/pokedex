@@ -1,7 +1,8 @@
 import React from "react";
 import Button from "components/Button";
-import { Col, Container, Row } from "react-bootstrap";
 import { KeyValue } from "helpers/types";
+import PokedexCard from "components/PokedexCard";
+import { Col, Container, Row } from "react-bootstrap";
 
 interface iProps {
   onLoadMoreClick(): void;
@@ -27,7 +28,7 @@ const PokedexPage: React.FC<iProps> = ({
     <Row>
       <Col>
         {pokemon.map(({ name }) => (
-          <p key={name}>{name}</p>
+          <PokedexCard name={name} />
         ))}
       </Col>
     </Row>

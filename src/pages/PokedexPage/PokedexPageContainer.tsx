@@ -24,12 +24,6 @@ const PokedexPageContainer: React.FC = () => {
     offset: 0,
   });
 
-  const updatePokemonList = () =>
-    setState((s) => ({
-      ...s,
-      pokemonList: s.sortedData.slice(s.offset, s.offset + LIST_LIMIT),
-    }));
-
   useEffect(() => {
     if (data) {
       setState((s) => ({
@@ -41,7 +35,12 @@ const PokedexPageContainer: React.FC = () => {
     }
   }, [data]);
 
-  useEffect(updatePokemonList, [state.sortedData, state.offset]);
+  useEffect(() => {
+    setState((s) => ({
+      ...s,
+      pokemonList: s.sortedData.slice(s.offset, s.offset + LIST_LIMIT),
+    }));
+  }, [state.sortedData, state.offset]);
 
   return (
     <PokedexPage
