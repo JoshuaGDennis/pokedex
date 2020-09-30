@@ -13,10 +13,18 @@ export interface iTheme {
   text: string;
   transition: string;
   colors: {
-    red: string;
-    blue: string;
-    green: string;
-    purple: string;
+    standard: {
+      red: string;
+      blue: string;
+      green: string;
+      purple: string;
+    };
+    pokemonTypes: {
+      [key: string]: {
+        primary: string;
+        secondary: string;
+      };
+    };
   };
 }
 

@@ -12,7 +12,7 @@ interface iState {
   offset: number;
 }
 
-const LIST_LIMIT = 30;
+const LIST_LIMIT = 4;
 
 const PokedexPageContainer: React.FC = () => {
   const { id } = useParams<{ id: string }>();

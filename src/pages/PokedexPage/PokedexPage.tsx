@@ -26,11 +26,9 @@ const PokedexPage: React.FC<iProps> = ({
     </Row>
 
     <Row>
-      <Col>
-        {pokemon.map(({ name }) => (
-          <PokedexCard name={name} />
-        ))}
-      </Col>
+      {pokemon.map(({ name }) => (
+        <PokedexCard name={name} />
+      ))}
     </Row>
   </Container>
 );
