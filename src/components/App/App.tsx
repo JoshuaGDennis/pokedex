@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import HomePage from "pages/HomePage";
 import Button from "components/Button";
+import { HomePage, PokedexPage } from "pages";
 import { ThemeProvider } from "styled-components";
 import { Col, Container, Row } from "react-bootstrap";
 import { THEME_LIGHT, THEME_DARK, GlobalStyles } from "theme";
@@ -28,6 +28,7 @@ const App: React.FC = () => {
             <Col md={{ span: 6, offset: 3 }}>
               <Router>
                 <Switch>
+                  <Route path="/pokedex/:id" component={PokedexPage} />
                   <Route path="/" component={HomePage} />
                 </Switch>
               </Router>

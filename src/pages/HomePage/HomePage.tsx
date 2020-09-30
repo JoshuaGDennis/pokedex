@@ -1,12 +1,12 @@
 import React from "react";
 import { useQuery } from "react-query";
 import { Col, Container, Row } from "react-bootstrap";
-import { getGenerations } from "helpers/api";
+import { getGenerationList } from "helpers/api";
 import Button from "components/Button";
 import { captialise } from "helpers/strings";
 
 const HomePage: React.FC = () => {
-  const { isLoading, data } = useQuery("generations", getGenerations);
+  const { isLoading, data } = useQuery("generationList", getGenerationList);
 
   return (
     <Container fluid>
@@ -22,7 +22,9 @@ const HomePage: React.FC = () => {
         <Row>
           <Col>
             {data.results.map(({ name }) => (
-              <Button>{captialise(name).replace("-", " ")}</Button>
+              <Button key={name} to={`/pokedex/${name}`}>
+                {captialise(name).replace("-", " ")}
+              </Button>
             ))}
           </Col>
         </Row>
