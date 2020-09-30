@@ -19,17 +19,14 @@ const PokedexPage: React.FC<iProps> = ({
         <h1>Pokedex Page!</h1>
       </Col>
     </Row>
-    <Row>
-      <Col>
-        <Button onClick={() => onLoadMoreClick()}>Load more</Button>
-      </Col>
-    </Row>
 
     <Row>
       {pokemon.map(({ name }) => (
-        <PokedexCard name={name} />
+        <PokedexCard key={name} name={name} />
       ))}
     </Row>
+
+    <Button onClick={() => onLoadMoreClick()}>Load more</Button>
   </Container>
 );
 

@@ -38,9 +38,12 @@ const PokedexPageContainer: React.FC = () => {
   useEffect(() => {
     setState((s) => ({
       ...s,
-      pokemonList: s.sortedData.slice(s.offset, s.offset + LIST_LIMIT),
+      pokemonList: [
+        ...s.pokemonList,
+        ...s.sortedData.slice(s.offset, s.offset + LIST_LIMIT),
+      ],
     }));
-  }, [state.sortedData, state.offset]);
+  }, [state.sortedData]);
 
   return (
     <PokedexPage

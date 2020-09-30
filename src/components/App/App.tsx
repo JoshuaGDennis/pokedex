@@ -25,7 +25,7 @@ const App: React.FC = () => {
             </Col>
           </Row>
           <Row>
-            <Col md={{ span: 6, offset: 3 }}>
+            <Col md={{ span: 8, offset: 2 }}>
               <Router>
                 <Switch>
                   <Route path="/pokedex/:id" component={PokedexPage} />

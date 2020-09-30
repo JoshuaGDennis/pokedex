@@ -15,7 +15,7 @@ const PokedexCard: React.FC<iProps> = ({ name, id, types, img }: iProps) => (
     <Card.Body>
       <Card.Title>{name}</Card.Title>
       {types.map((type) => (
-        <CardPill>{type}</CardPill>
+        <CardPill key={type}>{type}</CardPill>
       ))}
     </Card.Body>
   </Card>
