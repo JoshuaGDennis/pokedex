@@ -26,6 +26,7 @@ const PokedexCardContainer: React.FC<iProps> = ({ name }: iProps) => {
       types={types}
       img={data.sprites.front_default}
       pokemonColor={pokemonTypes[types[0].name.toLowerCase()].primary}
+      pokemonData={data}
     />
   );
 };

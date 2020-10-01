@@ -25,6 +25,10 @@ const PokedexPageContainer: React.FC = () => {
     }
   }, [data]);
 
+  useEffect(() => {
+    localStorage.setItem("current_gen", id);
+  }, [id]);
+
   if (isLoading) return <h2>Loading...</h2>;
 
   return (

@@ -1,5 +1,5 @@
+import { iTheme } from "theme";
 import styled from "styled-components";
-import { colorObject, iTheme } from "theme";
 import { Link as ReactLink } from "react-router-dom";
 import { Card as BootstrapCard } from "react-bootstrap";
 

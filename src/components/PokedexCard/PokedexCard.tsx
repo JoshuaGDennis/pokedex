@@ -1,4 +1,5 @@
 import React from "react";
+import { PokemonResource } from "helpers/types";
 import { Card, CardID, CardPill, Link } from "./PokedexCard.styles";
 
 interface iProps {
@@ -7,6 +8,7 @@ interface iProps {
   types: { name: string; color: string }[];
   img: string;
   pokemonColor: string;
+  pokemonData: PokemonResource;
 }
 
 const PokedexCard: React.FC<iProps> = ({
@@ -15,9 +17,10 @@ const PokedexCard: React.FC<iProps> = ({
   types,
   img,
   pokemonColor,
+  pokemonData,
 }: iProps) => (
   <Card color={pokemonColor}>
-    <Link to={`/pokemon/${id}`}>
+    <Link to={{ pathname: `/pokemon/${id}`, state: pokemonData }}>
       <Card.Img src={img} />
       <CardID>#{id}</CardID>
       <Card.Body>
