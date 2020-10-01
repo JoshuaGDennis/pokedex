@@ -31,6 +31,8 @@ const Card = styled(BootstrapCard)`
       right: 0;
       bottom: 0;
       margin: auto;
+      border-color: ${theme.id === "LIGHT" ? "#000" : "#fff"};
+      border-right-color: transparent;
     }
 
     background-color: ${theme.id === "LIGHT" ? color : theme.card};
