@@ -6,6 +6,7 @@ import { Card as BootstrapCard } from "react-bootstrap";
 const Card = styled(BootstrapCard)`
   ${({ color, theme }: { color: string; theme: iTheme }) => `
     width: 14rem;
+    height: 14rem;
     margin: 1rem;
 
     & .card-img {
@@ -21,6 +22,15 @@ const Card = styled(BootstrapCard)`
 
     & .card-body {
       padding-top: 0;
+    }
+
+    & .spinner-border {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
     }
 
     background-color: ${theme.id === "LIGHT" ? color : theme.card};

@@ -14,10 +14,12 @@ const PokemonPageContainer: React.FC = () => {
 
   const [pokemonData, setPokemonData] = useState<PokemonResource | null>(null);
 
+  // Pokemon Resource data
   const { isLoading, data } = useQuery(id, getPokemonResource, {
     enabled: !location.state,
   });
 
+  // Pokemon Species data
   const { isLoading: isLoadingSpecies, data: species } = useQuery(
     pokemonData?.species.name,
     getPokemonSpecies,

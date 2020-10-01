@@ -2,6 +2,8 @@ import React from "react";
 import { pokemonTypes } from "theme";
 import { useQuery } from "react-query";
 import PokedexCard from "./PokedexCard";
+import { Spinner } from "react-bootstrap";
+import { Card } from "./PokedexCard.styles";
 import { capitalise } from "helpers/strings";
 import { getPokemonResource } from "helpers/api";
 
@@ -12,7 +14,13 @@ interface iProps {
 const PokedexCardContainer: React.FC<iProps> = ({ name }: iProps) => {
   const { isLoading, data } = useQuery(name, getPokemonResource);
 
-  if (isLoading || !data) return null;
+  if (isLoading || !data) {
+    return (
+      <Card>
+        <Spinner animation="border" />
+      </Card>
+    );
+  }
 
   const types = data.types.map(({ type }) => ({
     name: capitalise(type.name),
