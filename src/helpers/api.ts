@@ -2,6 +2,7 @@ import {
   GenerationResource,
   PokemonResource,
   ResourceList,
+  PokemonSpeciesResource,
 } from "helpers/types";
 
 const BASE_URL = "https://pokeapi.co/api/v2";
@@ -15,4 +16,12 @@ const getGenerationList = (): Promise<ResourceList> =>
 const getPokemonResource = (id: string): Promise<PokemonResource> =>
   fetch(`${BASE_URL}/pokemon/${id}`).then((res) => res.json());
 
-export { getGeneration, getGenerationList, getPokemonResource };
+const getPokemonSpecies = (id: string): Promise<PokemonSpeciesResource> =>
+  fetch(`${BASE_URL}/pokemon-species/${id}`).then((res) => res.json());
+
+export {
+  getGeneration,
+  getGenerationList,
+  getPokemonResource,
+  getPokemonSpecies,
+};

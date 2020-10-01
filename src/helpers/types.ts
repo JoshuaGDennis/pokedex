@@ -8,6 +8,17 @@ export type InternationalKeyValue = {
   name: string;
 };
 
+export type GenusKeyValue = {
+  genus: string;
+  language: KeyValue;
+};
+
+export type FlavourText = {
+  flavor_text: string;
+  language: KeyValue;
+  version: KeyValue;
+};
+
 export type ResourceList = {
   count: number;
   next: string | null;
@@ -70,4 +81,44 @@ export type PokemonResource = {
     type: KeyValue;
   }[];
   weight: number;
+};
+
+export type PokemonSpeciesResource = {
+  base_happiness: number;
+  capture_rate: number;
+  color: KeyValue;
+  egg_groups: KeyValue[];
+  evolution_chain: string | null;
+  evolves_from_species: KeyValue | null;
+  flavor_text_entries: FlavourText[];
+  form_descriptions: KeyValue[];
+  forms_switchable: boolean;
+  gender_rate: number;
+  genera: GenusKeyValue[];
+  generation: KeyValue;
+  growth_rate: KeyValue;
+  habitat: KeyValue;
+  has_gender_differences: boolean;
+  hatch_counter: number;
+  id: number;
+  is_baby: boolean;
+  is_legendary: boolean;
+  is_mythical: boolean;
+  name: string;
+  names: InternationalKeyValue[];
+  order: number;
+  pal_park_encounters: {
+    area: KeyValue;
+    base_score: number;
+    rate: number;
+  }[];
+  pokedex_numbers: {
+    entry_number: number;
+    pokedex: KeyValue;
+  }[];
+  shape: KeyValue;
+  varieties: {
+    isDefault: boolean;
+    pokemon: KeyValue;
+  }[];
 };
