@@ -1,6 +1,6 @@
 import React from "react";
 import { colors } from "theme";
-import { ButtonProps } from "react-bootstrap";
+import { ButtonProps as ReactBtnProps } from "react-bootstrap";
 import { StyledButton } from "./Button.styles";
 import { Link } from "react-router-dom";
 
@@ -9,9 +9,11 @@ interface iProps {
   to?: string | object;
 }
 
-const Button: React.FC<
-  iProps & ButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>
-> = (props) => {
+type ButtonProps = iProps &
+  ReactBtnProps &
+  React.ButtonHTMLAttributes<HTMLButtonElement>;
+
+const Button: React.FC<ButtonProps> = (props) => {
   const comp = (
     <StyledButton {...props} variant="primary">
       {props.children}
