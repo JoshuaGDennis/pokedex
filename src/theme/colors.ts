@@ -1,3 +1,5 @@
+import { colorObject } from "./Theme";
+
 const colors = {
   red: "#FF5252",
   green: "#1BBC9B",
@@ -5,7 +7,7 @@ const colors = {
   purple: "#9C27B0",
 };
 
-const pokemonTypes = {
+const pokemonTypes: { [key: string]: colorObject } = {
   grass: {
     primary: "#67cc8e",
     secondary: "#91d9ad",

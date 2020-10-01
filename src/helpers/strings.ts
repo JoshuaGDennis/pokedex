@@ -1,4 +1,4 @@
-const captialise = (str: string): string =>
+const capitalise = (str: string): string =>
   str.charAt(0).toUpperCase() + str.slice(1);
 
 const getIdFromUrl = (url: string): string => {
@@ -11,4 +11,4 @@ const getIdFromUrl = (url: string): string => {
   return "0";
 };
 
-export { captialise, getIdFromUrl };
+export { capitalise, getIdFromUrl };

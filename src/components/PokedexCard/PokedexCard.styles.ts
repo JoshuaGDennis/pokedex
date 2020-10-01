@@ -1,11 +1,10 @@
-import { colors } from "theme";
-import { iTheme } from "theme/Theme";
 import styled from "styled-components";
+import { colorObject, iTheme } from "theme";
 import { Link as ReactLink } from "react-router-dom";
 import { Card as BootstrapCard } from "react-bootstrap";
 
 const Card = styled(BootstrapCard)`
-  ${({ theme }: { theme: iTheme }) => `
+  ${({ color, theme }: { color: string; theme: iTheme }) => `
     width: 14rem;
     margin: 1rem;
 
@@ -17,14 +16,14 @@ const Card = styled(BootstrapCard)`
     }
 
     & .card-title {
-      color: ${theme.text};
+      color: #fff;
     }
 
     & .card-body {
       padding-top: 0;
     }
 
-    background-color: ${theme.card};
+    background-color: ${theme.id === "LIGHT" ? color : theme.card};
   `}
 `;
 
@@ -34,10 +33,11 @@ const CardID = styled.p`
   position: absolute;
   top: 0.5rem;
   right: 1rem;
+  color: #fff;
 `;
 
 const CardPill = styled.span`
-  ${({ theme }: { theme: iTheme }) => `
+  ${({ color, theme }: { color: string; theme: iTheme }) => `
     padding: 0.5rem;
     color: #fff;
     border-radius: 1em;
@@ -51,11 +51,11 @@ const CardPill = styled.span`
     ${
       theme.id === "LIGHT"
         ? `
-        background-color: ${colors.purple};
+        background-color: ${color};
       `
         : `
         background-color: ${theme.background.secondary};
-        border-color: ${colors.purple};
+        border-color: ${color};
       `
     }
   `}}

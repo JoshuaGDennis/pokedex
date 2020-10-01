@@ -1,9 +1,9 @@
 import React from "react";
 import { useQuery } from "react-query";
-import { Col, Container, Row } from "react-bootstrap";
-import { getGenerationList } from "helpers/api";
 import Button from "components/Button";
-import { captialise } from "helpers/strings";
+import { capitalise } from "helpers/strings";
+import { getGenerationList } from "helpers/api";
+import { Col, Container, Row } from "react-bootstrap";
 
 const HomePage: React.FC = () => {
   const { isLoading, data } = useQuery("generationList", getGenerationList);
@@ -23,7 +23,7 @@ const HomePage: React.FC = () => {
           <Col>
             {data.results.map(({ name }) => (
               <Button key={name} to={`/pokedex/${name}`}>
-                {captialise(name).replace("-", " ")}
+                {capitalise(name).replace("-", " ")}
               </Button>
             ))}
           </Col>
