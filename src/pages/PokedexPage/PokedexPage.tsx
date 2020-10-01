@@ -5,13 +5,13 @@ import PokedexCard from "components/PokedexCard";
 import { Col, Container, Row } from "react-bootstrap";
 
 interface iProps {
-  onLoadMoreClick(): void;
   pokemon: KeyValue[];
+  onLoadMoreClick(): void;
 }
 
 const PokedexPage: React.FC<iProps> = ({
-  onLoadMoreClick,
   pokemon,
+  onLoadMoreClick,
 }: iProps) => (
   <Container fluid>
     <Row>

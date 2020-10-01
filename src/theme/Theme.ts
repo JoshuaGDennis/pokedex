@@ -1,4 +1,4 @@
-import colors from "./colors";
+import { colors } from "./colors";
 
 export type colorObject = {
   primary: string;
@@ -13,18 +13,10 @@ export interface iTheme {
   text: string;
   transition: string;
   colors: {
-    standard: {
-      red: string;
-      blue: string;
-      green: string;
-      purple: string;
-    };
-    pokemonTypes: {
-      [key: string]: {
-        primary: string;
-        secondary: string;
-      };
-    };
+    red: string;
+    blue: string;
+    green: string;
+    purple: string;
   };
 }
 

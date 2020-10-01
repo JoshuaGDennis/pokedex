@@ -1,7 +1,8 @@
-import styled from "styled-components";
-import { Card as BootstrapCard } from "react-bootstrap";
-import { iTheme } from "theme/Theme";
 import { colors } from "theme";
+import { iTheme } from "theme/Theme";
+import styled from "styled-components";
+import { Link as ReactLink } from "react-router-dom";
+import { Card as BootstrapCard } from "react-bootstrap";
 
 const Card = styled(BootstrapCard)`
   ${({ theme }: { theme: iTheme }) => `
@@ -9,6 +10,7 @@ const Card = styled(BootstrapCard)`
     margin: 1rem;
 
     & .card-img {
+      display: block;
       max-width: 8rem;
       max-height: 8rem;
       margin: 0 auto;
@@ -39,7 +41,7 @@ const CardPill = styled.span`
     padding: 0.5rem;
     color: #fff;
     border-radius: 1em;
-    width: 4rem;
+    width: 4.5rem;
     display: inline-block;
     margin-right: 1rem;
     text-align: center;
@@ -47,20 +49,23 @@ const CardPill = styled.span`
     border: 2px solid transparent;
 
     ${
-      theme.id === "LIGHT" &&
+      theme.id === "LIGHT"
+        ? `
+        background-color: ${colors.purple};
       `
-      background-color: ${colors.standard.purple};
-    `
-    }
-
-    ${
-      theme.id === "DARK" &&
+        : `
+        background-color: ${theme.background.secondary};
+        border-color: ${colors.purple};
       `
-      background-color: ${theme.background.secondary};
-      border-color: ${colors.standard.purple};
-    `
     }
   `}}
 `;
 
-export { Card, CardID, CardPill };
+const Link = styled(ReactLink)`
+  &:hover {
+    text-decoration: none;
+    color: none;
+  }
+`;
+
+export { Card, CardID, CardPill, Link };

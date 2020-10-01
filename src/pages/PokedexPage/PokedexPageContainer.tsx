@@ -3,54 +3,34 @@ import PokedexPage from "./PokedexPage";
 import { KeyValue } from "helpers/types";
 import { getGeneration } from "helpers/api";
 import { useParams } from "react-router-dom";
-import { getIdFromUrl } from "helpers/strings";
+import { sortListByIds } from "helpers/funcs";
 import React, { useEffect, useState } from "react";
 
-interface iState {
-  pokemonList: KeyValue[];
-  sortedData: KeyValue[];
-  offset: number;
-}
-
-const LIST_LIMIT = 4;
+const LIST_INCREMENT = 4;
 
 const PokedexPageContainer: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const { data } = useQuery(id, getGeneration);
+  const { data, isLoading } = useQuery(id, getGeneration);
 
-  const [state, setState] = useState<iState>({
-    pokemonList: [],
-    sortedData: [],
-    offset: 0,
-  });
+  const [limit, setLimit] = useState<number>(LIST_INCREMENT);
+  const [pokemonList, setPokemonList] = useState<KeyValue[]>([]);
+
+  const onLoadMoreClick = () => {
+    setLimit((s) => s + LIST_INCREMENT);
+  };
 
   useEffect(() => {
     if (data) {
-      setState((s) => ({
-        ...s,
-        sortedData: data.pokemon_species.sort(
-          (a, b) => +getIdFromUrl(a.url) - +getIdFromUrl(b.url)
-        ),
-      }));
+      setPokemonList(sortListByIds(data.pokemon_species));
     }
   }, [data]);
 
-  useEffect(() => {
-    setState((s) => ({
-      ...s,
-      pokemonList: [
-        ...s.pokemonList,
-        ...s.sortedData.slice(s.offset, s.offset + LIST_LIMIT),
-      ],
-    }));
-  }, [state.sortedData]);
+  if (isLoading) return <h2>Loading...</h2>;
 
   return (
     <PokedexPage
-      onLoadMoreClick={() =>
-        setState((s) => ({ ...s, offset: s.offset + LIST_LIMIT }))
-      }
-      pokemon={state.pokemonList}
+      pokemon={pokemonList.slice(0, limit)}
+      onLoadMoreClick={onLoadMoreClick}
     />
   );
 };

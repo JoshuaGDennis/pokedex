@@ -4,16 +4,8 @@ import { Button } from "react-bootstrap";
 import { colors } from "theme";
 
 const StyledButton = styled(Button)`
-  ${({
-    theme,
-    color,
-  }: {
-    theme: iTheme;
-    color: keyof typeof colors.standard;
-  }) => {
-    const mainColor = color
-      ? theme.colors.standard[color]
-      : theme.colors.standard.blue;
+  ${({ theme, color }: { theme: iTheme; color: keyof typeof colors }) => {
+    const mainColor = color ? theme.colors[color] : theme.colors.blue;
 
     return `
         &.btn-primary {
