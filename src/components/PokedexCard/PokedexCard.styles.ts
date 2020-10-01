@@ -24,17 +24,6 @@ const Card = styled(BootstrapCard)`
       padding-top: 0;
     }
 
-    & .spinner-border {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      margin: auto;
-      border-color: ${theme.id === "LIGHT" ? "#000" : "#fff"};
-      border-right-color: transparent;
-    }
-
     background-color: ${theme.id === "LIGHT" ? color : theme.card};
   `}
 `;

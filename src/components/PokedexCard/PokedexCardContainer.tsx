@@ -2,7 +2,7 @@ import React from "react";
 import { pokemonTypes } from "theme";
 import { useQuery } from "react-query";
 import PokedexCard from "./PokedexCard";
-import { Spinner } from "react-bootstrap";
+import Spinner from "components/Spinner";
 import { Card } from "./PokedexCard.styles";
 import { capitalise } from "helpers/strings";
 import { getPokemonResource } from "helpers/api";
@@ -17,7 +17,7 @@ const PokedexCardContainer: React.FC<iProps> = ({ name }: iProps) => {
   if (isLoading || !data) {
     return (
       <Card>
-        <Spinner animation="border" />
+        <Spinner />
       </Card>
     );
   }
