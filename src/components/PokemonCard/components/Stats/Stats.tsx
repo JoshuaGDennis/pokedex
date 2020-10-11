@@ -17,7 +17,7 @@ interface iProps {
 const Stats: React.FC<iProps> = ({ stats, colors }: iProps) => (
   <div>
     {stats.map((stat) => (
-      <StatContainer {...stat} colors={colors}>
+      <StatContainer {...stat} key={stat.name} colors={colors}>
         <Row>
           <Col>
             <span className="stat-name">{stat.name}</span>

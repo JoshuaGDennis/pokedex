@@ -1,18 +1,27 @@
 import React from "react";
+import {
+  StyledCard as Card,
+  PokemonID,
+  TypePill,
+  Ability,
+  Weakness,
+} from "./PokemonCard.styles";
+import { pokemonTypes } from "theme";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Stats from "./components/Stats";
 import { PokemonProps } from "helpers/types";
 import CardSection from "./components/CardSection";
-import { StyledCard as Card, PokemonID, TypePill } from "./PokemonCard.styles";
 
 const PokemonCard: React.FC<PokemonProps> = ({
   id,
+  abilities,
   name,
   description,
   image,
   stats,
   types,
+  weaknesses,
 }: PokemonProps) => (
   <Card>
     <PokemonID>#{id}</PokemonID>
@@ -46,9 +55,24 @@ const PokemonCard: React.FC<PokemonProps> = ({
         </Col>
       </Row>
 
-      <CardSection title="Abilities">CHILDREN</CardSection>
+      <CardSection title="Abilities">
+        <Row>
+          {abilities.map(({ name, description }) => (
+            <Ability key={name}>
+              <h3>{name}</h3>
+              <p>{description}</p>
+            </Ability>
+          ))}
+        </Row>
+      </CardSection>
 
-      <CardSection title="Weaknesses">CHILDREN</CardSection>
+      <CardSection title="Weaknesses">
+        {weaknesses.map((item) => (
+          <Weakness key={item} colors={pokemonTypes[item.toLowerCase()]}>
+            {item}
+          </Weakness>
+        ))}
+      </CardSection>
 
       <CardSection title="Evolutions">CHILDREN</CardSection>
 

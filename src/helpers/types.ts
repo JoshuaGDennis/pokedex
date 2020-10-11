@@ -132,13 +132,13 @@ export type PokemonAbilityResource = {
   effect_entries: {
     effect: string;
     short_effect: string;
-    langauge: KeyValue;
+    language: KeyValue;
   }[];
   flavor_text_entries: {
     flavor_text: string;
     language: KeyValue;
     version_group: KeyValue;
-  };
+  }[];
   generation: KeyValue;
   id: number;
   is_main_series: boolean;
@@ -151,8 +151,37 @@ export type PokemonAbilityResource = {
   }[];
 };
 
+export type PokemonTypeResource = {
+  damage_relations: {
+    double_damage_from: KeyValue[]
+    double_damage_to: KeyValue[]
+    half_damage_from: KeyValue[]
+    half_damage_to: KeyValue[]
+    no_damage_from: KeyValue[]
+    no_damage_to: KeyValue[]
+  }
+  game_indices: {
+    game_index: number
+    generation: KeyValue
+  }[]
+  generation: KeyValue
+  id: number
+  move_damage_class: KeyValue
+  moves: KeyValue[]
+  name: string
+  names: InternationalKeyValue[]
+  pokemon: {
+    pokemon: KeyValue
+    slot: number
+  }[]
+}
+
 export type PokemonProps = {
   id: string;
+  abilities: {
+    name: string
+    description: string
+  }[];
   name: string;
   description: string;
   image: string;
@@ -165,4 +194,5 @@ export type PokemonProps = {
     primary: string;
     secondary: string;
   }[];
+  weaknesses: string[]
 };

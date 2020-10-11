@@ -1,4 +1,6 @@
+import React from "react";
 import { iTheme } from "theme";
+import Col from "react-bootstrap/Col";
 import styled from "styled-components";
 import Card from "react-bootstrap/Card";
 
@@ -41,4 +43,54 @@ const TypePill = styled.span`
   `}
 `;
 
-export { StyledCard, PokemonID, TypePill };
+const Ability = styled(Col)`
+  h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+  }
+`;
+
+const Weakness = styled(({ colors, ...rest }) => <span {...rest} />)`
+  ${({
+    theme,
+    colors,
+  }: {
+    theme: iTheme;
+    colors: { primary: string; secondary: string };
+  }) => `
+    position: relative;
+    padding: 0.5rem;
+    background-color: ${theme.id === "LIGHT" ? colors.primary : "transparent"};
+    border-radius: 5px;
+    display: inline-block;
+    min-width: 5rem;
+    color: #fff;
+    margin-right: 1rem;
+
+    ${
+      theme.id === "DARK"
+        ? `
+      border: 2px solid ${colors.primary};
+    `
+        : ""
+    }
+
+    &::after {
+      content: 'x2';
+      background-color: ${
+        theme.id === "LIGHT" ? colors.secondary : "transparent"
+      };
+      position: absolute;
+      right: 0;
+      top: 0;
+      padding: 0.5rem 0px;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+      width: 1.5rem;
+      text-align: center;
+      color: ${theme.id === "DARK" ? colors.secondary : "#fff"};
+  `}
+`;
+
+export { StyledCard, PokemonID, TypePill, Ability, Weakness };
