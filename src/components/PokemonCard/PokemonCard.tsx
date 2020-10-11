@@ -3,6 +3,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Stats from "./components/Stats";
 import { PokemonProps } from "helpers/types";
+import CardSection from "./components/CardSection";
 import { StyledCard as Card, PokemonID, TypePill } from "./PokemonCard.styles";
 
 const PokemonCard: React.FC<PokemonProps> = ({
@@ -44,6 +45,14 @@ const PokemonCard: React.FC<PokemonProps> = ({
           />
         </Col>
       </Row>
+
+      <CardSection title="Abilities">CHILDREN</CardSection>
+
+      <CardSection title="Weaknesses">CHILDREN</CardSection>
+
+      <CardSection title="Evolutions">CHILDREN</CardSection>
+
+      <CardSection title="Moves">CHILDREN</CardSection>
     </Card.Body>
   </Card>
 );

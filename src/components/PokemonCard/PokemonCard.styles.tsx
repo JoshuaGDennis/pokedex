@@ -1,16 +1,21 @@
+import { iTheme } from "theme";
 import styled from "styled-components";
 import Card from "react-bootstrap/Card";
 
 const StyledCard = styled(Card)`
-  h1 {
-    font-size: 2rem;
-    font-weight: bold;
-  }
+  ${({ theme }: { theme: iTheme }) => `
+    h1 {
+      font-size: 2rem;
+      font-weight: bold;
+    }
 
-  .card-img {
-    width: 8rem;
-    height: 8rem;
-  }
+    .card-img {
+      width: 8rem;
+      height: 8rem;
+    }
+
+    background-color: ${theme.card};
+  `}
 `;
 
 const PokemonID = styled.span`
