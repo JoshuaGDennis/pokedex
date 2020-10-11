@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { Spinner as BootstrapSpinner } from "react-bootstrap";
+import Spinner from "react-bootstrap/Spinner";
 
-const StyledSpinner = styled(BootstrapSpinner)`
+const StyledSpinner = styled(Spinner)`
   ${({ theme }) => `
         position: absolute;
         top: 0;
@@ -15,6 +15,6 @@ const StyledSpinner = styled(BootstrapSpinner)`
     `}
 `;
 
-const Spinner = () => <StyledSpinner animation="border" />;
+const CustomSpinner = () => <StyledSpinner animation="border" />;
 
-export default Spinner;
+export default CustomSpinner;

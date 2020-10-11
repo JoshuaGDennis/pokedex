@@ -11,4 +11,17 @@ const getIdFromUrl = (url: string): string => {
   return "0";
 };
 
-export { capitalise, getIdFromUrl };
+const getShortStat = (stat: string): string => {
+  const short: { [key: string]: string } = {
+    hp: "HP",
+    attack: "ATK",
+    defense: "DEF",
+    special_attack: "SP ATK",
+    special_defense: "SP DEF",
+    speed: "SPD",
+  };
+
+  return short[stat.replace("-", "_")] || "";
+};
+
+export { capitalise, getIdFromUrl, getShortStat };

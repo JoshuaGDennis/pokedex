@@ -1,15 +1,11 @@
 import React from "react";
-import { Container } from "react-bootstrap";
+import { PokemonProps } from "helpers/types";
+import PokemonCard from "components/PokemonCard";
+import Container from "react-bootstrap/Container";
 
-interface iProps {
-  name: string;
-  description: string;
-}
-
-const PokemonPage: React.FC<iProps> = ({ name, description }: iProps) => (
+const PokemonPage: React.FC<PokemonProps> = (props) => (
   <Container fluid>
-    <h1>{name}</h1>
-    <p>{description}</p>
+    <PokemonCard {...props} />
   </Container>
 );
 

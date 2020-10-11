@@ -20,7 +20,7 @@ const HomePage: React.FC = () => {
       {data && (
         <Row>
           {data.results.map(({ name }) => (
-            <GenerationCard name={name} />
+            <GenerationCard key={name} name={name} />
           ))}
         </Row>
       )}

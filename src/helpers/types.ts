@@ -122,3 +122,19 @@ export type PokemonSpeciesResource = {
     pokemon: KeyValue;
   }[];
 };
+
+export type PokemonProps = {
+  id: string;
+  name: string;
+  description: string;
+  image: string;
+  stats: {
+    name: string;
+    value: number;
+  }[];
+  types: {
+    name: string;
+    primary: string;
+    secondary: string;
+  }[];
+};

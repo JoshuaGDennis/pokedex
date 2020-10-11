@@ -1,6 +1,7 @@
 import { useQuery } from "react-query";
 import PokemonPage from "./PokemonPage";
-import { capitalise } from "helpers/strings";
+import { pokemonTypes } from "theme/colors";
+import { capitalise, getShortStat } from "helpers/strings";
 import { getEnglishEntry } from "helpers/funcs";
 import { PokemonResource } from "helpers/types";
 import React, { useState, useEffect } from "react";
@@ -38,8 +39,18 @@ const PokemonPageContainer: React.FC = () => {
 
   return (
     <PokemonPage
+      id={id}
       name={capitalise(pokemonData.name)}
       description={getEnglishEntry(species.flavor_text_entries)}
+      image={pokemonData.sprites.front_default}
+      stats={pokemonData.stats.map(({ base_stat, stat }) => ({
+        name: getShortStat(stat.name),
+        value: base_stat,
+      }))}
+      types={pokemonData.types.map(({ type }) => ({
+        name: capitalise(type.name),
+        ...pokemonTypes[type.name],
+      }))}
     />
   );
 };
