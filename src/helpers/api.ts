@@ -3,6 +3,7 @@ import {
   PokemonResource,
   ResourceList,
   PokemonSpeciesResource,
+  PokemonAbilityResource,
 } from "helpers/types";
 
 const BASE_URL = "https://pokeapi.co/api/v2";
@@ -19,9 +20,20 @@ const getPokemonResource = (id: string): Promise<PokemonResource> =>
 const getPokemonSpecies = (id: string): Promise<PokemonSpeciesResource> =>
   fetch(`${BASE_URL}/pokemon-species/${id}`).then((res) => res.json());
 
+const getAbilityData = (
+  key: string,
+  { ids }: { ids: string[] }
+): Promise<PokemonAbilityResource[]> =>
+  Promise.all(
+    ids.map((id) =>
+      fetch(`${BASE_URL}/ability/${id}`).then((res) => res.json())
+    )
+  );
+
 export {
   getGeneration,
   getGenerationList,
   getPokemonResource,
   getPokemonSpecies,
+  getAbilityData,
 };

@@ -1,39 +1,66 @@
 import { useQuery } from "react-query";
 import PokemonPage from "./PokemonPage";
-import { pokemonTypes } from "theme/colors";
-import { capitalise, getShortStat } from "helpers/strings";
+import { capitalise, getIdFromUrl, getShortStat } from "helpers/strings";
 import { getEnglishEntry } from "helpers/funcs";
-import { PokemonResource } from "helpers/types";
-import React, { useState, useEffect } from "react";
+import {
+  PokemonAbilityResource,
+  PokemonResource,
+  PokemonSpeciesResource,
+} from "helpers/types";
+import React, { useEffect, useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
-import { getPokemonResource, getPokemonSpecies } from "helpers/api";
+import {
+  getAbilityData,
+  getPokemonResource,
+  getPokemonSpecies,
+} from "helpers/api";
+import { pokemonTypes } from "theme";
 
 const PokemonPageContainer: React.FC = () => {
   const { id } = useParams<{ id: string }>();
 
   const location = useLocation<PokemonResource>();
 
-  const [pokemonData, setPokemonData] = useState<PokemonResource | null>(null);
-
-  // Pokemon Resource data
-  const { isLoading, data } = useQuery(id, getPokemonResource, {
-    enabled: !location.state,
-  });
-
-  // Pokemon Species data
-  const { isLoading: isLoadingSpecies, data: species } = useQuery(
-    pokemonData?.species.name,
-    getPokemonSpecies,
-    { enabled: pokemonData && pokemonData.species }
-  );
+  const [pokemonData, setData] = useState<PokemonResource | null>(null);
+  const [species, setSpecies] = useState<PokemonSpeciesResource | null>(null);
+  const [abilities, setAbilities] = useState<PokemonAbilityResource[]>([]);
 
   useEffect(() => {
-    if (!pokemonData) {
-      setPokemonData(location.state ? location.state : data ? data : null);
+    if (!pokemonData && location.state) {
+      setData(location.state);
     }
-  }, [pokemonData, data, location.state]);
+  }, [pokemonData, location.state]);
 
-  if (isLoading || isLoadingSpecies || !pokemonData || !species) {
+  // Pokemon data
+  useQuery(id, getPokemonResource, {
+    enabled: !location.state,
+    onSuccess: (data) => setData(data),
+  });
+
+  // Species data
+  useQuery(pokemonData?.species.name, getPokemonSpecies, {
+    enabled: pokemonData && pokemonData.species,
+    onSuccess: (data) => setSpecies(data),
+  });
+
+  // Abilities data
+  useQuery(
+    [
+      "abilities",
+      {
+        ids: pokemonData?.abilities.map(({ ability }) =>
+          getIdFromUrl(ability.url)
+        ),
+      },
+    ],
+    getAbilityData,
+    {
+      enabled: pokemonData && pokemonData.abilities,
+      onSuccess: (data) => setAbilities(data),
+    }
+  );
+
+  if (!pokemonData || !species || !abilities) {
     return <h2>Loading...</h2>;
   }
 

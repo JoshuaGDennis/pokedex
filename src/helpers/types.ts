@@ -39,7 +39,11 @@ export type GenerationResource = {
 };
 
 export type PokemonResource = {
-  abilities: KeyValue[];
+  abilities: {
+    ability: KeyValue;
+    is_hidden: boolean;
+    slot: number;
+  }[];
   base_experience: number;
   forms: KeyValue[];
   game_indices: {
@@ -120,6 +124,30 @@ export type PokemonSpeciesResource = {
   varieties: {
     isDefault: boolean;
     pokemon: KeyValue;
+  }[];
+};
+
+export type PokemonAbilityResource = {
+  effect_changes: string[];
+  effect_entries: {
+    effect: string;
+    short_effect: string;
+    langauge: KeyValue;
+  }[];
+  flavor_text_entries: {
+    flavor_text: string;
+    language: KeyValue;
+    version_group: KeyValue;
+  };
+  generation: KeyValue;
+  id: number;
+  is_main_series: boolean;
+  name: string;
+  names: InternationalKeyValue[];
+  pokemon: {
+    is_hidden: boolean;
+    pokemon: KeyValue;
+    slot: number;
   }[];
 };
 
