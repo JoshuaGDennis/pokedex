@@ -19,6 +19,12 @@ export type FlavourText = {
   version: KeyValue;
 };
 
+export type AltFlavourText = {
+  flavor_text: string;
+  language: KeyValue;
+  version_group: KeyValue;
+}
+
 export type ResourceList = {
   count: number;
   next: string | null;
@@ -175,24 +181,3 @@ export type PokemonTypeResource = {
     slot: number
   }[]
 }
-
-export type PokemonProps = {
-  id: string;
-  abilities: {
-    name: string
-    description: string
-  }[];
-  name: string;
-  description: string;
-  image: string;
-  stats: {
-    name: string;
-    value: number;
-  }[];
-  types: {
-    name: string;
-    primary: string;
-    secondary: string;
-  }[];
-  weaknesses: string[]
-};

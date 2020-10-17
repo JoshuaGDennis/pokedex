@@ -1,28 +1,30 @@
 import React from "react";
-import {
-  StyledCard as Card,
-  PokemonID,
-  TypePill,
-  Ability,
-  Weakness,
-} from "./PokemonCard.styles";
-import { pokemonTypes } from "theme";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Stats from "./components/Stats";
-import { PokemonProps } from "helpers/types";
 import CardSection from "./components/CardSection";
+import { StyledCard as Card, PokemonID } from "./PokemonCard.styles";
 
-const PokemonCard: React.FC<PokemonProps> = ({
+interface iProps {
+  id: string;
+  image: string;
+  name: string;
+  description: string;
+  renderTypes(): React.ReactNode;
+  renderAbilities(): React.ReactNode;
+  renderDamages(): React.ReactNode[];
+  renderStats(): React.ReactNode;
+}
+
+const PokemonCard: React.FC<iProps> = ({
   id,
-  abilities,
+  image,
   name,
   description,
-  image,
-  stats,
-  types,
-  weaknesses,
-}: PokemonProps) => (
+  renderTypes,
+  renderAbilities,
+  renderDamages,
+  renderStats,
+}: iProps) => (
   <Card>
     <PokemonID>#{id}</PokemonID>
     <Card.Body>
@@ -34,45 +36,21 @@ const PokemonCard: React.FC<PokemonProps> = ({
 
       <Row>
         <Col>
-          {types.map(({ name, secondary }) => (
-            <TypePill key={name} color={secondary}>
-              {name}
-            </TypePill>
-          ))}
-
+          {renderTypes()}
           <p>{description}</p>
         </Col>
 
         <Col style={{ textAlign: "center" }}>
           <Card.Img src={image} />
-          <Stats
-            stats={stats}
-            colors={{
-              primary: types[0].primary,
-              secondary: types[0].secondary,
-            }}
-          />
+          {renderStats()}
         </Col>
       </Row>
 
       <CardSection title="Abilities">
-        <Row>
-          {abilities.map(({ name, description }) => (
-            <Ability key={name}>
-              <h3>{name}</h3>
-              <p>{description}</p>
-            </Ability>
-          ))}
-        </Row>
+        <Row>{renderAbilities()}</Row>
       </CardSection>
 
-      <CardSection title="Weaknesses">
-        {weaknesses.map((item) => (
-          <Weakness key={item} colors={pokemonTypes[item.toLowerCase()]}>
-            {item}
-          </Weakness>
-        ))}
-      </CardSection>
+      <CardSection title="Weaknesses">{renderDamages()}</CardSection>
 
       <CardSection title="Evolutions">CHILDREN</CardSection>
 

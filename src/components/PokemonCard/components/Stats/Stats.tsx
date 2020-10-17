@@ -2,11 +2,13 @@ import React from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { StatContainer } from "./Stats.styles";
+import { KeyValue } from "helpers/types";
 
 interface iProps {
   stats: {
-    name: string;
-    value: number;
+    base_stat: number;
+    effort: number;
+    stat: KeyValue;
   }[];
   colors: {
     primary: string;
@@ -16,8 +18,13 @@ interface iProps {
 
 const Stats: React.FC<iProps> = ({ stats, colors }: iProps) => (
   <div>
-    {stats.map((stat) => (
-      <StatContainer {...stat} key={stat.name} colors={colors}>
+    {stats.map(({ stat, ...item }) => (
+      <StatContainer
+        key={stat.name}
+        name={stat.name}
+        value={item.base_stat}
+        colors={colors}
+      >
         <Row>
           <Col>
             <span className="stat-name">{stat.name}</span>

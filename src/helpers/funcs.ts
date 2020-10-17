@@ -1,10 +1,12 @@
 import { getIdFromUrl } from "./strings";
-import { KeyValue, FlavourText } from "./types";
+import { KeyValue, FlavourText, AltFlavourText } from "./types";
+
+
 
 const sortListByIds = (list: KeyValue[]) =>
   list.sort((a, b) => +getIdFromUrl(a.url) - +getIdFromUrl(b.url));
 
-const getEnglishEntry = (list: FlavourText[]): string => {
+const getEnglishEntry = (list: Array<FlavourText | AltFlavourText>): string => {
   if (!list) {
     return "";
   }
