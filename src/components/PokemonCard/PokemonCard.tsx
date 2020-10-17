@@ -13,6 +13,7 @@ interface iProps {
   renderAbilities(): React.ReactNode;
   renderDamages(): React.ReactNode[];
   renderStats(): React.ReactNode;
+  renderEvolutions(): React.ReactNode | null;
 }
 
 const PokemonCard: React.FC<iProps> = ({
@@ -24,6 +25,7 @@ const PokemonCard: React.FC<iProps> = ({
   renderAbilities,
   renderDamages,
   renderStats,
+  renderEvolutions,
 }: iProps) => (
   <Card>
     <PokemonID>#{id}</PokemonID>
@@ -52,7 +54,7 @@ const PokemonCard: React.FC<iProps> = ({
 
       <CardSection title="Weaknesses">{renderDamages()}</CardSection>
 
-      <CardSection title="Evolutions">CHILDREN</CardSection>
+      {renderEvolutions()}
 
       <CardSection title="Moves">CHILDREN</CardSection>
     </Card.Body>

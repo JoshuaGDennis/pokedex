@@ -98,7 +98,7 @@ export type PokemonSpeciesResource = {
   capture_rate: number;
   color: KeyValue;
   egg_groups: KeyValue[];
-  evolution_chain: string | null;
+  evolution_chain: { url: string } | null;
   evolves_from_species: KeyValue | null;
   flavor_text_entries: FlavourText[];
   form_descriptions: KeyValue[];
@@ -180,4 +180,36 @@ export type PokemonTypeResource = {
     pokemon: KeyValue
     slot: number
   }[]
+}
+
+export type ChainLink = {
+  is_baby: boolean
+    species: KeyValue
+    evolution_details: {
+      item: KeyValue | null
+      trigger: KeyValue | null
+      gender: number
+      held_item: KeyValue | null
+      known_move: KeyValue | null
+      known_move_type: KeyValue | null
+      location: KeyValue | null
+      min_level: number
+      min_happiness: number
+      min_beauty: number
+      min_affection: number
+      needs_overworld_rain: boolean
+      party_species: KeyValue | null
+      party_type: KeyValue | null
+      relative_physical_stats: number
+      time_of_day: string
+      trade_species: KeyValue | null
+      turn_upside_down: boolean
+    }[]
+  evolves_to: ChainLink[]
+}
+
+export type PokemonEvolutionResource = {
+  baby_trigger_item: KeyValue | null
+  chain: ChainLink
+  id: number
 }

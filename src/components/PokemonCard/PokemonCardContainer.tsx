@@ -1,6 +1,12 @@
-import { getAbilityData, getPokemonSpecies, getTypeData } from "helpers/api";
+import {
+  getAbilityData,
+  getEvolutionData,
+  getPokemonSpecies,
+  getTypeData,
+} from "helpers/api";
 import {
   PokemonAbilityResource,
+  PokemonEvolutionResource,
   PokemonResource,
   PokemonSpeciesResource,
   PokemonTypeResource,
@@ -13,6 +19,8 @@ import { Ability, TypePill, Weakness } from "./PokemonCard.styles";
 import PokemonCard from "./PokemonCard";
 import Stats from "./components/Stats";
 import { getEnglishEntry } from "helpers/funcs";
+import CardSection from "./components/CardSection";
+import { Col, Row } from "react-bootstrap";
 
 interface iProps {
   id: string;
@@ -23,6 +31,9 @@ const PokemonCardContainer: React.FC<iProps> = ({ id, data }) => {
   const [typeData, setTypeData] = useState<PokemonTypeResource[]>([]);
   const [abilityData, setAbilityData] = useState<PokemonAbilityResource[]>([]);
   const [speciesData, setSpeciesData] = useState<PokemonSpeciesResource | null>(
+    null
+  );
+  const [evolutions, setEvolutions] = useState<PokemonEvolutionResource | null>(
     null
   );
 
@@ -50,6 +61,12 @@ const PokemonCardContainer: React.FC<iProps> = ({ id, data }) => {
     onSuccess: setTypeData,
   });
 
+  // Evolution data
+  useQuery(speciesData?.evolution_chain?.url, getEvolutionData, {
+    onSuccess: setEvolutions,
+    enabled: !!speciesData,
+  });
+
   const renderTypes = () =>
     data.types.map(({ type }) => (
       <TypePill key={type.name} color={pokemonTypes[type.name].secondary}>
@@ -75,7 +92,9 @@ const PokemonCardContainer: React.FC<iProps> = ({ id, data }) => {
     );
 
     return [...damages].map((item) => (
-      <Weakness colors={pokemonTypes[item]}>{capitalise(item)}</Weakness>
+      <Weakness key={item} colors={pokemonTypes[item]}>
+        {capitalise(item)}
+      </Weakness>
     ));
   };
 
@@ -85,6 +104,29 @@ const PokemonCardContainer: React.FC<iProps> = ({ id, data }) => {
       colors={{ ...pokemonTypes[data.types[0].type.name] }}
     />
   );
+
+  const renderEvolutions = () => {
+    if (evolutions && !!evolutions.chain.evolves_to.length) {
+      return (
+        <CardSection title="Evolutions">
+          <Row>
+            <Col>
+              <h3>{capitalise(evolutions.chain.species.name)}</h3>
+            </Col>
+
+            {evolutions.chain.evolves_to.map((item) => (
+              <Col key={item.species.name}>
+                <h3>{capitalise(item.species.name)}</h3>
+                <p>Level {item.evolution_details[0].min_level}</p>
+              </Col>
+            ))}
+          </Row>
+        </CardSection>
+      );
+    }
+
+    return null;
+  };
 
   if (typeData.length < 1 || abilityData.length < 1 || !speciesData) {
     return <h2>Loading</h2>;
@@ -100,6 +142,7 @@ const PokemonCardContainer: React.FC<iProps> = ({ id, data }) => {
       renderAbilities={renderAbilities}
       renderDamages={renderDamages}
       renderStats={renderStats}
+      renderEvolutions={renderEvolutions}
     />
   );
 };
