@@ -6,7 +6,7 @@ import Container from "react-bootstrap/Container";
 interface iLoaderProps {
   isLoading?: boolean;
   message?: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 const Loader: React.FC<iLoaderProps> = ({

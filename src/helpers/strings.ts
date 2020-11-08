@@ -1,6 +1,14 @@
 const capitalise = (str: string): string =>
   str.charAt(0).toUpperCase() + str.slice(1);
 
+const formatGeneration = (str: string): string => {
+  const split = str.split('-')
+
+  if (!split.length) return str
+  if (split.length === 2) return `${capitalise(split[0])} ${split[1].toUpperCase()}`
+  else return str
+}
+
 const getIdFromUrl = (url: string): string => {
   const exp = new RegExp(/\/(\d+)\//g).exec(url);
 
@@ -24,4 +32,4 @@ const getShortStat = (stat: string): string => {
   return short[stat.replace("-", "_")] || "";
 };
 
-export { capitalise, getIdFromUrl, getShortStat };
+export { capitalise, getIdFromUrl, getShortStat, formatGeneration };
