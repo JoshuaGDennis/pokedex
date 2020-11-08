@@ -1,30 +1,13 @@
 import React from "react";
-import { colors } from "theme";
-import { ButtonProps as ReactBtnProps } from "react-bootstrap";
-import { StyledButton } from "./Button.styles";
-import { Link } from "react-router-dom";
+import Button, { ButtonProps } from "react-bootstrap/Button";
 
-interface iProps {
-  color?: typeof colors;
-  to?: string | object;
-}
+type props = ButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-type ButtonProps = iProps &
-  ReactBtnProps &
-  React.ButtonHTMLAttributes<HTMLButtonElement>;
+const CustomButton: React.FC<props> = (props) => <Button {...props} />;
 
-const Button: React.FC<ButtonProps> = (props) => {
-  const comp = (
-    <StyledButton {...props} variant="primary">
-      {props.children}
-    </StyledButton>
-  );
-
-  return props.to ? <Link to={props.to}>{comp}</Link> : comp;
-};
-
-Button.defaultProps = {
+CustomButton.defaultProps = {
   size: "sm",
+  variant: "primary",
 };
 
-export default Button;
+export default CustomButton;

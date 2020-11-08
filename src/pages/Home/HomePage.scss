@@ -1,0 +1,43 @@
+.row-generations {
+  margin: 2rem 0;
+}
+
+.gen-card {
+  width: 15rem;
+  cursor: pointer;
+
+  &-circles {
+    padding: 0;
+    padding-left: 0.5rem;
+
+    .circle {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      display: inline-block;
+      background-color: blue;
+
+      &:last-child {
+        margin-left: -1rem;
+        background-color: red;
+      }
+    }
+  }
+
+  &-detail {
+    padding: 0;
+
+    h2,
+    p {
+      margin: 0;
+    }
+
+    h2 {
+      font-size: 1rem;
+    }
+
+    p {
+      font-size: 0.8rem;
+    }
+  }
+}

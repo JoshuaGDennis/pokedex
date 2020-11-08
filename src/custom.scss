@@ -1,0 +1,7 @@
+// BOOTSTRAP OVERRIDING STYLES
+
+$theme-colors: (
+  "primary": red,
+);
+
+@import "~bootstrap/scss/bootstrap";
