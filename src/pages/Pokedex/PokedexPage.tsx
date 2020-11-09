@@ -1,4 +1,3 @@
-import "./PokedexPage.scss";
 import Page from "components/Page";
 import Card from "components/Card";
 import List from "components/List";
@@ -7,8 +6,6 @@ import { getGeneration } from "helpers/api";
 import React, { useEffect, useState } from "react";
 import { GenerationResource } from "helpers/types";
 import { useLocation, useParams } from "react-router-dom";
-import { sortListByIds } from "helpers/funcs";
-import { getIdFromUrl } from "helpers/strings";
 
 const PokedexPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();

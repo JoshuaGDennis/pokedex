@@ -56,4 +56,10 @@
       }
     }
   }
+
+  &.pokemon-card {
+    &.small {
+      cursor: pointer;
+    }
+  }
 }

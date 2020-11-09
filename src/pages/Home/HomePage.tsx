@@ -2,9 +2,9 @@ import "./HomePage.scss";
 import Page from "components/Page";
 import List from "components/List";
 import { useQuery } from "react-query";
+import { GenerationCard } from "components/Card";
 import React, { useEffect, useState } from "react";
 import { GenerationResource } from "helpers/types";
-import GenerationCard from "components/Card/Generation";
 import { getGeneration, getGenerationList } from "helpers/api";
 
 const HomePage: React.FC = () => {
