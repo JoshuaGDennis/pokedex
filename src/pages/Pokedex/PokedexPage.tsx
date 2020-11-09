@@ -7,6 +7,8 @@ import { getGeneration } from "helpers/api";
 import React, { useEffect, useState } from "react";
 import { GenerationResource } from "helpers/types";
 import { useLocation, useParams } from "react-router-dom";
+import { sortListByIds } from "helpers/funcs";
+import { getIdFromUrl } from "helpers/strings";
 
 const PokedexPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -34,6 +36,7 @@ const PokedexPage: React.FC = () => {
         isLoading={!pokemon.length}
         items={pokemon}
         renderItem={(item, i) => <Card className="pokedex-card">{item}</Card>}
+        sortItems={(a, b) => +a.id - +b.id}
       />
     </Page>
   );

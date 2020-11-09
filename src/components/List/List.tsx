@@ -9,20 +9,24 @@ interface iListProps {
   loadingMessage?: string;
   items: any[] | undefined;
   renderItem(item: any, i: number): React.ReactNode;
+  sortItems?(a: any, b: any): number;
 }
 
 const List: React.FC<iListProps> = ({
   isLoading,
   loadingMessage,
-  items,
   renderItem,
+  sortItems,
+  items,
 }) => {
   if (items === undefined || !items.length) return <Loader isLoading />;
+
+  const sortedItems = sortItems ? items.sort(sortItems) : items;
 
   return (
     <Loader isLoading={isLoading} message={loadingMessage}>
       <Row className="list">
-        {items.map((item, i) => (
+        {sortedItems.map((item, i) => (
           <Col key={i} md="4">
             {renderItem(item, i)}
           </Col>

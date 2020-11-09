@@ -8,4 +8,52 @@
   &:hover {
     box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.15), 0 2px 5px rgba(0, 0, 0, 0.1);
   }
+
+  &.generation-card {
+    cursor: pointer;
+
+    a {
+      color: initial;
+      text-decoration: none;
+    }
+
+    .circles {
+      padding: 0;
+      padding-left: 0.5rem;
+
+      .circle {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        display: inline-block;
+
+        &:last-child {
+          margin-left: -1rem;
+        }
+      }
+    }
+
+    .detail {
+      padding: 0;
+
+      h2,
+      p {
+        margin: 0;
+      }
+
+      h2 {
+        font-size: 1rem;
+      }
+
+      p {
+        font-size: 0.8rem;
+      }
+
+      span {
+        font-size: 0.5rem;
+        font-weight: bold;
+        margin-right: 1rem;
+      }
+    }
+  }
 }
