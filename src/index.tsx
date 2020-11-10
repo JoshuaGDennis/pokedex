@@ -1,16 +1,12 @@
+import "./custom.scss";
+import App from "./App";
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./components/App";
 import * as serviceWorker from "./serviceWorker";
-import { QueryCache, ReactQueryCacheProvider } from "react-query";
-
-const queryCache = new QueryCache();
 
 ReactDOM.render(
   <React.StrictMode>
-    <ReactQueryCacheProvider queryCache={queryCache}>
-      <App />
-    </ReactQueryCacheProvider>
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );
