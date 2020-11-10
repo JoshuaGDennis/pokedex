@@ -1,0 +1,28 @@
+.card {
+  border: none;
+  height: 14rem;
+  overflow: hidden;
+  background-color: #fff;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+
+  &-body {
+    padding: 0;
+  }
+
+  .section {
+    height: 10rem;
+    overflow: hidden;
+    background-color: #b7c5c0;
+  }
+}
+
+.skeleton {
+  span {
+    width: 2rem;
+    height: 1rem;
+    margin: 1rem;
+    display: block;
+    border-radius: 1rem;
+    background-color: #9fa8a5;
+  }
+}
