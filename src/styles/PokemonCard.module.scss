@@ -1,0 +1,128 @@
+@import "variables";
+
+// Used on card image
+@keyframes fadeup {
+  from {
+    opacity: 0;
+    margin-top: 1rem;
+  }
+
+  to {
+    opacity: 1;
+    margin-top: 0;
+  }
+}
+
+.card {
+  border: none;
+  width: 14rem;
+  cursor: pointer;
+  overflow: hidden;
+  transition: 0.2s all ease;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  .pokeball {
+    width: 70px;
+    height: 70px;
+    overflow: hidden;
+    position: absolute;
+    border-radius: 50%;
+    background-color: blue;
+    top: 0.5rem;
+    right: 0.5rem;
+
+    &[data-color="green"] {
+      &,
+      &::before,
+      .inner {
+        background-color: scale-color($green, $lightness: +20%);
+      }
+      &::after {
+        background-color: $green;
+      }
+      .inner {
+        border-color: $green;
+      }
+    }
+
+    &::before,
+    &::after {
+      content: "";
+      width: 100%;
+      position: absolute;
+    }
+
+    &::before {
+      height: 50%;
+    }
+
+    &::after {
+      left: 0;
+      height: 10px;
+      top: calc(50% - 5px);
+      background-color: olive;
+    }
+
+    .inner {
+      width: 40px;
+      height: 40px;
+      z-index: 10;
+      border-width: 5px;
+      position: absolute;
+      border-radius: 50%;
+      border-style: solid;
+      top: calc(50% - 20px);
+      left: calc(50% - 20px);
+    }
+  }
+
+  p {
+    margin: 0;
+  }
+
+  .body {
+    height: 10rem;
+    padding: 0.5rem;
+    overflow: hidden;
+    border-top-left-radius: 0.2rem;
+    border-top-right-radius: 0.2rem;
+  }
+
+  .id {
+    color: white;
+    font-size: 0.8rem;
+    font-weight: bold;
+  }
+
+  .name {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  .image {
+    width: 8rem;
+    margin: 0 auto;
+    display: block;
+    animation-name: fadeup;
+    animation-duration: 0.5s;
+  }
+
+  .types {
+    margin-top: 0.5rem;
+
+    p {
+      font-size: 0.8rem;
+      text-align: center;
+    }
+  }
+
+  .footer {
+    padding: 0.5rem 1rem;
+    border-bottom-left-radius: 0.2rem;
+    border-bottom-right-radius: 0.2rem;
+  }
+}

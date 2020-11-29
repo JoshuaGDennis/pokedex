@@ -1,6 +1,6 @@
-import "./custom.scss";
-import App from "./App";
 import React from "react";
+import "styles/_custom.scss";
+import App from "components/App";
 import ReactDOM from "react-dom";
 import * as serviceWorker from "./serviceWorker";
 

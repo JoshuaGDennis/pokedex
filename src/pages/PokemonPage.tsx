@@ -1,7 +1,7 @@
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { getGeneration } from "../api";
 import { GenerationResponse } from "types";
+import { getGeneration } from "helpers/api";
 import PokemonCard from "components/PokemonCard";
 import Container from "react-bootstrap/Container";
 import React, { useEffect, useState } from "react";

@@ -1,61 +1,66 @@
-import Card from "./Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Card from "react-bootstrap/Card";
 import { SpeciesResponse } from "types";
+import { getSpecies } from "helpers/api";
+import Image from "react-bootstrap/Image";
+import { capitalise } from "helpers/strings";
 import React, { useEffect, useState } from "react";
-import { getSpecies } from "api";
+import styles from "styles/PokemonCard.module.scss";
 
 interface iPokemonCardProps {
-  id?: string;
+  id: string;
 }
 
 const PokemonCard: React.FC<iPokemonCardProps> = ({ id }) => {
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [pokemon, setPokemon] = useState<SpeciesResponse | null>(null);
 
   useEffect(() => {
-    if (id) {
-      getSpecies(id).then((data) => {
-        setPokemon(data);
-        setLoading(false);
-        console.log(data);
-      });
-    }
+    getSpecies(id).then((data) => {
+      setPokemon(data);
+      setIsLoading(false);
+    });
   }, [id]);
 
-  if (loading)
-    return (
-      <Card className="skeleton">
-        <div className="section">
-          <span />
-        </div>
-
-        <Row>
-          <Col>
-            <div className="header" />
-          </Col>
-        </Row>
-
-        <Row>
-          <Col>
-            <span />
-          </Col>
-          <Col>
-            <span />
-          </Col>
-        </Row>
-      </Card>
-    );
+  if (isLoading || !pokemon) return <h3>LOADING STATE HERE</h3>;
 
   return (
-    <Card>
-      <div className={`bg-${pokemon?.color} section`}></div>
-
-      <Row>
-        <Col>
-          <div className="header">{pokemon?.name}</div>
-        </Col>
-      </Row>
+    <Card className={styles.card}>
+      <div className={styles.pokeball} data-color={pokemon.color}>
+        <div className={styles.inner} />
+      </div>
+      <Card.Body className={`bg-${pokemon.color} ${styles.body}`}>
+        <Row>
+          <Col>
+            <p className={styles.id}>#{pokemon.id}</p>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Image
+              className={styles.image}
+              src={`${process.env.PUBLIC_URL}/assets/pokemon/${pokemon.name}.png`}
+              fluid
+            />
+          </Col>
+        </Row>
+      </Card.Body>
+      <Card.Footer className={styles.footer}>
+        <Row>
+          <Col>
+            <p className={styles.name}>{capitalise(pokemon.name)}</p>
+          </Col>
+        </Row>
+        <Row className={styles.types}>
+          <Col>
+            <p>Type 1</p>
+          </Col>
+          <Col>
+            <p>Type 2</p>
+          </Col>
+        </Row>
+      </Card.Footer>
     </Card>
   );
 };

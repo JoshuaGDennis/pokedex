@@ -1,7 +1,6 @@
 // BOOTSTRAP OVERRIDING STYLES
 
-$body-bg: #fbfbfb;
-
+@import "variables";
 @import "~bootstrap/scss/bootstrap";
 
 .container {
@@ -10,5 +9,5 @@ $body-bg: #fbfbfb;
 }
 
 .bg-green {
-  background-color: #2cc990;
+  background-color: $green;
 }
