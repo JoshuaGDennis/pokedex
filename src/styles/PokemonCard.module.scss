@@ -1,17 +1,6 @@
+@import "mixins";
 @import "variables";
-
-// Used on card image
-@keyframes fadeup {
-  from {
-    opacity: 0;
-    margin-top: 1rem;
-  }
-
-  to {
-    opacity: 1;
-    margin-top: 0;
-  }
-}
+@import "animations";
 
 .card {
   border: none;
@@ -36,17 +25,7 @@
     right: 0.5rem;
 
     &[data-color="green"] {
-      &,
-      &::before,
-      .inner {
-        background-color: scale-color($green, $lightness: +20%);
-      }
-      &::after {
-        background-color: $green;
-      }
-      .inner {
-        border-color: $green;
-      }
+      @include pokeballColors($green);
     }
 
     &::before,

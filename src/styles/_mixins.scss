@@ -1,0 +1,13 @@
+@mixin pokeballColors($value) {
+  &,
+  &::before,
+  .inner {
+    background-color: scale-color($value, $lightness: +20%);
+  }
+  &::after {
+    background-color: $value;
+  }
+  .inner {
+    border-color: $value;
+  }
+}
