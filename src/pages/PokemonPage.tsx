@@ -23,7 +23,10 @@ const PokemonPage: React.FC = () => {
           <PokemonCard id={generation.pokemon[0]} />
         </Col>
         <Col xs={12} md={4}>
-          <PokemonCard id={generation.pokemon[1]} />
+          <PokemonCard id={generation.pokemon[3]} />
+        </Col>
+        <Col xs={12} md={4}>
+          <PokemonCard id={generation.pokemon[6]} />
         </Col>
       </Row>
     </Container>

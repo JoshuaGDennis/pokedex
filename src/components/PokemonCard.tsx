@@ -15,6 +15,7 @@ interface iPokemonCardProps {
 
 const PokemonCard: React.FC<iPokemonCardProps> = ({ id }) => {
   const [isLoading, setIsLoading] = useState(true);
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
   const [pokemon, setPokemon] = useState<PokemonResponse | null>(null);
 
   useEffect(() => {
@@ -40,7 +41,14 @@ const PokemonCard: React.FC<iPokemonCardProps> = ({ id }) => {
         </Row>
         <Row>
           <Col>
-            <Image className={styles.image} src={pokemon.image} fluid />
+            <Image
+              className={`${styles.image} ${
+                isImageLoaded ? styles.loaded : ""
+              }`}
+              src={pokemon.image}
+              onLoad={() => setIsImageLoaded(true)}
+              fluid
+            />
           </Col>
         </Row>
       </Card.Body>
@@ -52,7 +60,7 @@ const PokemonCard: React.FC<iPokemonCardProps> = ({ id }) => {
         </Row>
         <Row className={styles.types}>
           {pokemon.types.map((type) => (
-            <Col>
+            <Col key={type}>
               <p>{capitalise(type)}</p>
             </Col>
           ))}

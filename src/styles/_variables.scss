@@ -1,3 +1,46 @@
 $body-bg: #fbfbfb;
 
 $green: #2cc990;
+$red: #ff7070;
+$blue: #00abd8;
+
+// TYPE COLORS
+$grass: $green;
+$bug: #a8c545;
+$fire: $red;
+$water: #7ecefd;
+$electric: #ffdc00;
+$poison: #9c27b0;
+$psychic: #e391c0;
+$dark: #374140;
+$fighting: #d57e7e;
+$flying: #59d8e6;
+$ground: #f0c755;
+$ghost: #c09dec;
+$fairy: #f6d5ee;
+$steel: #dcdcdc;
+$ice: #acf0f2;
+$rock: #e6a14d;
+$dragon: #8a76ff;
+$normal: #f7deb2;
+
+$allTypes: (
+  "grass": $grass,
+  "bug": $bug,
+  "fire": $red,
+  "water": $water,
+  "electric": $electric,
+  "poison": $poison,
+  "psychic": $psychic,
+  "dark": $dark,
+  "fighting": $fighting,
+  "flying": $flying,
+  "ground": $ground,
+  "ghost": $ghost,
+  "fairy": $fairy,
+  "steel": $steel,
+  "ice": $ice,
+  "rock": $rock,
+  "dragon": $dragon,
+  "normal": $normal,
+);

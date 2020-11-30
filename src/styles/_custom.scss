@@ -8,7 +8,12 @@
   margin-top: 3rem;
 }
 
-.bg-green,
-.bg-grass {
-  background-color: $green;
+@each $type, $color in $allTypes {
+  .bg-#{$type} {
+    background-color: $color;
+  }
+
+  .color-#{$type} {
+    background-color: $color;
+  }
 }
