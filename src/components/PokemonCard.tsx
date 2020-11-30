@@ -110,11 +110,11 @@ const PokemonCard: React.FC<iPokemonCardProps> = ({ data }) => (
   <Card className={styles.card}>
     <Card.Body className="p-0 h-100">
       <Row className="m-0 h-100">
-        <Col className="p-0" xs={12}>
+        <Col className="p-0" xs={12} md={6}>
           <LeftCard data={data} />
         </Col>
 
-        <Col className="p-0" xs={12}>
+        <Col className="p-0" xs={12} md={6}>
           <RightCard data={data} />
         </Col>
       </Row>
