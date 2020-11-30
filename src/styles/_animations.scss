@@ -9,3 +9,12 @@
     margin-top: 0;
   }
 }
+
+@keyframes load {
+  from {
+    left: -150px;
+  }
+  to {
+    left: 100%;
+  }
+}

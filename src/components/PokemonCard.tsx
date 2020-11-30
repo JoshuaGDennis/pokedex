@@ -19,11 +19,38 @@ const PokemonCard: React.FC<iPokemonCardProps> = ({ id }) => {
   useEffect(() => {
     getSpecies(id).then((data) => {
       setPokemon(data);
-      setIsLoading(false);
+      // setIsLoading(false);
     });
   }, [id]);
 
-  if (isLoading || !pokemon) return <h3>LOADING STATE HERE</h3>;
+  if (isLoading || !pokemon) {
+    return (
+      <Card className={styles.card}>
+        <Card.Body className={styles.body}>
+          <Row>
+            <Col>
+              <p className={`${styles.id} ${styles.skeleton}`}>#ID</p>
+            </Col>
+          </Row>
+        </Card.Body>
+        <Card.Footer className={styles.footer}>
+          <Row>
+            <Col>
+              <p className={`${styles.name} ${styles.skeleton}`}>Name</p>
+            </Col>
+          </Row>
+          <Row className={styles.types}>
+            <Col>
+              <p className={styles.skeleton}>Type 1</p>
+            </Col>
+            <Col>
+              <p className={styles.skeleton}>Type 2</p>
+            </Col>
+          </Row>
+        </Card.Footer>
+      </Card>
+    );
+  }
 
   return (
     <Card className={styles.card}>
