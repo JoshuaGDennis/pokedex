@@ -25,8 +25,6 @@ const PokemonCard: React.FC<iPokemonCardProps> = ({ id }) => {
 
   const inView = useVisibility(ref, () => console.log("IN VIEW"));
 
-  console.log(inView);
-
   useEffect(() => {
     if (inView) {
       getPokemon(id).then((data) => {
@@ -36,7 +34,7 @@ const PokemonCard: React.FC<iPokemonCardProps> = ({ id }) => {
     }
   }, [id, inView]);
 
-  if (isLoading || !pokemon) return <LoadingCard />;
+  if (isLoading || !pokemon) return <LoadingCard cardRef={ref} />;
 
   const mainType = pokemon.types[0];
 

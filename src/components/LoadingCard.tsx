@@ -1,12 +1,16 @@
-import React from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
+import React, { RefObject } from "react";
 import styles from "styles/LoadingCard.module.scss";
 import cardStyles from "styles/PokemonCard.module.scss";
 
-const LoadingCard: React.FC = () => (
-  <Card className={cardStyles.card}>
+interface iLoadingCardProps {
+  cardRef: RefObject<HTMLDivElement>;
+}
+
+const LoadingCard: React.FC<iLoadingCardProps> = ({ cardRef }) => (
+  <Card className={cardStyles.card} ref={cardRef}>
     <Card.Body className={cardStyles.body}>
       <Row>
         <Col>
