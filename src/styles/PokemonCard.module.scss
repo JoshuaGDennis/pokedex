@@ -1,3 +1,5 @@
+@import "variables";
+
 .card {
   width: 100%;
   height: 100%;
@@ -15,6 +17,10 @@
     text-align: center;
     border-radius: 0.8rem;
   }
+
+  .pane {
+    padding: 1rem 0;
+  }
 }
 
 .leftCard {
@@ -29,4 +35,15 @@
   border: none;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
+}
+
+.tabs {
+  left: 1rem;
+  top: -3.9rem;
+  position: absolute;
+
+  .tab {
+    color: #fff;
+    border-color: #e9ecef #e9ecef #dee2e6;
+  }
 }

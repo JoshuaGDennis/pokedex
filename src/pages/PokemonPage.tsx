@@ -12,7 +12,7 @@ const PokemonPage: React.FC = () => {
   console.log(id, location);
 
   return (
-    <Row className="justify-content-md-center mt-5">
+    <Row className="justify-content-md-center" style={{ marginTop: "5rem" }}>
       <Col xs={12} md={11}>
         <PokemonCard data={location.state} />
       </Col>

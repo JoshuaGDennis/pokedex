@@ -1,8 +1,8 @@
-import React from "react";
 import Image from "./Image";
 import Tab from "react-bootstrap/Tab";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import React, { useState } from "react";
 import Tabs from "react-bootstrap/Tabs";
 import Card from "react-bootstrap/Card";
 import { capitalise } from "helpers/strings";
@@ -32,11 +32,6 @@ const LeftCard: React.FC<iPokemonCardProps> = ({ data }) => (
           <h1 className="text-md-center">{capitalise(data.name)}</h1>
         </Col>
       </Row>
-      <Row>
-        <Col>
-          <p className="text-md-center">This is some short pokemon text!</p>
-        </Col>
-      </Row>
       <Row md={6} className="justify-content-md-center">
         {data.types.map((type, i) => (
           <Col key={type}>
@@ -54,35 +49,62 @@ const LeftCard: React.FC<iPokemonCardProps> = ({ data }) => (
   </Card>
 );
 
-const RightCard: React.FC<iPokemonCardProps> = ({ data }) => (
-  <Card className={styles.rightCard}>
-    <Card.Body>
-      <Row>
-        <Col>
-          <h2>{capitalise(data.name)}</h2>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          <Tabs defaultActiveKey="profile">
-            <Tab eventKey="profile" title="PROFILE">
-              <Tab.Pane>SOME STUFF</Tab.Pane>
-            </Tab>
-            <Tab eventKey="moves" title="MOVES">
-              <Tab.Pane>SOME MOVES</Tab.Pane>
-            </Tab>
-            <Tab eventKey="evolutions" title="EVOLUTIONS">
-              <Tab.Pane>SOME EVOLUTIONS</Tab.Pane>
-            </Tab>
-            <Tab eventKey="weaknesses" title="WEAKNESSES">
-              <Tab.Pane>SOME WEAKNESSES</Tab.Pane>
-            </Tab>
-          </Tabs>
-        </Col>
-      </Row>
-    </Card.Body>
-  </Card>
-);
+const RightCard: React.FC<iPokemonCardProps> = ({ data }) => {
+  const [active, setActive] = useState<string>("profile");
+
+  return (
+    <Card className={styles.rightCard}>
+      <Card.Body>
+        <Row>
+          <Col>
+            <Tabs
+              activeKey={active}
+              className={styles.tabs}
+              onSelect={(k: any) => setActive(k)}
+            >
+              <Tab
+                eventKey="profile"
+                title="PROFILE"
+                tabClassName={`${styles.tab} bg-${data.types[0]}${
+                  active === "" ? "--darker" : "--lighter"
+                }`}
+              >
+                <Tab.Pane className={styles.pane}>SOME STUFF</Tab.Pane>
+              </Tab>
+              <Tab
+                eventKey="moves"
+                title="MOVES"
+                tabClassName={`${styles.tab} bg-${data.types[0]}${
+                  active === "" ? "--darker" : "--lighter"
+                }`}
+              >
+                <Tab.Pane className={styles.pane}>SOME MOVES</Tab.Pane>
+              </Tab>
+              <Tab
+                eventKey="evolutions"
+                title="EVOLUTIONS"
+                tabClassName={`${styles.tab} bg-${data.types[0]}${
+                  active === "" ? "--darker" : "--lighter"
+                }`}
+              >
+                <Tab.Pane className={styles.pane}>SOME EVOLUTIONS</Tab.Pane>
+              </Tab>
+              <Tab
+                eventKey="weaknesses"
+                title="WEAKNESSES"
+                tabClassName={`${styles.tab} bg-${data.types[0]}${
+                  active === "" ? "--darker" : "--lighter"
+                }`}
+              >
+                <Tab.Pane className={styles.pane}>SOME WEAKNESSES</Tab.Pane>
+              </Tab>
+            </Tabs>
+          </Col>
+        </Row>
+      </Card.Body>
+    </Card>
+  );
+};
 
 const PokemonCard: React.FC<iPokemonCardProps> = ({ data }) => (
   <Card className={styles.card}>

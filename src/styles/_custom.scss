@@ -25,34 +25,34 @@ body {
   }
 
   .bg-#{$type}--lighter {
-    background-color: scale-color($color, $lightness: +20%);
+    background-color: scale-color($color, $lightness: +30%) !important;
   }
 
   .bg-#{$type}--darker {
-    background-color: scale-color($color, $lightness: -20%);
+    background-color: scale-color($color, $lightness: -30%) !important;
   }
 
   .color-#{$type} {
-    background-color: $color;
+    background-color: $color !important;
   }
 
   .color-#{$type}--lighter {
-    color: scale-color($color, $lightness: +20%);
+    color: scale-color($color, $lightness: +20%) !important;
   }
 
   .color-#{$type}--darker {
-    color: scale-color($color, $lightness: -20%);
+    color: scale-color($color, $lightness: -20%) !important;
   }
 
   .bs-#{$type} {
-    box-shadow: 0 0 5px 0 $color;
+    box-shadow: 0 0 5px 0 $color !important;
   }
 
   .bs-#{$type}--lighter {
-    box-shadow: 0 0 5px 0 scale-color($color, $lightness: +20%);
+    box-shadow: 0 0 5px 0 scale-color($color, $lightness: +20%) !important;
   }
 
   .bs-#{$type}--darker {
-    box-shadow: 0 0 5px 0 scale-color($color, $lightness: -20%);
+    box-shadow: 0 0 5px 0 scale-color($color, $lightness: -20%) !important;
   }
 }
