@@ -1,0 +1,13 @@
+@import "animations";
+
+.image {
+  opacity: 0;
+  display: block;
+  transition: 0.2s all ease;
+}
+
+.loaded {
+  opacity: 1;
+  animation-name: fadeup;
+  animation-duration: 0.5s;
+}

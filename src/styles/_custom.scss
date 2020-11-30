@@ -17,12 +17,42 @@ body {
   transition: background-color 0.2s;
 }
 
+//     background-color: scale-color($value, $lightness: +20%);
+
 @each $type, $color in $allTypes {
   .bg-#{$type} {
     background-color: $color;
   }
 
+  .bg-#{$type}--lighter {
+    background-color: scale-color($color, $lightness: +20%);
+  }
+
+  .bg-#{$type}--darker {
+    background-color: scale-color($color, $lightness: -20%);
+  }
+
   .color-#{$type} {
     background-color: $color;
+  }
+
+  .color-#{$type}--lighter {
+    color: scale-color($color, $lightness: +20%);
+  }
+
+  .color-#{$type}--darker {
+    color: scale-color($color, $lightness: -20%);
+  }
+
+  .bs-#{$type} {
+    box-shadow: 0 0 5px 0 $color;
+  }
+
+  .bs-#{$type}--lighter {
+    box-shadow: 0 0 5px 0 scale-color($color, $lightness: +20%);
+  }
+
+  .bs-#{$type}--darker {
+    box-shadow: 0 0 5px 0 scale-color($color, $lightness: -20%);
   }
 }

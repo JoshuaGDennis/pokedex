@@ -1,9 +1,9 @@
+import Image from "./Image";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import { getPokemon } from "helpers/api";
-import Image from "react-bootstrap/Image";
 import { PokemonResponse } from "helpers/types";
 import { useTheme } from "helpers/ThemeContext";
 import LoadingCard from "components/LoadingCard";
@@ -66,15 +66,7 @@ const PokedexCard: React.FC<iPokedexCardProps> = ({ id }) => {
           </Row>
           <Row>
             <Col>
-              <Image
-                className={addClasses(styles, [
-                  "image",
-                  isImageLoaded ? "loaded" : "",
-                ])}
-                src={pokemon.image}
-                onLoad={() => setIsImageLoaded(true)}
-                fluid
-              />
+              <Image className={styles.image} src={pokemon.image} fluid />
             </Col>
           </Row>
         </Card.Body>

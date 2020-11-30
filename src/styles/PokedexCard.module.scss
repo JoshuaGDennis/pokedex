@@ -1,6 +1,5 @@
 @import "mixins";
 @import "variables";
-@import "animations";
 
 .link {
   p {
@@ -103,17 +102,8 @@
   }
 
   .image {
-    opacity: 0;
     width: 8rem;
     margin: 0 auto;
-    display: block;
-    transition: 0.2s all ease;
-  }
-
-  .loaded {
-    opacity: 1;
-    animation-name: fadeup;
-    animation-duration: 0.5s;
   }
 
   .types {
