@@ -1,9 +1,9 @@
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { GenerationResponse } from "types";
 import { getGeneration } from "helpers/api";
 import PokemonCard from "components/PokemonCard";
 import Container from "react-bootstrap/Container";
+import { GenerationResponse } from "helpers/types";
 import React, { useEffect, useState } from "react";
 
 const PokemonPage: React.FC = () => {
@@ -14,11 +14,16 @@ const PokemonPage: React.FC = () => {
     getGeneration(ID).then(setGeneration);
   }, [ID]);
 
+  if (!generation) return null;
+
   return (
     <Container>
       <Row>
         <Col xs={12} md={4}>
-          {generation ? <PokemonCard id={generation.pokemon[0]} /> : null}
+          <PokemonCard id={generation.pokemon[0]} />
+        </Col>
+        <Col xs={12} md={4}>
+          <PokemonCard id={generation.pokemon[1]} />
         </Col>
       </Row>
     </Container>

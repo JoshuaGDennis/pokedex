@@ -28,10 +28,6 @@
     top: 0.5rem;
     right: 0.5rem;
 
-    &[data-color="green"] {
-      @include pokeballColors($green);
-    }
-
     &::before,
     &::after {
       content: "";
@@ -108,5 +104,17 @@
     padding: 0.5rem 1rem;
     border-bottom-left-radius: 0.2rem;
     border-bottom-right-radius: 0.2rem;
+  }
+}
+
+.grass {
+  composes: card;
+
+  .body {
+    background-color: $green;
+  }
+
+  .pokeball {
+    @include pokeballColors($green);
   }
 }

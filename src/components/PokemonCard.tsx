@@ -1,10 +1,10 @@
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
-import { SpeciesResponse } from "types";
-import { getSpecies } from "helpers/api";
+import { getPokemon } from "helpers/api";
 import Image from "react-bootstrap/Image";
 import { capitalise } from "helpers/strings";
+import { PokemonResponse } from "helpers/types";
 import LoadingCard from "components/LoadingCard";
 import React, { useEffect, useState } from "react";
 import styles from "styles/PokemonCard.module.scss";
@@ -15,10 +15,10 @@ interface iPokemonCardProps {
 
 const PokemonCard: React.FC<iPokemonCardProps> = ({ id }) => {
   const [isLoading, setIsLoading] = useState(true);
-  const [pokemon, setPokemon] = useState<SpeciesResponse | null>(null);
+  const [pokemon, setPokemon] = useState<PokemonResponse | null>(null);
 
   useEffect(() => {
-    getSpecies(id).then((data) => {
+    getPokemon(id).then((data) => {
       setPokemon(data);
       setIsLoading(false);
     });
@@ -27,11 +27,12 @@ const PokemonCard: React.FC<iPokemonCardProps> = ({ id }) => {
   if (isLoading || !pokemon) return <LoadingCard />;
 
   return (
-    <Card className={styles.card}>
-      <div className={styles.pokeball} data-color={pokemon.color}>
+    <Card className={`${styles.card} ${styles[pokemon.types[0]]}}`}>
+      <div className={styles.pokeball}>
         <div className={styles.inner} />
       </div>
-      <Card.Body className={`bg-${pokemon.color} ${styles.body}`}>
+
+      <Card.Body className={styles.body}>
         <Row>
           <Col>
             <p className={styles.id}>#{pokemon.id}</p>
@@ -39,11 +40,7 @@ const PokemonCard: React.FC<iPokemonCardProps> = ({ id }) => {
         </Row>
         <Row>
           <Col>
-            <Image
-              className={styles.image}
-              src={`${process.env.PUBLIC_URL}/assets/pokemon/${pokemon.name}.png`}
-              fluid
-            />
+            <Image className={styles.image} src={pokemon.image} fluid />
           </Col>
         </Row>
       </Card.Body>
@@ -54,12 +51,11 @@ const PokemonCard: React.FC<iPokemonCardProps> = ({ id }) => {
           </Col>
         </Row>
         <Row className={styles.types}>
-          <Col>
-            <p>Type 1</p>
-          </Col>
-          <Col>
-            <p>Type 2</p>
-          </Col>
+          {pokemon.types.map((type) => (
+            <Col>
+              <p>{capitalise(type)}</p>
+            </Col>
+          ))}
         </Row>
       </Card.Footer>
     </Card>
