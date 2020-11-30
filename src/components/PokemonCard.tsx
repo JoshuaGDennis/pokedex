@@ -22,7 +22,7 @@ const LeftCard: React.FC<iPokemonCardProps> = ({ data }) => (
         </Col>
       </Row>
 
-      <Row className="justify-content-md-center">
+      <Row className="justify-content-center">
         <Col>
           <Image className={styles.image} src={data.image} fluid />
         </Col>
@@ -32,7 +32,7 @@ const LeftCard: React.FC<iPokemonCardProps> = ({ data }) => (
           <h1 className="text-md-center">{capitalise(data.name)}</h1>
         </Col>
       </Row>
-      <Row md={6} className="justify-content-md-center">
+      <Row md={6} className="justify-content-center">
         {data.types.map((type, i) => (
           <Col key={type}>
             <p
@@ -110,11 +110,11 @@ const PokemonCard: React.FC<iPokemonCardProps> = ({ data }) => (
   <Card className={styles.card}>
     <Card.Body className="p-0 h-100">
       <Row className="m-0 h-100">
-        <Col className="p-0">
+        <Col className="p-0" xs={12}>
           <LeftCard data={data} />
         </Col>
 
-        <Col className="p-0">
+        <Col className="p-0" xs={12}>
           <RightCard data={data} />
         </Col>
       </Row>

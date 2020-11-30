@@ -21,7 +21,6 @@ const PokedexCard: React.FC<iPokedexCardProps> = ({ id }) => {
   const ref = useRef<HTMLDivElement>(null);
 
   const [isLoading, setIsLoading] = useState(true);
-  const [isImageLoaded, setIsImageLoaded] = useState(false);
   const [pokemon, setPokemon] = useState<PokemonResponse | null>(null);
 
   const inView = useVisibility(ref, () => console.log("IN VIEW"));
