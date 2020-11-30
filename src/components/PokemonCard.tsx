@@ -5,6 +5,7 @@ import { SpeciesResponse } from "types";
 import { getSpecies } from "helpers/api";
 import Image from "react-bootstrap/Image";
 import { capitalise } from "helpers/strings";
+import LoadingCard from "components/LoadingCard";
 import React, { useEffect, useState } from "react";
 import styles from "styles/PokemonCard.module.scss";
 
@@ -19,38 +20,11 @@ const PokemonCard: React.FC<iPokemonCardProps> = ({ id }) => {
   useEffect(() => {
     getSpecies(id).then((data) => {
       setPokemon(data);
-      // setIsLoading(false);
+      setIsLoading(false);
     });
   }, [id]);
 
-  if (isLoading || !pokemon) {
-    return (
-      <Card className={styles.card}>
-        <Card.Body className={styles.body}>
-          <Row>
-            <Col>
-              <p className={`${styles.id} ${styles.skeleton}`}>#ID</p>
-            </Col>
-          </Row>
-        </Card.Body>
-        <Card.Footer className={styles.footer}>
-          <Row>
-            <Col>
-              <p className={`${styles.name} ${styles.skeleton}`}>Name</p>
-            </Col>
-          </Row>
-          <Row className={styles.types}>
-            <Col>
-              <p className={styles.skeleton}>Type 1</p>
-            </Col>
-            <Col>
-              <p className={styles.skeleton}>Type 2</p>
-            </Col>
-          </Row>
-        </Card.Footer>
-      </Card>
-    );
-  }
+  if (isLoading || !pokemon) return <LoadingCard />;
 
   return (
     <Card className={styles.card}>
