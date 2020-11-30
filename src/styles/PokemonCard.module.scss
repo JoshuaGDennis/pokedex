@@ -8,7 +8,7 @@
   margin: 1rem;
   cursor: pointer;
   overflow: hidden;
-  transition: 0.2s all ease;
+  transition: background-color 0.2s;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
 
   @media only screen and (max-width: $breakpoint-mobile) {
@@ -30,7 +30,6 @@
     overflow: hidden;
     position: absolute;
     border-radius: 50%;
-    background-color: blue;
     top: 0.5rem;
     right: 0.5rem;
 
@@ -49,7 +48,6 @@
       left: 0;
       height: 10px;
       top: calc(50% - 5px);
-      background-color: olive;
     }
 
     .inner {
@@ -62,11 +60,13 @@
       border-style: solid;
       top: calc(50% - 20px);
       left: calc(50% - 20px);
+      transition: background-color 0.2s;
     }
   }
 
   p {
     margin: 0;
+    transition: color 0.2s;
   }
 
   .body {
@@ -75,6 +75,7 @@
     overflow: hidden;
     border-top-left-radius: 0.2rem;
     border-top-right-radius: 0.2rem;
+    transition: background-color 0.2s;
   }
 
   .id {
@@ -128,6 +129,23 @@
 
     .pokeball {
       @include pokeballColors($color);
+    }
+  }
+
+  .#{$type}--dark {
+    composes: card;
+
+    &,
+    .body {
+      background-color: gray;
+    }
+
+    p {
+      color: #fff;
+    }
+
+    .pokeball {
+      @include pokeballColors($color, gray);
     }
   }
 }

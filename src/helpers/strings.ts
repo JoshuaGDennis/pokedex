@@ -14,4 +14,8 @@ const getEnglishFlavorText = (entries: FlavorTextEntry[]): string => {
   return found ? found.flavor_text : "";
 };
 
-export { capitalise, getIdFromUrl, getEnglishFlavorText };
+const addClasses = (module: { [key: string]: string }, classes: string[]) => {
+  return classes.map((cls) => module[cls]).join(" ");
+};
+
+export { capitalise, getIdFromUrl, getEnglishFlavorText, addClasses };

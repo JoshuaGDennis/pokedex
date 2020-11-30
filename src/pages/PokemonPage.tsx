@@ -19,11 +19,15 @@ const PokemonPage: React.FC = () => {
   return (
     <Container>
       <Row>
-        {generation.pokemon.map((id) => (
-          <Col xs={12} md={4} key={id}>
-            <PokemonCard id={id} />
-          </Col>
-        ))}
+        <Col xs={12} md={4}>
+          <PokemonCard id={generation.pokemon[0]} />
+        </Col>
+        <Col xs={12} md={4}>
+          <PokemonCard id={generation.pokemon[3]} />
+        </Col>
+        <Col xs={12} md={4}>
+          <PokemonCard id={generation.pokemon[6]} />
+        </Col>
       </Row>
     </Container>
   );
