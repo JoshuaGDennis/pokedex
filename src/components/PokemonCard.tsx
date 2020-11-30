@@ -6,9 +6,10 @@ import Image from "react-bootstrap/Image";
 import { PokemonResponse } from "helpers/types";
 import { useTheme } from "helpers/ThemeContext";
 import LoadingCard from "components/LoadingCard";
-import React, { useEffect, useState } from "react";
+import useVisibility from "helpers/useVisibility";
 import styles from "styles/PokemonCard.module.scss";
 import { capitalise, addClasses } from "helpers/strings";
+import React, { useEffect, useState, useRef } from "react";
 
 interface iPokemonCardProps {
   id: string;
@@ -16,16 +17,24 @@ interface iPokemonCardProps {
 
 const PokemonCard: React.FC<iPokemonCardProps> = ({ id }) => {
   const theme = useTheme();
+  const ref = useRef<HTMLDivElement>(null);
+
   const [isLoading, setIsLoading] = useState(true);
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   const [pokemon, setPokemon] = useState<PokemonResponse | null>(null);
 
+  const inView = useVisibility(ref, () => console.log("IN VIEW"));
+
+  console.log(inView);
+
   useEffect(() => {
-    getPokemon(id).then((data) => {
-      setPokemon(data);
-      setIsLoading(false);
-    });
-  }, [id]);
+    if (inView) {
+      getPokemon(id).then((data) => {
+        setPokemon(data);
+        setIsLoading(false);
+      });
+    }
+  }, [id, inView]);
 
   if (isLoading || !pokemon) return <LoadingCard />;
 
@@ -37,6 +46,7 @@ const PokemonCard: React.FC<iPokemonCardProps> = ({ id }) => {
         "card",
         `${mainType}${theme === "dark" ? "--dark" : ""}`,
       ])}
+      ref={ref}
     >
       <div className={styles.pokeball}>
         <div className={styles.inner} />

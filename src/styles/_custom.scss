@@ -9,6 +9,14 @@
   margin-top: 3rem;
 }
 
+body {
+  &.theme--dark {
+    background-color: gray;
+  }
+
+  transition: background-color 0.2s;
+}
+
 @each $type, $color in $allTypes {
   .bg-#{$type} {
     background-color: $color;

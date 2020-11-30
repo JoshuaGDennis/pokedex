@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 const ThemeContext = createContext("light");
 
@@ -14,6 +14,15 @@ const useTheme = () => {
 
 const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const [theme, setTheme] = useState("light");
+
+  useEffect(() => {
+    document.body.classList.add(
+      theme === "light" ? "theme--light" : "theme--dark"
+    );
+    document.body.classList.remove(
+      theme === "light" ? "theme--dark" : "theme--light"
+    );
+  }, [theme]);
 
   return (
     <ThemeContext.Provider value={theme}>
