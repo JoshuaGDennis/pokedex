@@ -1,7 +1,7 @@
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { getGeneration } from "helpers/api";
-import PokemonCard from "components/PokemonCard";
+import PokedexCard from "components/PokedexCard";
 import Container from "react-bootstrap/Container";
 import { GenerationResponse } from "helpers/types";
 import React, { useEffect, useState } from "react";
@@ -27,7 +27,7 @@ const PokedexPage: React.FC = () => {
       <Row>
         {generation.pokemon.map((id) => (
           <Col xs={12} md={4} key={id}>
-            <PokemonCard id={id} />
+            <PokedexCard id={id} />
           </Col>
         ))}
       </Row>

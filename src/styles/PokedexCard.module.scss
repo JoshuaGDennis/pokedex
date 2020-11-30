@@ -2,6 +2,19 @@
 @import "variables";
 @import "animations";
 
+.link {
+  p {
+    color: initial;
+  }
+
+  &:hover {
+    &,
+    p {
+      text-decoration: none;
+    }
+  }
+}
+
 .card {
   border: none;
   width: 14rem;

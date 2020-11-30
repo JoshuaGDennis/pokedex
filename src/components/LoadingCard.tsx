@@ -3,7 +3,7 @@ import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import React, { RefObject } from "react";
 import styles from "styles/LoadingCard.module.scss";
-import cardStyles from "styles/PokemonCard.module.scss";
+import cardStyles from "styles/PokedexCard.module.scss";
 
 interface iLoadingCardProps {
   cardRef: RefObject<HTMLDivElement>;
