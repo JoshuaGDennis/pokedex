@@ -3,10 +3,36 @@ type APIItem = {
   url: string;
 };
 
+type PokemonSprites = {
+  back_default: string;
+  back_female: string | null;
+  back_shiny: string;
+  front_default: string;
+  front_female: string | null;
+  front_shiny: string;
+  front_shiny_female: string | null;
+  other: {
+    dream_world: {
+      front_default: string;
+      front_female: string | null;
+    };
+    "official-artwork": {
+      front_default: string;
+    };
+  };
+}
+
 export type FlavorTextEntry = {
   flavor_text: string;
   language: APIItem;
 };
+
+export type APIResource = {
+  count: number
+  next: string | null
+  previous: string | null
+  results: APIItem[]
+}
 
 export type GenerationResponse = {
   id: number;
@@ -135,24 +161,7 @@ export type PokemonResource = {
   name: string;
   order: number;
   species: APIItem;
-  sprites: {
-    back_default: string;
-    back_female: string | null;
-    back_shiny: string;
-    front_default: string;
-    front_female: string | null;
-    front_shiny: string;
-    front_shiny_female: string | null;
-    other: {
-      dream_world: {
-        front_default: string;
-        front_female: string | null;
-      };
-      "official-artwork": {
-        front_default: string;
-      };
-    };
-  };
+  sprites: PokemonSprites
   stats: {
     base_stat: number;
     effort: number;
@@ -163,3 +172,25 @@ export type PokemonResource = {
     type: APIItem;
   }[];
 };
+
+export type PokemonFormResponse = {
+  id: number
+  name: string
+  image: string
+}
+
+export type PokemonFormResource = {
+  form_name: string
+  form_names: string[]
+  form_order: number
+  id: number
+  is_battle_only: boolean
+  is_default: boolean
+  is_mega: boolean
+  name: string
+  names: string[]
+  order: number
+  pokemon: APIItem
+  sprites: PokemonSprites
+  version_group: APIItem
+}

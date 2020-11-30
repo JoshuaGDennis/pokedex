@@ -19,9 +19,13 @@ const useVisibility = (ref: RefObject<HTMLDivElement>, callback: Function) => {
     );
 
     if (ref.current) {
-      observer.observe(ref.current);
+      if(!inView) {
+        observer.observe(ref.current);
+      } else {
+        observer.disconnect()
+      }
     }
-  }, [ref, callback]);
+  }, [ref, callback, inView]);
 
   return inView;
 };

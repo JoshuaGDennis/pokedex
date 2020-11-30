@@ -5,8 +5,9 @@ import PokemonCard from "components/PokemonCard";
 import Container from "react-bootstrap/Container";
 import { GenerationResponse } from "helpers/types";
 import React, { useEffect, useState } from "react";
+import GenerationDropdown from "components/GenerationDropdown";
 
-const PokemonPage: React.FC = () => {
+const PokedexPage: React.FC = () => {
   const [ID, setID] = useState(1);
   const [generation, setGeneration] = useState<GenerationResponse | null>(null);
 
@@ -19,18 +20,19 @@ const PokemonPage: React.FC = () => {
   return (
     <Container>
       <Row>
-        <Col xs={12} md={4}>
-          <PokemonCard id={generation.pokemon[0]} />
+        <Col>
+          <GenerationDropdown onChange={setID} />
         </Col>
-        <Col xs={12} md={4}>
-          <PokemonCard id={generation.pokemon[3]} />
-        </Col>
-        <Col xs={12} md={4}>
-          <PokemonCard id={generation.pokemon[6]} />
-        </Col>
+      </Row>
+      <Row>
+        {generation.pokemon.map((id) => (
+          <Col xs={12} md={4} key={id}>
+            <PokemonCard id={id} />
+          </Col>
+        ))}
       </Row>
     </Container>
   );
 };
 
-export default PokemonPage;
+export default PokedexPage;

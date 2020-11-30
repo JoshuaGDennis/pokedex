@@ -1,10 +1,10 @@
 import React from "react";
-import PokemonPage from "pages/PokemonPage";
+import PokedexPage from "pages/PokedexPage";
 import { Route, Switch } from "react-router-dom";
 
 const Routes = () => (
   <Switch>
-    <Route path="/" component={PokemonPage} />
+    <Route path="/" component={PokedexPage} />
   </Switch>
 );
 

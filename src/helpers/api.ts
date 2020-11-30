@@ -5,10 +5,18 @@ import {
   SpeciesResponse,
   PokemonResponse,
   PokemonResource,
+  APIResource,
+  PokemonFormResponse,
+  PokemonFormResource,
 } from "./types";
 import { getIdFromUrl, getEnglishFlavorText } from "./strings";
 
 const POKE_API = "https://pokeapi.co/api/v2";
+
+const getAllGenerations = (): Promise<number[]> => 
+  fetch(`${POKE_API}/generation`)
+    .then(res => res.json())
+    .then((data: APIResource) => data.results.map((_, i) => i + 1))
 
 const getGeneration = (id: string | number): Promise<GenerationResponse> =>
   fetch(`${POKE_API}/generation/${id}`)
@@ -52,4 +60,13 @@ const getPokemon = (id: string | number): Promise<PokemonResponse> =>
       types: data.types.map(({ type }) => type.name),
     }));
 
-export { getGeneration, getSpecies, getPokemon };
+  const getPokemonForm = (id: string | number): Promise<PokemonFormResponse> => 
+    fetch(`${POKE_API}/pokemon-form/${id}`)
+      .then(res => res.json())
+      .then((data: PokemonFormResource) => ({
+        id: data.id,
+        name: data.name,
+        image: data.sprites.front_default
+      }))
+
+export { getAllGenerations, getGeneration, getSpecies, getPokemon, getPokemonForm };

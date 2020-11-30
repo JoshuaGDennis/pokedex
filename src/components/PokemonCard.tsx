@@ -79,7 +79,7 @@ const PokemonCard: React.FC<iPokemonCardProps> = ({ id }) => {
         <Row className={styles.types}>
           {pokemon.types.map((type) => (
             <Col key={type}>
-              <p>{capitalise(type)}</p>
+              <p className={`bg-${type}`}>{capitalise(type)}</p>
             </Col>
           ))}
         </Row>
