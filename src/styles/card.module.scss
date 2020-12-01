@@ -1,0 +1,9 @@
+.card {
+    cursor: pointer;
+    padding: 25px;
+    position: relative;
+    border-radius: 5px;
+    background: white;
+    will-change: width, height;
+    box-shadow: 0px 10px 10px -5px rgba(0, 0, 0, 0.05);
+}
