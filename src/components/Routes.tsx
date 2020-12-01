@@ -1,7 +1,6 @@
 import React from "react";
-import PokedexPage from "pages/PokedexPage";
+import { PokedexPage, PokemonPage } from "pages";
 import { Route, Switch } from "react-router-dom";
-import PokemonPage from "pages/PokemonPage";
 
 const Routes = () => (
   <Switch>

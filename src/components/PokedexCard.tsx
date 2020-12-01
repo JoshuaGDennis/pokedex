@@ -3,14 +3,10 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
-import { getPokemon } from "helpers/api";
-import { PokemonResponse } from "helpers/types";
-import { useTheme } from "helpers/ThemeContext";
-import LoadingCard from "components/LoadingCard";
-import useVisibility from "helpers/useVisibility";
+import LoadingCard from "./LoadingCard";
 import styles from "styles/PokedexCard.module.scss";
-import { capitalise, addClasses } from "helpers/strings";
 import React, { useEffect, useState, useRef } from "react";
+import { getPokemon, PokemonResponse, useTheme, useVisibility, capitalise } from 'helpers'
 
 interface iPokedexCardProps {
   id?: string;
@@ -24,7 +20,7 @@ const PokedexCard: React.FC<iPokedexCardProps> = ({ id = '0', skeleton }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [pokemon, setPokemon] = useState<PokemonResponse | null>(null);
 
-  const inView = useVisibility(ref, () => console.log("IN VIEW"));
+  const inView = useVisibility(ref);
 
   useEffect(() => {
     if (inView && !skeleton) {
@@ -37,8 +33,6 @@ const PokedexCard: React.FC<iPokedexCardProps> = ({ id = '0', skeleton }) => {
 
   if (isLoading || !pokemon || skeleton) return <LoadingCard cardRef={ref} />;
 
-  const mainType = pokemon.types[0];
-
   return (
     <Link
       className={styles.link}
@@ -48,11 +42,8 @@ const PokedexCard: React.FC<iPokedexCardProps> = ({ id = '0', skeleton }) => {
       }}
     >
       <Card
-        className={addClasses(styles, [
-          "card",
-          `${mainType}${theme === "dark" ? "--dark" : ""}`,
-        ])}
         ref={ref}
+        className={[styles.card, styles[`${pokemon.types[0]}${theme === 'dark' ? '--dark' : ''}`]].join(" ")}
       >
         <div className={styles.pokeball}>
           <div className={styles.inner} />

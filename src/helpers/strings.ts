@@ -14,10 +14,6 @@ const getEnglishFlavorText = (entries: FlavorTextEntry[]): string => {
   return found ? found.flavor_text : "";
 };
 
-const addClasses = (module: { [key: string]: string }, classes: string[]) => {
-  return classes.map((cls) => module[cls]).join(" ");
-};
-
 const getPokemonSprite = (id: string | number) => `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`
 
-export { capitalise, getIdFromUrl, getEnglishFlavorText, addClasses, getPokemonSprite };
+export { capitalise, getIdFromUrl, getEnglishFlavorText, getPokemonSprite };

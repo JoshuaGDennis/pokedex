@@ -2,11 +2,9 @@ import Image from './Image'
 import Button from 'react-bootstrap/Button'
 import Spinner from 'react-bootstrap/Spinner'
 import Dropdown from 'react-bootstrap/Dropdown'
-import { GenerationResponse } from 'helpers/types'
-import { getPokemonSprite } from 'helpers/strings'
 import styles from 'styles/GenerationDropdown.module.scss'
-import { getGeneration, getGenerationIds } from 'helpers/api'
 import React, { Dispatch, forwardRef, SetStateAction, useEffect, useState } from 'react'
+import { GenerationResponse, getGeneration, getGenerationIds, getPokemonSprite } from 'helpers'
 
 interface iDropdownProps {
   onChange: Dispatch<SetStateAction<GenerationResponse | null>>

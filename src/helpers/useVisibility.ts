@@ -1,6 +1,6 @@
 import { RefObject, useEffect, useState } from "react";
 
-const useVisibility = (ref: RefObject<HTMLDivElement>, callback: Function) => {
+const useVisibility = (ref: RefObject<HTMLDivElement>, callback?: Function) => {
   const [inView, setInView] = useState(false);
 
   useEffect(() => {
@@ -8,7 +8,7 @@ const useVisibility = (ref: RefObject<HTMLDivElement>, callback: Function) => {
       ([entry]) => {
         if (entry.intersectionRatio === 1) {
           setInView(true);
-          callback();
+          callback && callback();
         }
       },
       {
