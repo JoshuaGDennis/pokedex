@@ -1,32 +1,23 @@
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import React, { useState } from "react";
-import PokedexCard from "components/PokedexCard";
-import Container from "react-bootstrap/Container";
-import { GenerationResponse } from "helpers/types";
-import GenerationDropdown from "components/GenerationDropdown";
+import React, { useRef, useState } from "react";
+import { animated, useSpring, config } from 'react-spring'
 
 const PokedexPage: React.FC = () => {
-  const [ generation, setGeneration ] = useState<GenerationResponse | null>(null)
+  const [ loaded, setLoaded ] = useState(false)
+
+  const cardRef = useRef()
+
+  const { size, ...rest } = useSpring({
+    ref: cardRef,
+    config: config.stiff,
+    from: { size: '20%', background: 'hotpink' },
+    to: { size: loaded ? '100%' : '20%', background: loaded ? 'white' : 'hotpink' }
+  })
 
   return (
-    <Container>
-      <Row>
-        <Col>
-          <GenerationDropdown onChange={setGeneration}  />
-        </Col>
-      </Row>
-      <Row>
-        {generation && (
-          generation.pokemon.map(({ name }) => (
-            <Col xs={12} md={4} key={name}>
-              <PokedexCard id={name} />
-            </Col>
-          ))
-        )}
-      </Row>
-    </Container>
-  );
+    <animated.div style={{ ...rest, width: size, height: size }} onClick={() => setLoaded(s => !s)}>
+      STUFF
+    </animated.div>
+  )
 };
 
 export default PokedexPage;
