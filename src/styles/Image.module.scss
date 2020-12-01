@@ -6,6 +6,10 @@
   transition: 0.2s all ease;
 }
 
+.no-animate {
+  opacity: 1;
+}
+
 .loaded {
   opacity: 1;
   animation-name: fadeup;

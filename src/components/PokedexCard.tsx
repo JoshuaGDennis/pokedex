@@ -13,10 +13,11 @@ import { capitalise, addClasses } from "helpers/strings";
 import React, { useEffect, useState, useRef } from "react";
 
 interface iPokedexCardProps {
-  id: string;
+  id?: string;
+  skeleton?: boolean
 }
 
-const PokedexCard: React.FC<iPokedexCardProps> = ({ id }) => {
+const PokedexCard: React.FC<iPokedexCardProps> = ({ id = '0', skeleton }) => {
   const theme = useTheme();
   const ref = useRef<HTMLDivElement>(null);
 
@@ -26,15 +27,15 @@ const PokedexCard: React.FC<iPokedexCardProps> = ({ id }) => {
   const inView = useVisibility(ref, () => console.log("IN VIEW"));
 
   useEffect(() => {
-    if (inView) {
+    if (inView && !skeleton) {
       getPokemon(id).then((data) => {
         setPokemon(data);
         setIsLoading(false);
       });
     }
-  }, [id, inView]);
+  }, [id, inView, skeleton]);
 
-  if (isLoading || !pokemon) return <LoadingCard cardRef={ref} />;
+  if (isLoading || !pokemon || skeleton) return <LoadingCard cardRef={ref} />;
 
   const mainType = pokemon.types[0];
 

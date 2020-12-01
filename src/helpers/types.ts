@@ -38,7 +38,10 @@ export type GenerationResponse = {
   id: number;
   name: string;
   versions: string[];
-  pokemon: string[];
+  pokemon: {
+    name: string
+    id: number
+  }[];
 };
 
 export type GenerationResource = {

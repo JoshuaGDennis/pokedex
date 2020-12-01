@@ -18,4 +18,6 @@ const addClasses = (module: { [key: string]: string }, classes: string[]) => {
   return classes.map((cls) => module[cls]).join(" ");
 };
 
-export { capitalise, getIdFromUrl, getEnglishFlavorText, addClasses };
+const getPokemonSprite = (id: string | number) => `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`
+
+export { capitalise, getIdFromUrl, getEnglishFlavorText, addClasses, getPokemonSprite };

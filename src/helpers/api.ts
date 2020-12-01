@@ -9,11 +9,11 @@ import {
   PokemonFormResponse,
   PokemonFormResource,
 } from "./types";
-import { getIdFromUrl, getEnglishFlavorText } from "./strings";
+import { capitalise, getIdFromUrl, getEnglishFlavorText } from "./strings";
 
 const POKE_API = "https://pokeapi.co/api/v2";
 
-const getAllGenerations = (): Promise<number[]> => 
+const getGenerationIds = (): Promise<number[]> => 
   fetch(`${POKE_API}/generation`)
     .then(res => res.json())
     .then((data: APIResource) => data.results.map((_, i) => i + 1))
@@ -24,10 +24,13 @@ const getGeneration = (id: string | number): Promise<GenerationResponse> =>
     .then((data: GenerationResource) => ({
       id: data.id,
       name: data.main_region.name,
-      versions: data.version_groups.map(({ name }) => name),
+      versions: data.version_groups.map(({ name }) => capitalise(name.split('-').map(str => capitalise(str)).join("/"))),
       pokemon: data.pokemon_species
         .sort((a, b) => getIdFromUrl(a.url) - getIdFromUrl(b.url))
-        .map(({ name }) => name),
+        .map(({ name, url }) => ({
+          name: name,
+          id: getIdFromUrl(url)
+        })),
     }));
 
 const getSpecies = (id: string | number): Promise<SpeciesResponse> =>
@@ -69,4 +72,4 @@ const getPokemon = (id: string | number): Promise<PokemonResponse> =>
         image: data.sprites.front_default
       }))
 
-export { getAllGenerations, getGeneration, getSpecies, getPokemon, getPokemonForm };
+export { getGenerationIds, getGeneration, getSpecies, getPokemon, getPokemonForm };

@@ -1,46 +1,77 @@
-import Dropdown from "react-bootstrap/Dropdown";
-import React, { forwardRef, useEffect, useState } from "react";
-import { getAllGenerations } from "helpers/api";
+import Image from './Image'
+import Button from 'react-bootstrap/Button'
+import Spinner from 'react-bootstrap/Spinner'
+import Dropdown from 'react-bootstrap/Dropdown'
+import { GenerationResponse } from 'helpers/types'
+import { getPokemonSprite } from 'helpers/strings'
+import styles from 'styles/GenerationDropdown.module.scss'
+import { getGeneration, getGenerationIds } from 'helpers/api'
+import React, { Dispatch, forwardRef, SetStateAction, useEffect, useState } from 'react'
 
-interface iGenMenuProps {
-  children: React.ReactNode;
-  className: string;
+interface iDropdownProps {
+  onChange: Dispatch<SetStateAction<GenerationResponse | null>>
 }
 
-interface iGenDropdownProps {
-  onChange: Function;
+interface iItemProps {
+  gen: GenerationResponse
+  className: string
+  onSelected(gen: GenerationResponse): void
 }
 
-const GenerationMenu = forwardRef<HTMLDivElement, iGenMenuProps>(
-  ({ children, className }, ref) => {
-    return (
-      <div className={className} ref={ref}>
-        {children}
-      </div>
-    );
+const GenItem = forwardRef<HTMLDivElement, iItemProps>(({ gen, className, onSelected }, ref) => (
+  <div className={`${className} ${styles.item}`} ref={ref} onClick={() => onSelected(gen)}>
+    {gen.versions[0]}
+    <div className={styles.sprites}>
+      <Image src={getPokemonSprite(gen.pokemon[0].id)} noAnimate/>
+      <Image src={getPokemonSprite(gen.pokemon[3].id)} noAnimate/>
+      <Image src={getPokemonSprite(gen.pokemon[6].id)} noAnimate/>
+    </div>
+  </div>
+  )
+)
+
+const GenerationDropdown: React.FC<iDropdownProps> = ({ onChange }) => {
+  const [ generations, setGenerations ] = useState<GenerationResponse[]>([])
+  const [ selected, setSelected ] = useState<GenerationResponse | null>(null)
+
+  const handleOnChange = (gen: GenerationResponse) => {
+    onChange(gen)
+    setSelected(gen)
   }
-);
-
-const GenerationDropdown: React.FC<iGenDropdownProps> = ({ onChange }) => {
-  const [genIds, setGenIds] = useState<number[]>([]);
 
   useEffect(() => {
-    getAllGenerations().then(setGenIds);
-  }, []);
+    getGenerationIds().then((ids: number[]) => {
+      Promise.all(ids.map(getGeneration)).then((gens => {
+        setGenerations(gens)
+        setSelected(gens[0])
+        onChange(gens[0])
+      }))
+    })
+  }, [onChange])
+
+  if (!selected) {
+    return (
+      <Button variant="primary" disabled>
+        <Spinner
+          as="span"
+          animation="border"
+          size="sm"
+          role="status"
+          aria-hidden="true"
+        />
+    </Button>
+    )
+  }
 
   return (
     <Dropdown>
-      <Dropdown.Toggle variant="primary">Generations</Dropdown.Toggle>
-
-      <Dropdown.Menu as={GenerationMenu}>
-        {genIds.map((id) => (
-          <Dropdown.Item id={id} onClick={() => onChange(id)}>
-            Generation {id}
-          </Dropdown.Item>
-        ))}
+      <Dropdown.Toggle variant="primary">{selected.versions[0]}</Dropdown.Toggle>
+      <Dropdown.Menu>
+        {generations.map(gen => <Dropdown.Item as={GenItem} gen={gen} key={gen.id} onSelected={handleOnChange} />)}
       </Dropdown.Menu>
     </Dropdown>
-  );
-};
+  )
 
-export default GenerationDropdown;
+}
+
+export default GenerationDropdown
