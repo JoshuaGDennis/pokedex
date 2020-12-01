@@ -51,6 +51,7 @@ const LeftCard: React.FC<iPokemonCardProps> = ({ data }) => (
 
 const RightCard: React.FC<iPokemonCardProps> = ({ data }) => {
   const [active, setActive] = useState<string>("profile");
+  const tabClasses = [styles.tab, `bg-${data.types[0]}`].join(" ")
 
   return (
     <Card className={styles.rightCard}>
@@ -65,36 +66,28 @@ const RightCard: React.FC<iPokemonCardProps> = ({ data }) => {
               <Tab
                 eventKey="profile"
                 title="PROFILE"
-                tabClassName={`${styles.tab} bg-${data.types[0]}${
-                  active === "" ? "--darker" : "--lighter"
-                }`}
+                tabClassName={tabClasses}
               >
                 <Tab.Pane className={styles.pane}>SOME STUFF</Tab.Pane>
               </Tab>
               <Tab
                 eventKey="moves"
                 title="MOVES"
-                tabClassName={`${styles.tab} bg-${data.types[0]}${
-                  active === "" ? "--darker" : "--lighter"
-                }`}
+                tabClassName={tabClasses}
               >
                 <Tab.Pane className={styles.pane}>SOME MOVES</Tab.Pane>
               </Tab>
               <Tab
                 eventKey="evolutions"
                 title="EVOLUTIONS"
-                tabClassName={`${styles.tab} bg-${data.types[0]}${
-                  active === "" ? "--darker" : "--lighter"
-                }`}
+                tabClassName={tabClasses}
               >
                 <Tab.Pane className={styles.pane}>SOME EVOLUTIONS</Tab.Pane>
               </Tab>
               <Tab
                 eventKey="weaknesses"
                 title="WEAKNESSES"
-                tabClassName={`${styles.tab} bg-${data.types[0]}${
-                  active === "" ? "--darker" : "--lighter"
-                }`}
+                tabClassName={tabClasses}
               >
                 <Tab.Pane className={styles.pane}>SOME WEAKNESSES</Tab.Pane>
               </Tab>
