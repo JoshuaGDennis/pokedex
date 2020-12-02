@@ -4,34 +4,31 @@ import Col from "react-bootstrap/Col";
 import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import LoadingCard from "./LoadingCard";
+import React, { useState, useRef } from "react";
 import styles from "styles/PokedexCard.module.scss";
-import React, { useEffect, useState, useRef } from "react";
-import { getPokemon, PokemonResponse, useTheme, useVisibility, capitalise } from 'helpers'
+import { PokemonResponse, useTheme, useVisibility, capitalise, useApi } from 'helpers'
 
-interface iPokedexCardProps {
-  id?: string;
-  skeleton?: boolean
+interface iProps {
+  id: string;
 }
 
-const PokedexCard: React.FC<iPokedexCardProps> = ({ id = '0', skeleton }) => {
-  const theme = useTheme();
-  const ref = useRef<HTMLDivElement>(null);
+const PokedexCard:React.FC<iProps> = ({ id }) => {
+  const ref = useRef<HTMLDivElement>(null)
+  
+  const [ isLoading, setIsLoading ] = useState(true)
+  const [ pokemon, setPokemon ] = useState<PokemonResponse | null>(null)
 
-  const [isLoading, setIsLoading] = useState(true);
-  const [pokemon, setPokemon] = useState<PokemonResponse | null>(null);
+  const theme = useTheme()
+  const { getPokemon } = useApi()
 
-  const inView = useVisibility(ref);
+  useVisibility(ref, () => {
+    getPokemon(id).then(data => {
+      setPokemon(data)
+      setIsLoading(false)
+    })
+  })
 
-  useEffect(() => {
-    if (inView && !skeleton) {
-      getPokemon(id).then((data) => {
-        setPokemon(data);
-        setIsLoading(false);
-      });
-    }
-  }, [id, inView, skeleton]);
-
-  if (isLoading || !pokemon || skeleton) return <LoadingCard cardRef={ref} />;
+  if (isLoading || !pokemon) return <LoadingCard cardRef={ref}/>
 
   return (
     <Link
@@ -43,7 +40,10 @@ const PokedexCard: React.FC<iPokedexCardProps> = ({ id = '0', skeleton }) => {
     >
       <Card
         ref={ref}
-        className={[styles.card, styles[`${pokemon.types[0]}${theme === 'dark' ? '--dark' : ''}`]].join(" ")}
+        className={[
+          styles.card, 
+          styles[`${pokemon.types[0]}${theme === 'dark' ? '--dark' : ''}`]
+        ].join(" ")}
       >
         <div className={styles.pokeball}>
           <div className={styles.inner} />
@@ -77,7 +77,7 @@ const PokedexCard: React.FC<iPokedexCardProps> = ({ id = '0', skeleton }) => {
         </Card.Footer>
       </Card>
     </Link>
-  );
-};
+  )
+}
 
-export default PokedexCard;
+export default PokedexCard

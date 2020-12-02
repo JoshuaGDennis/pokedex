@@ -3,8 +3,8 @@ import Button from 'react-bootstrap/Button'
 import Spinner from 'react-bootstrap/Spinner'
 import Dropdown from 'react-bootstrap/Dropdown'
 import styles from 'styles/GenerationDropdown.module.scss'
+import { GenerationResponse, getPokemonSprite, useApi } from 'helpers'
 import React, { Dispatch, forwardRef, SetStateAction, useEffect, useState } from 'react'
-import { GenerationResponse, getGeneration, getGenerationIds, getPokemonSprite } from 'helpers'
 
 interface iDropdownProps {
   onChange: Dispatch<SetStateAction<GenerationResponse | null>>
@@ -29,25 +29,23 @@ const GenItem = forwardRef<HTMLDivElement, iItemProps>(({ gen, className, onSele
 )
 
 const GenerationDropdown: React.FC<iDropdownProps> = ({ onChange }) => {
-  const [ generations, setGenerations ] = useState<GenerationResponse[]>([])
+  const { generations, isLoading } = useApi()
   const [ selected, setSelected ] = useState<GenerationResponse | null>(null)
 
-  const handleOnChange = (gen: GenerationResponse) => {
-    onChange(gen)
-    setSelected(gen)
-  }
+  useEffect(() => {
+    if (generations.length && !selected) {
+      setSelected(generations[0])
+    }
+  }, [generations, selected])
 
   useEffect(() => {
-    getGenerationIds().then((ids: number[]) => {
-      Promise.all(ids.map(getGeneration)).then((gens => {
-        setGenerations(gens)
-        setSelected(gens[0])
-        onChange(gens[0])
-      }))
-    })
-  }, [onChange])
+    if (selected) {
+      onChange(selected)
+    }
+  }, [selected, onChange])
 
-  if (!selected) {
+
+  if (!selected || isLoading) {
     return (
       <Button variant="primary" disabled>
         <Spinner
@@ -65,11 +63,19 @@ const GenerationDropdown: React.FC<iDropdownProps> = ({ onChange }) => {
     <Dropdown>
       <Dropdown.Toggle variant="primary">{selected.versions[0]}</Dropdown.Toggle>
       <Dropdown.Menu>
-        {generations.map(gen => <Dropdown.Item as={GenItem} gen={gen} key={gen.id} onSelected={handleOnChange} />)}
+        {generations.map(gen => 
+          <Dropdown.Item 
+            as={GenItem} 
+            gen={gen} 
+            key={gen.id} 
+            onSelected={setSelected} 
+          />
+        )}
       </Dropdown.Menu>
     </Dropdown>
   )
-
 }
+
+
 
 export default GenerationDropdown

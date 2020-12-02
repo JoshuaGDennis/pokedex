@@ -1,5 +1,5 @@
-export * from './api'
 export * from './strings'
 export * from './ThemeContext'
 export * from './types'
+export * from './ApiContext'
 export { default as useVisibility } from './useVisibility'
