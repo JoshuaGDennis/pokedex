@@ -4,15 +4,17 @@ import Col from "react-bootstrap/Col";
 import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import LoadingCard from "./LoadingCard";
-import React, { useState, useRef } from "react";
 import styles from "styles/PokedexCard.module.scss";
+import React, { useEffect, useState, useRef } from "react";
 import { PokemonResponse, useTheme, useVisibility, capitalise, useApi } from 'helpers'
 
 interface iProps {
   id: string;
+  startLoad: boolean
+  loaded(): void
 }
 
-const PokedexCard:React.FC<iProps> = ({ id }) => {
+const PokedexCard:React.FC<iProps> = ({ id, startLoad, loaded }) => {
   const ref = useRef<HTMLDivElement>(null)
   
   const [ isLoading, setIsLoading ] = useState(true)
@@ -20,13 +22,16 @@ const PokedexCard:React.FC<iProps> = ({ id }) => {
 
   const theme = useTheme()
   const { getPokemon } = useApi()
+  const inView = useVisibility(ref, { once: true })
 
-  useVisibility(ref, () => {
-    getPokemon(id).then(data => {
-      setPokemon(data)
-      setIsLoading(false)
-    })
-  })
+  useEffect(() => {
+    if (inView && startLoad) {
+      getPokemon(id).then(data => {
+        setPokemon(data)
+        setIsLoading(false)
+      })
+    }
+  }, [inView, startLoad, getPokemon, id])
 
   if (isLoading || !pokemon) return <LoadingCard cardRef={ref}/>
 
@@ -57,7 +62,12 @@ const PokedexCard:React.FC<iProps> = ({ id }) => {
           </Row>
           <Row>
             <Col>
-              <Image className={styles.image} src={pokemon.image} fluid />
+              <Image 
+                className={styles.image} 
+                src={pokemon.image} 
+                onLoad={loaded} 
+                fluid 
+              />
             </Col>
           </Row>
         </Card.Body>

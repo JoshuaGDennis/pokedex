@@ -6,7 +6,7 @@ import styles from "styles/LoadingCard.module.scss";
 import cardStyles from "styles/PokedexCard.module.scss";
 
 interface iLoadingCardProps {
-  cardRef: RefObject<HTMLDivElement>;
+  cardRef?: RefObject<HTMLDivElement>;
 }
 
 const LoadingCard: React.FC<iLoadingCardProps> = ({ cardRef }) => (

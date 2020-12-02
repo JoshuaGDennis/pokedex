@@ -3,11 +3,11 @@ import Button from 'react-bootstrap/Button'
 import Spinner from 'react-bootstrap/Spinner'
 import Dropdown from 'react-bootstrap/Dropdown'
 import styles from 'styles/GenerationDropdown.module.scss'
+import React, { forwardRef, useEffect, useState } from 'react'
 import { GenerationResponse, getPokemonSprite, useApi } from 'helpers'
-import React, { Dispatch, forwardRef, SetStateAction, useEffect, useState } from 'react'
 
 interface iDropdownProps {
-  onChange: Dispatch<SetStateAction<GenerationResponse | null>>
+  onChange(gen: GenerationResponse): void
 }
 
 interface iItemProps {
@@ -40,6 +40,7 @@ const GenerationDropdown: React.FC<iDropdownProps> = ({ onChange }) => {
 
   useEffect(() => {
     if (selected) {
+      console.log('HERE', selected.name)
       onChange(selected)
     }
   }, [selected, onChange])

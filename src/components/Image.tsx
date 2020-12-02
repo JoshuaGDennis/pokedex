@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { SyntheticEvent, useState } from "react";
 import styles from "styles/Image.module.scss";
 import Image, { ImageProps } from "react-bootstrap/Image";
 
@@ -16,8 +16,9 @@ const CustomImage: React.FC<iImageProps> = ({
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const handleOnLoad = () => {
+  const handleOnLoad = (e: SyntheticEvent<HTMLImageElement, Event>) => {
     setIsLoaded(true);
+    onLoad && onLoad(e)
   };
 
   const classes = [

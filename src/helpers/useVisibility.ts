@@ -1,6 +1,6 @@
 import { RefObject, useEffect, useState } from "react";
 
-const useVisibility = (ref: RefObject<HTMLDivElement>, callback?: () => any) => {
+const useVisibility = (ref: RefObject<HTMLDivElement>, options?: {fn?: () => any, once?: boolean}) => {
   const [inView, setInView] = useState(false);
 
   useEffect(() => {
@@ -8,7 +8,7 @@ const useVisibility = (ref: RefObject<HTMLDivElement>, callback?: () => any) => 
       ([entry]) => {
         if (entry.intersectionRatio === 1) {
           setInView(true);
-          callback && callback();
+          options && options.fn && options.fn()
         }
       },
       {
@@ -22,10 +22,12 @@ const useVisibility = (ref: RefObject<HTMLDivElement>, callback?: () => any) => 
       if(!inView) {
         observer.observe(ref.current);
       } else {
-        observer.disconnect()
+        if (options && options.once) {
+          observer.disconnect()
+        }
       }
     }
-  }, [ref, callback, inView]);
+  }, [ref, options, inView]);
 
   return inView;
 };
