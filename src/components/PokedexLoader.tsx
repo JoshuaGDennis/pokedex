@@ -2,8 +2,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { GenerationResponse } from 'helpers'
 import PokedexCard from 'components/PokedexCard'
-import React, { useEffect, useState } from 'react'
 import VisibleElement from "components/VisibleElement";
+import React, { useEffect, useRef, useState } from 'react'
 
 
 interface iProps {
@@ -11,11 +11,18 @@ interface iProps {
 }
 
 const PokedexLoader: React.FC<iProps> = ({ gen }) => {
+    const lastGen = useRef(gen)
+
     const [ loadId, setLoadId ] = useState(0)
     const [ maximum, setMaximum ] = useState(6)
     const [ items, setItems ] = useState<{id: number, name: string}[]>([])
 
     useEffect(() => {
+        if (lastGen.current.name !== gen.name) {
+            setLoadId(0)
+            setMaximum(6)
+            lastGen.current = gen
+        }
         setItems(gen.pokemon.slice(0, maximum))
     }, [gen, maximum])
 
