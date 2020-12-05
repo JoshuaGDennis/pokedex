@@ -30,6 +30,7 @@
 
   &:hover {
     box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.1);
+    transform: translate(-1rem -1rem);
 
     .image {
       margin-top: -0.5rem;
@@ -106,18 +107,10 @@
     margin: 0 auto;
   }
 
-  .types {
-    margin-top: 0.5rem;
-
-    p {
-      font-size: 0.8rem;
-      text-align: center;
-      width: fit-content;
-      margin: 0 auto;
-      padding: 0.2rem 0.5rem;
-      border-radius: 0.8rem;
-      color: white;
-    }
+  .type {
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-align: center;
   }
 
   .footer {
@@ -144,8 +137,9 @@
     composes: card;
 
     &,
-    .body {
-      background-color: gray;
+    .body,
+    .footer {
+      background-color: $card-bg-dark;
     }
 
     p {
@@ -153,7 +147,7 @@
     }
 
     .pokeball {
-      @include pokeballColors($color, gray);
+      @include pokeballColors($color, $card-bg-dark);
     }
   }
 }

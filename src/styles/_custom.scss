@@ -11,13 +11,11 @@
 
 body {
   &.theme--dark {
-    background-color: gray;
+    background-color: $body-bg-dark;
   }
 
   transition: background-color 0.2s;
 }
-
-//     background-color: scale-color($value, $lightness: +20%);
 
 @each $type, $color in $allTypes {
   .bg-#{$type} {
@@ -33,7 +31,7 @@ body {
   }
 
   .color-#{$type} {
-    background-color: $color !important;
+    color: $color !important;
   }
 
   .color-#{$type}--lighter {
