@@ -1,10 +1,19 @@
+@import "variables";
+
 .card {
+  height: 70vh;
   overflow: hidden;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
 
   &Split {
+    height: 100%;
     border: none;
     border-radius: 0;
+  }
+
+  &SplitDark {
+    @extend .cardSplit;
+    background-color: $card-bg-dark;
   }
 
   &LargeText {
@@ -16,6 +25,7 @@
   &Image {
     width: 20rem;
     margin: 0 auto;
+    margin-top: 3rem;
   }
 
   &Tabs {
@@ -27,6 +37,37 @@
 
     &Content {
       padding: 1rem 0;
+
+      &Heading {
+        font-weight: 600;
+        font-size: 1rem;
+      }
+    }
+  }
+
+  &Pokeball {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 25rem;
+    height: 25rem;
+
+    div {
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      margin: auto;
+      width: 20rem;
+      height: 20rem;
+      border-width: 2rem;
+    }
+
+    &::after {
+      height: 2rem;
+      top: calc(50% - 1rem);
     }
   }
 }

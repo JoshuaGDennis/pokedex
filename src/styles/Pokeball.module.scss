@@ -1,0 +1,71 @@
+@import "variables";
+
+.pokeball {
+  width: 70px;
+  top: 0.5rem;
+  height: 70px;
+  right: 0.5rem;
+  overflow: hidden;
+  position: absolute;
+  border-radius: 50%;
+
+  @each $type, $color in $allTypes {
+    &#{$type} {
+      &,
+      &::before,
+      div {
+        background-color: scale-color($color, $lightness: +20%);
+      }
+      &::after {
+        background-color: $color;
+      }
+      div {
+        border-color: $color;
+      }
+    }
+
+    &#{$type}Dark {
+      &,
+      &::before,
+      div {
+        background-color: scale-color($color, $lightness: +20%);
+      }
+      &::after {
+        background-color: $card-bg-dark;
+      }
+      div {
+        border-color: $card-bg-dark;
+      }
+    }
+  }
+
+  &::before,
+  &::after {
+    content: "";
+    width: 100%;
+    position: absolute;
+  }
+
+  &::before {
+    height: 50%;
+  }
+
+  &::after {
+    left: 0;
+    height: 10px;
+    top: calc(50% - 5px);
+  }
+
+  div {
+    width: 40px;
+    height: 40px;
+    z-index: 10;
+    border-width: 5px;
+    position: absolute;
+    border-radius: 50%;
+    border-style: solid;
+    top: calc(50% - 20px);
+    left: calc(50% - 20px);
+    transition: background-color 0.2s;
+  }
+}

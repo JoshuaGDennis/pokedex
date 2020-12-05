@@ -1,11 +1,4 @@
 import Image from "./Image";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import { Link } from "react-router-dom";
-import Card from "react-bootstrap/Card";
-import LoadingCard from "./LoadingCard";
-import styles from "styles/PokedexCard.module.scss";
-import React, { useEffect, useState, useRef } from "react";
 import {
   PokemonResponse,
   useTheme,
@@ -13,6 +6,14 @@ import {
   capitalise,
   useApi,
 } from "helpers";
+import Pokeball from "./Pokeball";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import { Link } from "react-router-dom";
+import Card from "react-bootstrap/Card";
+import LoadingCard from "./LoadingCard";
+import styles from "styles/PokedexCard.module.scss";
+import React, { useEffect, useState, useRef } from "react";
 
 interface iProps {
   id: string;
@@ -57,9 +58,7 @@ const PokedexCard: React.FC<iProps> = ({ id, startLoad, loaded }) => {
           styles[theme === "light" ? typeColor : `${typeColor}--dark`]
         }`}
       >
-        <div className={styles.pokeball}>
-          <div className={styles.inner} />
-        </div>
+        <Pokeball type={pokemon.types[0]} />
 
         <Card.Body className={[styles.body, `bg-${typeColor}`].join(" ")}>
           <Row>
