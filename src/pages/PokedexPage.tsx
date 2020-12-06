@@ -6,6 +6,7 @@ import { GenerationResponse } from "helpers/types";
 import VisibleElement from "components/VisibleElement";
 import React, { useEffect, useRef, useState } from "react";
 import GenerationDropdown from "components/GenerationDropdown";
+import { useApi } from "helpers";
 
 const PokedexPage: React.FC = () => {
   const INITIAL_LOAD_ID = 0;
@@ -16,27 +17,28 @@ const PokedexPage: React.FC = () => {
   const [loadId, setLoadId] = useState(INITIAL_LOAD_ID);
   const [maximum, setMaximum] = useState(INITIAL_MAXIMUM);
   const [items, setItems] = useState<{ id: number; name: string }[]>([]);
-  const [generation, setGeneration] = useState<GenerationResponse | null>(null);
+
+  const { currentGen } = useApi();
 
   useEffect(() => {
-    if (generation) {
+    if (currentGen) {
       if (!lastGen.current) {
-        lastGen.current = generation;
-      } else if (lastGen.current.name !== generation.name) {
+        lastGen.current = currentGen;
+      } else if (lastGen.current.name !== currentGen.name) {
         setLoadId(INITIAL_LOAD_ID);
         setMaximum(INITIAL_MAXIMUM);
-        lastGen.current = generation;
+        lastGen.current = currentGen;
       }
 
-      setItems(generation.pokemon.slice(0, maximum));
+      setItems(currentGen.pokemon.slice(0, maximum));
     }
-  }, [generation, maximum]);
+  }, [currentGen, maximum]);
 
   return (
     <Container>
       <Row>
         <Col>
-          <GenerationDropdown onChange={setGeneration} />
+          <GenerationDropdown />
         </Col>
       </Row>
       <Row>

@@ -14,6 +14,7 @@ import styles from "styles/PokemonCard.module.scss";
 import { useLocation, useParams } from "react-router-dom";
 import PokemonShowCard from "components/PokemonShowCard";
 import PokemonDetailCard from "components/PokemonDetailCard";
+import NavButtons from "components/NavButtons";
 
 const PokemonPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -59,10 +60,8 @@ const PokemonPage: React.FC = () => {
   if (pokemon && species && types.length && abilities.length) {
     return (
       <Container className="wide">
-        <Row
-          className="justify-content-md-center"
-          style={{ marginTop: "5rem" }}
-        >
+        <NavButtons currentID={pokemon.id} />
+        <Row className="justify-content-center" style={{ marginTop: "5rem" }}>
           <Col xs={12}>
             <Card className={styles.card}>
               <Row className="h-100">

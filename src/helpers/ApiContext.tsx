@@ -1,11 +1,19 @@
 import { capitalise, getEnglishFlavorText, getIdFromUrl } from "./strings";
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, {
+  createContext,
+  Dispatch,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import {
   APIResource,
   GenerationResource,
   GenerationResponse,
   PokemonAbilityResource,
   PokemonAbilityResponse,
+  PokemonFormResource,
+  PokemonFormResponse,
   PokemonResource,
   PokemonResponse,
   PokemonTypeResource,
@@ -17,7 +25,10 @@ import {
 interface iContext {
   generations: GenerationResponse[];
   isLoading: boolean;
+  currentGen: GenerationResponse | null;
+  setCurrentGen: Dispatch<React.SetStateAction<GenerationResponse | null>>;
   getSpecies(id: string | number): Promise<SpeciesResponse>;
+  getForm(id: string | number): Promise<PokemonFormResponse>;
   getPokemon(id: string | number): Promise<PokemonResponse>;
   getAbility(id: string | number): Promise<PokemonAbilityResponse>;
   getType(id: string | number): Promise<PokemonTypeResponse>;
@@ -34,6 +45,7 @@ const useApi = () => useContext(ApiContext) as iContext;
 const ApiProvider: React.FC<iProvider> = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [generations, setGenerations] = useState<GenerationResponse[]>([]);
+  const [currentGen, setCurrentGen] = useState<GenerationResponse | null>(null);
 
   const apiFetch = (url: string) =>
     fetch(`https://pokeapi.co/api/v2${url}`).then((res) => res.json());
@@ -51,6 +63,13 @@ const ApiProvider: React.FC<iProvider> = ({ children }) => {
       description: getEnglishFlavorText(data.flavor_text_entries),
       isLegendary: data.is_legendary,
       isMythical: data.is_mythical,
+    }));
+
+  const getForm = (id: string | number): Promise<PokemonFormResponse> =>
+    apiFetch(`/pokemon-form/${id}`).then((data: PokemonFormResource) => ({
+      id: data.id,
+      name: data.name,
+      image: data.sprites.front_default,
     }));
 
   const getPokemon = (id: string | number): Promise<PokemonResponse> =>
@@ -129,6 +148,7 @@ const ApiProvider: React.FC<iProvider> = ({ children }) => {
         )
       ).then((data) => {
         setGenerations(data);
+        setCurrentGen(data[0]);
         setIsLoading(false);
       });
     });
@@ -139,7 +159,10 @@ const ApiProvider: React.FC<iProvider> = ({ children }) => {
       value={{
         generations,
         isLoading,
+        currentGen,
+        setCurrentGen,
         getSpecies,
+        getForm,
         getPokemon,
         getAbility,
         getType,
