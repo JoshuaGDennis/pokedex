@@ -86,4 +86,43 @@
       font-size: 1.2rem;
     }
   }
+
+  &Stat {
+    align-items: center;
+    margin-bottom: 1rem;
+
+    &Bar {
+      width: 100%;
+      height: 1rem;
+      overflow: hidden;
+      position: relative;
+      border-radius: 1rem;
+
+      &::before {
+        width: 20%;
+        content: " ";
+        height: 100%;
+        display: block;
+        position: relative;
+        border-radius: 1rem;
+      }
+
+      @each $type, $color in $allTypes {
+        &Type#{$type} {
+          background-color: scale-color($color: $color, $lightness: +20%);
+
+          &::before {
+            background-color: $color;
+          }
+        }
+      }
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+
+  &Type {
+  }
 }

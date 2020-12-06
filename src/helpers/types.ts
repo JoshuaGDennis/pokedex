@@ -237,3 +237,42 @@ export type PokemonAbilityResource = {
     slot: number
   }[]
 }
+
+export type PokemonTypeResource = {
+  damage_relations: {
+    double_damage_from: APIItem[]
+    double_damage_to: APIItem[]
+    half_damage_from: APIItem[]
+    half_damage_to: APIItem[]
+    no_damage_from: APIItem[]
+    no_damage_to: APIItem[]
+  }
+  game_indices: {
+    game_index: number
+    generation: APIItem
+  }[]
+  generation: APIItem
+  id: number
+  move_damage_class: APIItem
+  moves: APIItem[]
+  name: string
+  names: {
+    language: APIItem
+    name: string
+  }[]
+  pokemon: {
+    pokemon: APIItem
+    slot: number
+  }[]
+}
+
+export type PokemonTypeResponse = {
+  id: number
+  name: string
+  doubleDamageFrom: string[]
+  doubleDamageTo: string[]
+  halfDamageFrom: string[]
+  halfDamageTo: string[]
+  noDamageFrom: string[]
+  noDamageTo: string[]
+}

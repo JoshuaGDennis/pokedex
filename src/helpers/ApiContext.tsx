@@ -8,6 +8,8 @@ import {
   PokemonAbilityResponse,
   PokemonResource,
   PokemonResponse,
+  PokemonTypeResource,
+  PokemonTypeResponse,
   SpeciesResource,
   SpeciesResponse,
 } from "./types";
@@ -18,6 +20,7 @@ interface iContext {
   getSpecies(id: string | number): Promise<SpeciesResponse>;
   getPokemon(id: string | number): Promise<PokemonResponse>;
   getAbility(id: string | number): Promise<PokemonAbilityResponse>;
+  getType(id: string | number): Promise<PokemonTypeResponse>;
 }
 
 interface iProvider {
@@ -76,6 +79,28 @@ const ApiProvider: React.FC<iProvider> = ({ children }) => {
           ?.effect || "",
     }));
 
+  const getType = (id: string | number): Promise<PokemonTypeResponse> =>
+    apiFetch(`/type/${id}`).then((data: PokemonTypeResource) => ({
+      id: data.id,
+      name: data.name,
+      doubleDamageFrom: data.damage_relations.double_damage_from.map(
+        ({ name }) => name
+      ),
+      doubleDamageTo: data.damage_relations.double_damage_to.map(
+        ({ name }) => name
+      ),
+      halfDamageFrom: data.damage_relations.half_damage_from.map(
+        ({ name }) => name
+      ),
+      halfDamageTo: data.damage_relations.half_damage_to.map(
+        ({ name }) => name
+      ),
+      noDamageFrom: data.damage_relations.no_damage_from.map(
+        ({ name }) => name
+      ),
+      noDamageTo: data.damage_relations.no_damage_to.map(({ name }) => name),
+    }));
+
   // Get all generations
   useEffect(() => {
     setIsLoading(true);
@@ -117,6 +142,7 @@ const ApiProvider: React.FC<iProvider> = ({ children }) => {
         getSpecies,
         getPokemon,
         getAbility,
+        getType,
       }}
     >
       {children}
