@@ -23,17 +23,17 @@ const PokemonDetailCardStatsTab: React.FC<iProps> = ({ stats, types }) => {
     <Tab.Content className={styles.cardTabsContent}>
       {stats.map(({ name, value }) => (
         <Row key={name} className={styles.cardStat}>
-          <Col>
+          <Col md={4}>
             <p>{capitalise(name)}</p>
           </Col>
-          <Col>
+          <Col md={6}>
             <div
               className={`${styles.cardStatBar} ${
                 styles[`cardStatBarType${types[0].name}`]
               }`}
             />
           </Col>
-          <Col>
+          <Col md={2}>
             <p>{value}</p>
           </Col>
         </Row>
@@ -41,28 +41,26 @@ const PokemonDetailCardStatsTab: React.FC<iProps> = ({ stats, types }) => {
 
       <Row>
         <Col>
-          <h5>DOUBLE DAMAGE FROM</h5>
-          <Row>
-            <Col>
-              {getTypes("doubleDamageFrom").map((name) => (
-                <div key={name} className={`${styles.cardType} bg-${name}`}>
-                  <p>{capitalise(name)}</p>
-                  <span className={`bg-${name}--lighter`}>x2</span>
-                </div>
-              ))}
-            </Col>
-          </Row>
-          <h5>HALF DAMAGE FROM</h5>
-          <Row>
-            <Col>
-              {getTypes("halfDamageTo").map((name) => (
-                <div key={name} className={`${styles.cardType} bg-${name}`}>
-                  <p>{capitalise(name)}</p>
-                  <span className={`bg-${name}--lighter`}>x0.5</span>
-                </div>
-              ))}
-            </Col>
-          </Row>
+          <h4 className={`${styles.cardTabsContentHeading} mt-4 mb-4`}>
+            DOUBLE DAMAGE FROM
+          </h4>
+          {getTypes("doubleDamageFrom").map((name) => (
+            <div key={name} className={`${styles.cardType} bg-${name}`}>
+              <p>{capitalise(name)}</p>
+              <span className={`bg-${name}--lighter`}>x2</span>
+            </div>
+          ))}
+        </Col>
+        <Col>
+          <h4 className={`${styles.cardTabsContentHeading} mt-4 mb-4`}>
+            HALF DAMAGE FROM
+          </h4>
+          {getTypes("halfDamageTo").map((name) => (
+            <div key={name} className={`${styles.cardType} bg-${name}`}>
+              <p>{capitalise(name)}</p>
+              <span className={`bg-${name}--lighter`}>x0.5</span>
+            </div>
+          ))}
         </Col>
       </Row>
     </Tab.Content>

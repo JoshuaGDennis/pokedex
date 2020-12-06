@@ -30,7 +30,9 @@ const PokemonDetailCard: React.FC<iProps> = ({
 }) => {
   const theme = useTheme();
 
-  const tabsClasses = [styles.cardTabs, "justify-content-center"].join(" ");
+  const tabsClasses = [styles.cardTabs, "justify-content-center mb-4"].join(
+    " "
+  );
 
   return (
     <Card

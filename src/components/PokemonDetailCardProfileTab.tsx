@@ -23,11 +23,11 @@ const PokemonDetailCardProfileTab: React.FC<iProps> = ({
   growthRate,
 }) => (
   <Tab.Content className={styles.cardTabsContent}>
-    <p>{description}</p>
+    <p className="mb-4">{description}</p>
 
     <h4 className={styles.cardTabsContentHeading}>ABILITIES</h4>
 
-    <Row>
+    <Row className="ml-2 mb-4">
       {abilities.map(({ name, description }) => (
         <Col key={name} className={styles.cardAbility}>
           <h4>{capitalise(name)}</h4>
@@ -36,7 +36,7 @@ const PokemonDetailCardProfileTab: React.FC<iProps> = ({
       ))}
     </Row>
     <h4 className={styles.cardTabsContentHeading}>TRAINING</h4>
-    <Row>
+    <Row className="ml-2 mt-4">
       <Col>
         <p>Base Exp</p>
       </Col>
@@ -44,7 +44,7 @@ const PokemonDetailCardProfileTab: React.FC<iProps> = ({
         <p>{exp}</p>
       </Col>
     </Row>
-    <Row>
+    <Row className="ml-2">
       <Col>
         <p>Base Happiness</p>
       </Col>
@@ -52,7 +52,7 @@ const PokemonDetailCardProfileTab: React.FC<iProps> = ({
         <p>{happiness}</p>
       </Col>
     </Row>
-    <Row>
+    <Row className="ml-2">
       <Col>
         <p>Catch Rate</p>
       </Col>
@@ -60,7 +60,7 @@ const PokemonDetailCardProfileTab: React.FC<iProps> = ({
         <p>{captureRate}</p>
       </Col>
     </Row>
-    <Row>
+    <Row className="ml-2">
       <Col>
         <p>Growth Rate</p>
       </Col>

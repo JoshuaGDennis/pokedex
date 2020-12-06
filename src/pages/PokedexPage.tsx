@@ -33,7 +33,7 @@ const PokedexPage: React.FC = () => {
   }, [generation, maximum]);
 
   return (
-    <Container>
+    <Container className="wide">
       <Row>
         <Col>
           <GenerationDropdown onChange={setGeneration} />
