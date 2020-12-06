@@ -276,3 +276,51 @@ export type PokemonTypeResponse = {
   noDamageFrom: string[]
   noDamageTo: string[]
 }
+
+type EvolutionDetail = {
+  gender: APIItem | null
+  held_item: APIItem | null
+  item: APIItem | null
+  known_move: APIItem | null
+  known_move_type: APIItem | null
+  location: APIItem | null
+  min_affection: number | null
+  min_beauty: number | null
+  min_happiness: number | null
+  min_level: number
+  needs_overworld_rain: boolean
+  party_species: APIItem | null
+  party_type: APIItem | null
+  relative_physical_stats: null
+  time_of_day: string
+  trade_species: APIItem | null
+  trigger: APIItem
+  turn_upside_down: boolean
+}
+
+type EvolutionChain = {
+  evolution_details: EvolutionDetail[]
+  evolves_to: EvolutionChain
+  is_baby: boolean
+  species: APIItem
+}
+
+export type PokemonEvolutionResource = {
+  baby_trigger_item: APIItem | null
+  chain: {
+    evolution_details: EvolutionDetail[]
+    evolves_to: EvolutionChain
+    is_baby: boolean
+    species: APIItem
+  }
+  id: number
+}
+
+export type PokemonEvolutionResponse = {
+  id: number
+  pokemon: {
+    name: string
+    trigger: string
+    level: number
+  }[]
+}
