@@ -2,14 +2,14 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import React, { RefObject } from "react";
-import styles from "styles/LoadingCard.module.scss";
 import cardStyles from "styles/PokedexCard.module.scss";
+import styles from "styles/PokedexCardLoading.module.scss";
 
-interface iLoadingCardProps {
+interface iProps {
   cardRef?: RefObject<HTMLDivElement>;
 }
 
-const LoadingCard: React.FC<iLoadingCardProps> = ({ cardRef }) => (
+const PokedexCardLoading: React.FC<iProps> = ({ cardRef }) => (
   <Card className={cardStyles.card} ref={cardRef}>
     <Card.Body className={cardStyles.body}>
       <Row>
@@ -36,4 +36,4 @@ const LoadingCard: React.FC<iLoadingCardProps> = ({ cardRef }) => (
   </Card>
 );
 
-export default LoadingCard;
+export default PokedexCardLoading;

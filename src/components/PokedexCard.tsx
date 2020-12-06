@@ -1,4 +1,3 @@
-import Image from "./Image";
 import {
   PokemonResponse,
   useTheme,
@@ -6,13 +5,14 @@ import {
   capitalise,
   useApi,
 } from "helpers";
+import Image from "./Image";
 import Pokeball from "./Pokeball";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
-import LoadingCard from "./LoadingCard";
 import styles from "styles/PokedexCard.module.scss";
+import PokedexCardLoading from "./PokedexCardLoading";
 import React, { useEffect, useState, useRef } from "react";
 
 interface iProps {
@@ -40,7 +40,7 @@ const PokedexCard: React.FC<iProps> = ({ id, startLoad, loaded }) => {
     }
   }, [inView, startLoad, getPokemon, id]);
 
-  if (isLoading || !pokemon) return <LoadingCard cardRef={ref} />;
+  if (isLoading || !pokemon) return <PokedexCardLoading cardRef={ref} />;
 
   const typeColor = pokemon.types[0];
 
