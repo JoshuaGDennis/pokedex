@@ -3,6 +3,7 @@
 .card {
   height: 70vh;
   overflow: hidden;
+  background-color: transparent;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
 
   &Split {
@@ -22,10 +23,17 @@
     font-size: 2.5rem;
   }
 
+  &SmallText {
+    color: white;
+    font-size: 0.8rem;
+  }
+
   &Image {
+    z-index: 11;
     width: 20rem;
     margin: 0 auto;
     margin-top: 3rem;
+    position: relative;
   }
 
   &Tabs {
@@ -46,9 +54,9 @@
   }
 
   &Pokeball {
-    top: 0;
     left: 0;
     right: 0;
+    top: 5rem;
     bottom: 0;
     margin: auto;
     width: 25rem;
@@ -68,6 +76,14 @@
     &::after {
       height: 2rem;
       top: calc(50% - 1rem);
+    }
+  }
+
+  &Ability {
+    margin-top: 1rem;
+
+    h4 {
+      font-size: 1.2rem;
     }
   }
 }

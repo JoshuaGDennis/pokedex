@@ -60,6 +60,10 @@ export type GenerationResource = {
 
 export type SpeciesResponse = {
   id: number;
+  happiness: number
+  captureRate: number
+  growthRate: string
+  genera: string
   name: string;
   color: string;
   evolution: string;
@@ -118,6 +122,7 @@ export type SpeciesResource = {
 
 export type PokemonResponse = {
   abilities: string[];
+  exp: number;
   id: number;
   name: string;
   moves: string[];
@@ -196,4 +201,39 @@ export type PokemonFormResource = {
   pokemon: APIItem
   sprites: PokemonSprites
   version_group: APIItem
+}
+
+export type PokemonAbilityResponse = {
+  id: number
+  name: string
+  description: string
+  effect: string
+}
+
+export type PokemonAbilityResource = {
+  effect_changes: {
+    effect_entries: {
+      effect: string
+      language: APIItem
+    }[]
+    version_group: APIItem
+  }[]
+  effect_entries: {
+    effect: string
+    language: APIItem
+  }[]
+  flavor_text_entries: FlavorTextEntry[]
+  generation: APIItem
+  id: number
+  is_main_series: boolean
+  name: string
+  names: {
+    language: APIItem
+    name: string
+  }[]
+  pokemon: {
+    is_hidden: boolean
+    pokemon: APIItem
+    slot: number
+  }[]
 }

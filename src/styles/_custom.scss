@@ -29,10 +29,6 @@ body {
     background-color: scale-color($color, $lightness: +30%) !important;
   }
 
-  .bg-#{$type}--darker {
-    background-color: scale-color($color, $lightness: -30%) !important;
-  }
-
   .color-#{$type} {
     color: $color !important;
   }
@@ -41,19 +37,11 @@ body {
     color: scale-color($color, $lightness: +20%) !important;
   }
 
-  .color-#{$type}--darker {
-    color: scale-color($color, $lightness: -20%) !important;
-  }
-
   .bs-#{$type} {
     box-shadow: 0 0 5px 0 $color !important;
   }
 
   .bs-#{$type}--lighter {
     box-shadow: 0 0 5px 0 scale-color($color, $lightness: +20%) !important;
-  }
-
-  .bs-#{$type}--darker {
-    box-shadow: 0 0 5px 0 scale-color($color, $lightness: -20%) !important;
   }
 }
