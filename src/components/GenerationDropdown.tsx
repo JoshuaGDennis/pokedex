@@ -1,5 +1,5 @@
 import Image from "./Image";
-import React, { forwardRef } from "react";
+import React, { forwardRef, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 import Dropdown from "react-bootstrap/Dropdown";
@@ -30,7 +30,13 @@ const GenItem = forwardRef<HTMLDivElement, iItemProps>(
 );
 
 const GenerationDropdown: React.FC = () => {
+  const [show, setShow] = useState(false);
   const { generations, currentGen, setCurrentGen, isLoading } = useApi();
+
+  const handleChange = (gen: GenerationResponse) => {
+    setShow(false);
+    setCurrentGen(gen);
+  };
 
   if (!currentGen || isLoading) {
     return (
@@ -48,16 +54,16 @@ const GenerationDropdown: React.FC = () => {
 
   return (
     <Dropdown>
-      <Dropdown.Toggle variant="primary">
+      <Dropdown.Toggle variant="primary" onClick={() => setShow((s) => !s)}>
         {currentGen.versions[0]}
       </Dropdown.Toggle>
-      <Dropdown.Menu>
+      <Dropdown.Menu show={show}>
         {generations.map((gen) => (
           <Dropdown.Item
             as={GenItem}
             gen={gen}
             key={gen.id}
-            onSelected={setCurrentGen}
+            onSelected={handleChange}
           />
         ))}
       </Dropdown.Menu>

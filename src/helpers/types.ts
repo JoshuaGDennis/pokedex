@@ -133,6 +133,8 @@ export type PokemonResponse = {
     value: number;
   }[];
   types: string[];
+  height: number
+  weight: number
 };
 
 export type PokemonResource = {
@@ -179,6 +181,7 @@ export type PokemonResource = {
     slot: number;
     type: APIItem;
   }[];
+  weight: number
 };
 
 export type PokemonFormResponse = {

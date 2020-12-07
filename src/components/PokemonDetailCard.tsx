@@ -11,7 +11,6 @@ import Card from "react-bootstrap/Card";
 import Tabs from "react-bootstrap/Tabs";
 import styles from "styles/PokemonCard.module.scss";
 import PokemonDetailCardStatsTab from "./PokemonDetailCardStatsTab";
-import PokemonDetailCardMovesTab from "./PokemonDetailCardMovesTab";
 import PokemonDetailCardProfileTab from "./PokemonDetailCardProfileTab";
 import PokemonDetailCardEvolutionsTab from "./PokemonDetailCardEvolutionsTab";
 
@@ -48,6 +47,8 @@ const PokemonDetailCard: React.FC<iProps> = ({
               happiness={species.happiness}
               captureRate={species.captureRate}
               growthRate={species.growthRate}
+              height={data.height}
+              weight={data.weight}
             />
           </Tab>
           <Tab eventKey="stats" title="STATS">
@@ -55,9 +56,6 @@ const PokemonDetailCard: React.FC<iProps> = ({
           </Tab>
           <Tab eventKey="evolutions" title="EVOLUTIONS">
             <PokemonDetailCardEvolutionsTab />
-          </Tab>
-          <Tab eventKey="moves" title="MOVES">
-            <PokemonDetailCardMovesTab />
           </Tab>
         </Tabs>
       </Card.Body>

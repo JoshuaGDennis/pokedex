@@ -8,15 +8,17 @@ import {
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import React, { useEffect, useState } from "react";
 import styles from "styles/PokemonCard.module.scss";
-import { useLocation, useParams } from "react-router-dom";
+import { useHistory, useLocation, useParams } from "react-router-dom";
 import PokemonShowCard from "components/PokemonShowCard";
 import PokemonDetailCard from "components/PokemonDetailCard";
 import NavButtons from "components/NavButtons";
 
 const PokemonPage: React.FC = () => {
+  const history = useHistory();
   const { id } = useParams<{ id: string }>();
   const location = useLocation<PokemonResponse>();
   const { getAbility, getPokemon, getSpecies, getType } = useApi();
@@ -60,8 +62,11 @@ const PokemonPage: React.FC = () => {
   if (pokemon && species && types.length && abilities.length) {
     return (
       <Container className="wide">
+        <Button variant="primary" onClick={() => history.push("/pokedex")}>
+          Back to pokedex
+        </Button>
         <NavButtons currentID={pokemon.id} />
-        <Row className="justify-content-center" style={{ marginTop: "5rem" }}>
+        <Row className="justify-content-center mt-3">
           <Col xs={12}>
             <Card className={styles.card}>
               <Row className="h-100">

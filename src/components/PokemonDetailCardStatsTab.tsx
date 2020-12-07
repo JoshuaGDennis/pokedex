@@ -45,21 +45,19 @@ const PokemonDetailCardStatsTab: React.FC<iProps> = ({ stats, types }) => {
             DOUBLE DAMAGE FROM
           </h4>
           {getTypes("doubleDamageFrom").map((name) => (
-            <div key={name} className={`${styles.cardType} bg-${name}`}>
-              <p>{capitalise(name)}</p>
-              <span className={`bg-${name}--lighter`}>x2</span>
-            </div>
+            <p key={name} className={`${styles.cardType} bg-${name}`}>
+              {capitalise(name)}
+            </p>
           ))}
         </Col>
         <Col>
           <h4 className={`${styles.cardTabsContentHeading} mt-4 mb-4`}>
-            HALF DAMAGE FROM
+            HALF DAMAGE TO
           </h4>
           {getTypes("halfDamageTo").map((name) => (
-            <div key={name} className={`${styles.cardType} bg-${name}`}>
-              <p>{capitalise(name)}</p>
-              <span className={`bg-${name}--lighter`}>x0.5</span>
-            </div>
+            <p key={name} className={`${styles.cardType} bg-${name}`}>
+              {capitalise(name)}
+            </p>
           ))}
         </Col>
       </Row>

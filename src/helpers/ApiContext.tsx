@@ -86,6 +86,8 @@ const ApiProvider: React.FC<iProvider> = ({ children }) => {
         value: item.base_stat,
       })),
       types: data.types.map(({ type }) => type.name),
+      height: data.height,
+      weight: data.weight,
     }));
 
   const getAbility = (id: string | number): Promise<PokemonAbilityResponse> =>

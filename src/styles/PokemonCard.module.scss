@@ -129,23 +129,10 @@
 
   &Type {
     color: white;
-    overflow: hidden;
+    padding: 0.5rem;
     margin-right: 0.5rem;
     margin-bottom: 0.5rem;
     border-radius: 0.2rem;
-
-    &,
-    p,
-    span {
-      display: inline-block;
-    }
-
-    p {
-      margin: 0 0.5rem;
-    }
-
-    span {
-      padding: 0.5rem;
-    }
+    display: inline-block;
   }
 }

@@ -12,6 +12,8 @@ interface iProps {
   happiness: number;
   captureRate: number;
   growthRate: string;
+  height: number;
+  weight: number;
 }
 
 const PokemonDetailCardProfileTab: React.FC<iProps> = ({
@@ -21,9 +23,13 @@ const PokemonDetailCardProfileTab: React.FC<iProps> = ({
   happiness,
   captureRate,
   growthRate,
+  height,
+  weight,
 }) => (
   <Tab.Content className={styles.cardTabsContent}>
     <p className="mb-4">{description}</p>
+    <p>Height: {height}m</p>
+    <p>Weight: {weight}kg</p>
 
     <h4 className={styles.cardTabsContentHeading}>ABILITIES</h4>
 
@@ -38,7 +44,7 @@ const PokemonDetailCardProfileTab: React.FC<iProps> = ({
     <h4 className={styles.cardTabsContentHeading}>TRAINING</h4>
     <Row className="ml-2 mt-4">
       <Col>
-        <p>Base Exp</p>
+        <p>Base Exp:</p>
       </Col>
       <Col>
         <p>{exp}</p>
@@ -46,7 +52,7 @@ const PokemonDetailCardProfileTab: React.FC<iProps> = ({
     </Row>
     <Row className="ml-2">
       <Col>
-        <p>Base Happiness</p>
+        <p>Base Happiness:</p>
       </Col>
       <Col>
         <p>{happiness}</p>
@@ -54,7 +60,7 @@ const PokemonDetailCardProfileTab: React.FC<iProps> = ({
     </Row>
     <Row className="ml-2">
       <Col>
-        <p>Catch Rate</p>
+        <p>Catch Rate:</p>
       </Col>
       <Col>
         <p>{captureRate}</p>
@@ -62,7 +68,7 @@ const PokemonDetailCardProfileTab: React.FC<iProps> = ({
     </Row>
     <Row className="ml-2">
       <Col>
-        <p>Growth Rate</p>
+        <p>Growth Rate:</p>
       </Col>
       <Col>
         <p>{growthRate}</p>
