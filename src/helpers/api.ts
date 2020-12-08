@@ -1,4 +1,18 @@
-import { PokemonAbilityResource, PokemonAbilityResponse, PokemonFormResource, PokemonFormResponse, PokemonResource, PokemonResponse, PokemonTypeResource, PokemonTypeResponse, SpeciesResource, SpeciesResponse, APIItem, APIResource, GenerationResponse, GenerationResource } from "./types"
+import { 
+    PokemonAbilityResource, 
+    PokemonAbilityResponse, 
+    PokemonFormResource, 
+    PokemonFormResponse, 
+    PokemonResource,
+    PokemonResponse,
+    PokemonTypeResource,
+    PokemonTypeResponse,
+    SpeciesResource,
+    SpeciesResponse,
+    APIResource,
+    GenerationResponse,
+    GenerationResource
+} from "./types"
 import { capitalise, getEnglishFlavorText, getIdFromUrl, getNames } from "./strings"
 
 const POKE_API_URL = 'https://pokeapi.co/api/v2'

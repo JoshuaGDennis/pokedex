@@ -20,13 +20,11 @@ import { getPokemon, getPokemonAbility, getPokemonSpecies, getPokemonType } from
 const PokemonPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const location = useLocation<PokemonResponse>();
-  const [ pokemon, setPokemon ] = useState<PokemonResponse | null>(location.state || null)
+  const [ pokemon, setPokemon ] = useState<PokemonResponse | null>(null)
 
   useEffect(() => {
-    if (!pokemon) {
-      getPokemon(id).then(setPokemon)
-    }
-  }, [id, pokemon])
+    location.state ? setPokemon(location.state) : getPokemon(id).then(setPokemon)
+  }, [id, location.state])
 
   if (!pokemon) return null
 

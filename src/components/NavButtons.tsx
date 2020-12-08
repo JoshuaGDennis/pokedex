@@ -1,59 +1,43 @@
 import Image from "./Image";
+import React from "react";
 import { Link } from "react-router-dom";
+import PromiseLoader from "./PromiseLoader";
+import { getPokemonForm } from "helpers/api";
 import styles from "styles/NavButtons.module.scss";
-import React, { useEffect, useState } from "react";
 import { PokemonFormResponse, useApi } from "helpers";
-
 interface iProps {
   currentID: number;
 }
 
 const NavButtons: React.FC<iProps> = ({ currentID }) => {
-  const [previousForm, setPreviousForm] = useState<PokemonFormResponse | null>(
-    null
-  );
-  const [nextForm, setNextForm] = useState<PokemonFormResponse | null>(null);
+  const { currentGen } = useApi()
 
-  const { currentGen, getForm } = useApi();
-
-  console.log(previousForm, nextForm);
-
-  useEffect(() => {
-    if (currentGen) {
-      if (!previousForm) {
-        getForm(
-          currentID === 1 ? currentGen.pokemon.length : currentID - 1
-        ).then(setPreviousForm);
-      }
-      if (!nextForm) {
-        getForm(
-          currentID === currentGen.pokemon.length ? 1 : currentID + 1
-        ).then(setNextForm);
-      }
-    }
-  }, [currentGen, currentID, previousForm, nextForm, getForm]);
+  if (!currentGen) return null
 
   return (
-    <>
-      {previousForm && (
-        <Link
-          to={`/pokemon/${previousForm.name}`}
-          className={`${styles.link} ${styles.left}`}
-        >
-          <Image src={previousForm.image} fluid noAnimate />
-        </Link>
-      )}
+    <PromiseLoader
+      promises={[
+        getPokemonForm(currentID === 1 ? currentGen.pokemon.length : currentID - 1),
+        getPokemonForm(currentID === currentGen.pokemon.length ? 1 : currentID + 1)
+      ]}
+      render={([previous, next]: PokemonFormResponse[]) => (
+        <>
+          {previous && (
+            <Link to={`/pokemon/${previous.name}`} className={`${styles.link} ${styles.left}`}>
+              <Image src={previous.image} fluid noAnimate/>
+            </Link>
+          )}
 
-      {nextForm && (
-        <Link
-          to={`/pokemon/${nextForm.name}`}
-          className={`${styles.link} ${styles.right}`}
-        >
-          <Image src={nextForm.image} fluid noAnimate />
-        </Link>
+          {next && (
+            <Link to={`/pokemon/${next.name}`} className={`${styles.link} ${styles.right}`}>
+              <Image src={next.image} fluid noAnimate />
+            </Link>
+          )}
+        </>
       )}
-    </>
-  );
-};
+    />
+  )
+}
+
 
 export default NavButtons;

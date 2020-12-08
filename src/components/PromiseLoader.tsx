@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useState } from 'react'
+import React, { ReactElement, useCallback, useEffect, useState } from 'react'
 
 interface iProps {
     render(items: any[]): void
@@ -10,12 +10,15 @@ const PromiseLoader: React.FC<iProps> = ({ render, renderLoading, promises }) =>
     const [ data, setData ] = useState<any[]>([])
     const [ isLoading, setIsLoading ] = useState(true)
 
-    useEffect(() => {
+    const loadPromises = useCallback(() => {
+        setIsLoading(true)
         Promise.all(promises).then(data => {
             setData(data)
             setIsLoading(false)
         })
     }, [promises])
+
+    useEffect(() => loadPromises(), [loadPromises])
 
     if (isLoading) return renderLoading ? renderLoading() : <p>LOADING</p>
 
