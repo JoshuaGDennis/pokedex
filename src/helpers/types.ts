@@ -1,4 +1,4 @@
-type APIItem = {
+export type APIItem = {
   name: string;
   url: string;
 };

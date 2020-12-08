@@ -1,4 +1,4 @@
-import { FlavorTextEntry } from "./types";
+import { APIItem, FlavorTextEntry } from "./types";
 
 const capitalise = (str: string): string =>
   `${str.charAt(0).toUpperCase()}${str.slice(1)}`;
@@ -16,4 +16,6 @@ const getEnglishFlavorText = (entries: FlavorTextEntry[]): string => {
 
 const getPokemonSprite = (id: string | number) => `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`
 
-export { capitalise, getIdFromUrl, getEnglishFlavorText, getPokemonSprite };
+const getNames = (items: APIItem[], func?: Function) => items.map(({ name  }) => func ? func(name) : name) 
+
+export { capitalise, getIdFromUrl, getEnglishFlavorText, getPokemonSprite, getNames };
