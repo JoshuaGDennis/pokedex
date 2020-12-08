@@ -29,16 +29,12 @@ const PokemonDetailCard: React.FC<iProps> = ({
 }) => {
   const theme = useTheme();
 
-  const tabsClasses = [styles.cardTabs, "justify-content-center mb-4"].join(
-    " "
-  );
-
   return (
     <Card
       className={styles[`${theme === "light" ? "cardSplit" : "cardSplitDark"}`]}
     >
       <Card.Body>
-        <Tabs className={tabsClasses}>
+        <Tabs className={`${styles.cardTabs} justify-content-center mb-4`}>
           <Tab eventKey="profile" title="PROFILE">
             <PokemonDetailCardProfileTab
               description={species.description}

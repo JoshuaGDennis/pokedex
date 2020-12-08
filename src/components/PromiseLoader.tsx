@@ -1,28 +1,38 @@
-import React, { forwardRef, ReactElement, useCallback, useEffect, useState } from 'react'
+import React, { ReactElement, useCallback, useEffect, useState } from "react";
 
 interface iProps {
-    render(items: any[]): React.ReactNode
-    renderLoading?(): ReactElement<any, any>
-    promises: Promise<any>[]
+  render(items: any[]): React.ReactNode;
+  renderLoading?(): ReactElement<any, any>;
+  promises: Promise<any>[];
+  loading?: boolean;
 }
 
-const PromiseLoader = forwardRef<any, iProps>(({ render, renderLoading, promises }, ref) => {
-    const [ data, setData ] = useState<any[]>([])
-    const [ isLoading, setIsLoading ] = useState(true)
+const PromiseLoader: React.FC<iProps> = ({
+  render,
+  renderLoading,
+  promises,
+  loading,
+}) => {
+  const [data, setData] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(
+    loading !== undefined ? loading : true
+  );
 
-    const loadPromises = useCallback(() => {
-        setIsLoading(true)
-        Promise.all(promises).then(data => {
-            setData(data)
-            setIsLoading(false)
-        })
-    }, [promises])
+  const loadPromises = useCallback(() => {
+    setIsLoading(true);
+    Promise.all(promises).then((data) => {
+      setData(data);
+      if (loading === undefined) {
+        setIsLoading(false);
+      }
+    });
+  }, [promises, loading]);
 
-    useEffect(() => loadPromises(), [loadPromises])
+  useEffect(() => loadPromises(), [loadPromises]);
 
-    if (isLoading) return renderLoading ? renderLoading() : <p>LOADING</p>
+  if (isLoading) return renderLoading ? renderLoading() : <p>LOADING</p>;
 
-    return <div ref={ref}>{render(data)}</div>
-})
+  return <>{render(data)}</>;
+};
 
-export default PromiseLoader
+export default PromiseLoader;

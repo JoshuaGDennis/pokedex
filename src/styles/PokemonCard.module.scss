@@ -75,6 +75,11 @@
       border-width: 2rem;
     }
 
+    &Default {
+      composes: cardPokeball;
+      top: 0;
+    }
+
     &::after {
       height: 2rem;
       top: calc(50% - 1rem);
