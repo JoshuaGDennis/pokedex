@@ -6,7 +6,7 @@ import { GenerationResponse } from "helpers/types";
 import VisibleElement from "components/VisibleElement";
 import React, { useEffect, useRef, useState } from "react";
 import GenerationDropdown from "components/GenerationDropdown";
-import { useApi } from "helpers";
+import { useGen } from "helpers";
 
 const PokedexPage: React.FC = () => {
   const INITIAL_LOAD_ID = 0;
@@ -18,7 +18,7 @@ const PokedexPage: React.FC = () => {
   const [maximum, setMaximum] = useState(INITIAL_MAXIMUM);
   const [items, setItems] = useState<{ id: number; name: string }[]>([]);
 
-  const { currentGen } = useApi();
+  const { currentGen } = useGen();
 
   useEffect(() => {
     if (currentGen) {

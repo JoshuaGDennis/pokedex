@@ -3,7 +3,6 @@ import {
   useTheme,
   useVisibility,
   capitalise,
-  useApi,
 } from "helpers";
 import Image from "./Image";
 import Pokeball from "./Pokeball";
@@ -14,6 +13,7 @@ import Card from "react-bootstrap/Card";
 import styles from "styles/PokedexCard.module.scss";
 import PokedexCardLoading from "./PokedexCardLoading";
 import React, { useEffect, useState, useRef } from "react";
+import { getPokemon } from "helpers/api";
 
 interface iProps {
   id: string;
@@ -28,7 +28,6 @@ const PokedexCard: React.FC<iProps> = ({ id, startLoad, loaded }) => {
   const [pokemon, setPokemon] = useState<PokemonResponse | null>(null);
 
   const theme = useTheme();
-  const { getPokemon } = useApi();
   const inView = useVisibility(ref, { once: true });
 
   useEffect(() => {
@@ -38,7 +37,7 @@ const PokedexCard: React.FC<iProps> = ({ id, startLoad, loaded }) => {
         setIsLoading(false);
       });
     }
-  }, [inView, startLoad, getPokemon, id]);
+  }, [inView, startLoad, id]);
 
   if (isLoading || !pokemon) return <PokedexCardLoading cardRef={ref} />;
 

@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 import Dropdown from "react-bootstrap/Dropdown";
 import styles from "styles/GenerationDropdown.module.scss";
-import { GenerationResponse, getPokemonSprite, useApi } from "helpers";
+import { GenerationResponse, getPokemonSprite, useGen } from "helpers";
 
 interface iItemProps {
   gen: GenerationResponse;
@@ -31,7 +31,7 @@ const GenItem = forwardRef<HTMLDivElement, iItemProps>(
 
 const GenerationDropdown: React.FC = () => {
   const [show, setShow] = useState(false);
-  const { generations, currentGen, setCurrentGen, isLoading } = useApi();
+  const { generations, currentGen, setCurrentGen, isLoading } = useGen();
 
   const handleChange = (gen: GenerationResponse) => {
     setShow(false);

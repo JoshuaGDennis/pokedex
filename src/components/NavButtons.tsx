@@ -4,13 +4,13 @@ import { Link } from "react-router-dom";
 import PromiseLoader from "./PromiseLoader";
 import { getPokemonForm } from "helpers/api";
 import styles from "styles/NavButtons.module.scss";
-import { PokemonFormResponse, useApi } from "helpers";
+import { PokemonFormResponse, useGen } from "helpers";
 interface iProps {
   currentID: number;
 }
 
 const NavButtons: React.FC<iProps> = ({ currentID }) => {
-  const { currentGen } = useApi()
+  const { currentGen } = useGen()
 
   if (!currentGen) return null
 

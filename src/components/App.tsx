@@ -1,16 +1,16 @@
 import React from "react";
 import Routes from "./Routes";
-import { ApiProvider } from "helpers/ApiContext"
+import { GenProvider } from "helpers/ApiContext"
 import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "helpers/ThemeContext";
 
 const App: React.FC = () => (
   <ThemeProvider>
-    <ApiProvider>
+    <GenProvider>
       <BrowserRouter>
         <Routes />
       </BrowserRouter>
-    </ApiProvider>
+    </GenProvider>
   </ThemeProvider>
 );
 

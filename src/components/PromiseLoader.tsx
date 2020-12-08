@@ -1,12 +1,12 @@
-import React, { ReactElement, useCallback, useEffect, useState } from 'react'
+import React, { forwardRef, ReactElement, useCallback, useEffect, useState } from 'react'
 
 interface iProps {
-    render(items: any[]): void
+    render(items: any[]): React.ReactNode
     renderLoading?(): ReactElement<any, any>
     promises: Promise<any>[]
 }
 
-const PromiseLoader: React.FC<iProps> = ({ render, renderLoading, promises }) => {
+const PromiseLoader = forwardRef<any, iProps>(({ render, renderLoading, promises }, ref) => {
     const [ data, setData ] = useState<any[]>([])
     const [ isLoading, setIsLoading ] = useState(true)
 
@@ -22,7 +22,7 @@ const PromiseLoader: React.FC<iProps> = ({ render, renderLoading, promises }) =>
 
     if (isLoading) return renderLoading ? renderLoading() : <p>LOADING</p>
 
-    return <>{render(data)}</>
-}
+    return <div ref={ref}>{render(data)}</div>
+})
 
 export default PromiseLoader
