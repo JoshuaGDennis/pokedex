@@ -46,7 +46,6 @@ const PokemonPage: React.FC = () => {
               <Card className={styles.card}>
                 <Row className="h-100">
                   <PromiseLoader
-                    loading
                     promises={[
                       getPokemonSpecies(pokemon.name),
                       Promise.all(pokemon.abilities.map(getPokemonAbility)),

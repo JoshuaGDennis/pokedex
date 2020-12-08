@@ -30,7 +30,7 @@ const PromiseLoader: React.FC<iProps> = ({
 
   useEffect(() => loadPromises(), [loadPromises]);
 
-  if (isLoading) return renderLoading ? renderLoading() : <p>LOADING</p>;
+  if (isLoading) return renderLoading ? renderLoading() : null;
 
   return <>{render(data)}</>;
 };

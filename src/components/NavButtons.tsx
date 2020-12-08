@@ -5,39 +5,49 @@ import PromiseLoader from "./PromiseLoader";
 import { getPokemonForm } from "helpers/api";
 import styles from "styles/NavButtons.module.scss";
 import { PokemonFormResponse, useGen } from "helpers";
+
 interface iProps {
   currentID: number;
 }
 
 const NavButtons: React.FC<iProps> = ({ currentID }) => {
-  const { currentGen } = useGen()
+  const { currentGen } = useGen();
 
-  if (!currentGen) return null
+  if (!currentGen) return null;
 
   return (
     <PromiseLoader
       promises={[
-        getPokemonForm(currentID === 1 ? currentGen.pokemon.length : currentID - 1),
-        getPokemonForm(currentID === currentGen.pokemon.length ? 1 : currentID + 1)
+        getPokemonForm(
+          currentID === 1 ? currentGen.pokemon.length : currentID - 1
+        ),
+        getPokemonForm(
+          currentID === currentGen.pokemon.length ? 1 : currentID + 1
+        ),
       ]}
       render={([previous, next]: PokemonFormResponse[]) => (
         <>
           {previous && (
-            <Link to={`/pokemon/${previous.name}`} className={`${styles.link} ${styles.left}`}>
-              <Image src={previous.image} fluid noAnimate/>
+            <Link
+              to={`/pokemon/${previous.name}`}
+              className={`${styles.link} ${styles.left}`}
+            >
+              <Image src={previous.image} fluid noAnimate />
             </Link>
           )}
 
           {next && (
-            <Link to={`/pokemon/${next.name}`} className={`${styles.link} ${styles.right}`}>
+            <Link
+              to={`/pokemon/${next.name}`}
+              className={`${styles.link} ${styles.right}`}
+            >
               <Image src={next.image} fluid noAnimate />
             </Link>
           )}
         </>
       )}
     />
-  )
-}
-
+  );
+};
 
 export default NavButtons;
