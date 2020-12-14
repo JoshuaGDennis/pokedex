@@ -11,7 +11,11 @@ import {
     SpeciesResponse,
     APIResource,
     GenerationResponse,
-    GenerationResource
+    GenerationResource,
+    PokemonEvolutionResponse,
+    PokemonEvolutionResource,
+    EvolutionChain,
+    PokemonEvolution
 } from "./types"
 import { capitalise, getEnglishFlavorText, getIdFromUrl, getNames } from "./strings"
 
@@ -28,7 +32,7 @@ const getPokemonSpecies = (id: string | number): Promise<SpeciesResponse> =>
       happiness: data.base_happiness,
       name: data.name,
       color: data.color.name,
-      evolution: data.evolution_chain.url,
+      evolutionChainId: getIdFromUrl(data.evolution_chain.url),
       description: getEnglishFlavorText(data.flavor_text_entries),
       isLegendary: data.is_legendary,
       isMythical: data.is_mythical,
@@ -82,6 +86,38 @@ const getPokemonType = (id: string | number): Promise<PokemonTypeResponse> =>
         noDamageTo: getNames(data.damage_relations.no_damage_to)
     }));
 
+const getPokemonEvolutions = (id: number): Promise<PokemonEvolutionResponse> => 
+    apiFetch(`/evolution-chain/${id}`).then((data: PokemonEvolutionResource) => {
+        const pokemon: PokemonEvolution[] = []
+
+        const getNextEvolution = (obj: EvolutionChain) => {
+            if (!obj.evolution_details.length) {
+                pokemon.push({
+                    name: obj.species.name,
+                    trigger: '',
+                    level: 1
+                })
+            } else {
+                pokemon.push({
+                    name: obj.species.name,
+                    trigger: obj.evolution_details[0].trigger.name,
+                    level: obj.evolution_details[0].min_level
+                })
+            }
+
+            if (obj.evolves_to.length) {
+                getNextEvolution(obj.evolves_to[0])
+            }
+        }
+
+        getNextEvolution(data.chain)
+
+        return {
+            id: id,
+            pokemon
+        }
+    })
+
 const getAllGenerations = (): Promise<APIResource> =>
     apiFetch('/generation').then((data: APIResource) => data)
 
@@ -101,4 +137,4 @@ const getGeneration = (id: string | number): Promise<GenerationResponse> =>
         }
     })
 
-export { getPokemonSpecies, getPokemonForm, getPokemon, getPokemonAbility, getPokemonType, getAllGenerations, getGeneration }
+export { getPokemonSpecies, getPokemonForm, getPokemon, getPokemonAbility, getPokemonType, getPokemonEvolutions, getAllGenerations, getGeneration }

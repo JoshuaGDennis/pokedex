@@ -51,7 +51,7 @@ const PokemonDetailCard: React.FC<iProps> = ({
             <PokemonDetailCardStatsTab stats={data.stats} types={types} />
           </Tab>
           <Tab eventKey="evolutions" title="EVOLUTIONS">
-            <PokemonDetailCardEvolutionsTab />
+            <PokemonDetailCardEvolutionsTab chainID={species.evolutionChainId} />
           </Tab>
         </Tabs>
       </Card.Body>

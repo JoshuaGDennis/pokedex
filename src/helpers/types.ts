@@ -66,7 +66,7 @@ export type SpeciesResponse = {
   genera: string
   name: string;
   color: string;
-  evolution: string;
+  evolutionChainId: number;
   description: string;
   isLegendary: boolean;
   isMythical: boolean;
@@ -301,9 +301,15 @@ type EvolutionDetail = {
   turn_upside_down: boolean
 }
 
-type EvolutionChain = {
+export type PokemonEvolution = {
+  name: string
+  trigger: string
+  level: number
+}
+
+export type EvolutionChain = {
   evolution_details: EvolutionDetail[]
-  evolves_to: EvolutionChain
+  evolves_to: EvolutionChain[]
   is_baby: boolean
   species: APIItem
 }
@@ -312,7 +318,7 @@ export type PokemonEvolutionResource = {
   baby_trigger_item: APIItem | null
   chain: {
     evolution_details: EvolutionDetail[]
-    evolves_to: EvolutionChain
+    evolves_to: EvolutionChain[]
     is_baby: boolean
     species: APIItem
   }
@@ -321,9 +327,5 @@ export type PokemonEvolutionResource = {
 
 export type PokemonEvolutionResponse = {
   id: number
-  pokemon: {
-    name: string
-    trigger: string
-    level: number
-  }[]
+  pokemon: PokemonEvolution[]
 }

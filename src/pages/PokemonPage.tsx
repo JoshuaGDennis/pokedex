@@ -4,6 +4,12 @@ import {
   PokemonTypeResponse,
   SpeciesResponse,
 } from "helpers";
+import {
+  getPokemon,
+  getPokemonAbility,
+  getPokemonSpecies,
+  getPokemonType,
+} from "helpers/api";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
@@ -15,12 +21,6 @@ import PromiseLoader from "components/PromiseLoader";
 import PokemonShowCard from "components/PokemonShowCard";
 import PokemonDetailCard from "components/PokemonDetailCard";
 import { Link, useLocation, useParams } from "react-router-dom";
-import {
-  getPokemon,
-  getPokemonAbility,
-  getPokemonSpecies,
-  getPokemonType,
-} from "helpers/api";
 import PokemonShowCardLoading from "components/PokemonShowCardLoading";
 import PokemonDetailCardLoading from "components/PokemonDetailCardLoading";
 
