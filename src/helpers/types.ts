@@ -302,6 +302,7 @@ type EvolutionDetail = {
 }
 
 export type PokemonEvolution = {
+  id: number
   name: string
   trigger: string
   level: number

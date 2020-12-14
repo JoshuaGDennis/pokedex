@@ -93,12 +93,14 @@ const getPokemonEvolutions = (id: number): Promise<PokemonEvolutionResponse> =>
         const getNextEvolution = (obj: EvolutionChain) => {
             if (!obj.evolution_details.length) {
                 pokemon.push({
+                    id: getIdFromUrl(obj.species.url),
                     name: obj.species.name,
                     trigger: '',
                     level: 1
                 })
             } else {
                 pokemon.push({
+                    id: getIdFromUrl(obj.species.url),
                     name: obj.species.name,
                     trigger: obj.evolution_details[0].trigger.name,
                     level: obj.evolution_details[0].min_level

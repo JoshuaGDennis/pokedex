@@ -141,3 +141,38 @@
     display: inline-block;
   }
 }
+
+.evolution {
+  margin: auto;
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-direction: column;
+
+  &:hover {
+    color: initial;
+    text-decoration: none;
+  }
+
+  &Name {
+    font-size: 1.4rem;
+  }
+
+  &Level {
+    font-size: .8rem;
+    margin-top: -0.2rem;
+  }
+
+  img {
+    width: 5rem;
+    padding: 1rem;
+    border-radius: 50%;
+    box-sizing: content-box;
+  }
+
+  p {
+    margin: 0;
+    color: initial;
+  }
+}
