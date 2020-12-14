@@ -16,6 +16,7 @@ interface iProps {
 const PokemonDetailCardStatsTab: React.FC<iProps> = ({ stats, types }) => {
 
   const doubleDamageFrom = [...new Set(types.map(t => t.doubleDamageFrom.map(n => n)).flat())].filter(x => !types.find(t => t.name === x)).map(name => name)
+  const halfDamageFrom = types[0].halfDamageFrom
 
   return (
     <Tab.Content className={styles.cardTabsContent}>
@@ -48,16 +49,18 @@ const PokemonDetailCardStatsTab: React.FC<iProps> = ({ stats, types }) => {
             </p>
           ))}
         </Col>
-        <Col>
-          <h4 className={`${styles.cardTabsContentHeading} mt-4 mb-4`}>
-            HALF DAMAGE TO
-          </h4>
-          {types[0].halfDamageFrom.map(name => (
-            <p key={name} className={`${styles.cardType} bg-${name}`}>
-              {capitalise(name)}
-            </p>
-          ))}
-        </Col>
+        {!!halfDamageFrom.length && (
+          <Col>
+            <h4 className={`${styles.cardTabsContentHeading} mt-4 mb-4`}>
+              HALF DAMAGE TO
+            </h4>
+            {halfDamageFrom.map(name => (
+              <p key={name} className={`${styles.cardType} bg-${name}`}>
+                {capitalise(name)}
+              </p>
+            ))}
+          </Col>
+        )}
       </Row>
     </Tab.Content>
   );

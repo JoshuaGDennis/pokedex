@@ -1,9 +1,8 @@
 import {
   PokemonAbilityResponse,
-  PokemonResponse,
   PokemonTypeResponse,
+  PokemonResponse,
   SpeciesResponse,
-  useTheme,
 } from "helpers";
 import React from "react";
 import Tab from "react-bootstrap/Tab";
