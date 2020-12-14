@@ -14,10 +14,8 @@ interface iProps {
 }
 
 const PokemonDetailCardStatsTab: React.FC<iProps> = ({ stats, types }) => {
-  const getTypes = (key: "doubleDamageFrom" | "halfDamageTo") =>
-    [...new Set(types.map((t) => t[key].map((n) => n)).flat())].filter(
-      (s) => !types.find((t) => t.name === s)
-    );
+
+  const doubleDamageFrom = [...new Set(types.map(t => t.doubleDamageFrom.map(n => n)).flat())].filter(x => !types.find(t => t.name === x)).map(name => name)
 
   return (
     <Tab.Content className={styles.cardTabsContent}>
@@ -44,7 +42,7 @@ const PokemonDetailCardStatsTab: React.FC<iProps> = ({ stats, types }) => {
           <h4 className={`${styles.cardTabsContentHeading} mt-4 mb-4`}>
             DOUBLE DAMAGE FROM
           </h4>
-          {getTypes("doubleDamageFrom").map((name) => (
+          {doubleDamageFrom.map(name => (
             <p key={name} className={`${styles.cardType} bg-${name}`}>
               {capitalise(name)}
             </p>
@@ -54,7 +52,7 @@ const PokemonDetailCardStatsTab: React.FC<iProps> = ({ stats, types }) => {
           <h4 className={`${styles.cardTabsContentHeading} mt-4 mb-4`}>
             HALF DAMAGE TO
           </h4>
-          {getTypes("halfDamageTo").map((name) => (
+          {types[0].halfDamageFrom.map(name => (
             <p key={name} className={`${styles.cardType} bg-${name}`}>
               {capitalise(name)}
             </p>
