@@ -37,7 +37,17 @@
   }
 
   &Tabs {
+
+    @each $type, $color in $allTypes {
+      &Color#{$type} {
+        a {
+          color: $color;
+        }
+      }
+    }
+
     a {
+      font-weight: bold;
       border: none !important;
       letter-spacing: 0.2rem;
       background-color: transparent !important;
@@ -103,24 +113,23 @@
     &Bar {
       width: 100%;
       height: 1rem;
+      display: flex;
       overflow: hidden;
       position: relative;
       border-radius: 1rem;
 
-      &::before {
-        width: 20%;
-        content: " ";
+      span {
         height: 100%;
-        display: block;
         position: relative;
         border-radius: 1rem;
+        display: inline-block;
       }
 
       @each $type, $color in $allTypes {
         &Type#{$type} {
           background-color: scale-color($color: $color, $lightness: +20%);
 
-          &::before {
+          span {
             background-color: $color;
           }
         }

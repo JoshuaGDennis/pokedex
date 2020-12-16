@@ -30,7 +30,9 @@ const PokemonDetailCardStatsTab: React.FC<iProps> = ({ stats, types }) => {
               className={`${styles.cardStatBar} ${
                 styles[`cardStatBarType${types[0].name}`]
               }`}
-            />
+            >
+              <span style={{ width: `${(value / 200) * 100}%`}} />
+            </div>
           </Col>
           <Col md={2}>
             <p>{value}</p>
@@ -52,7 +54,7 @@ const PokemonDetailCardStatsTab: React.FC<iProps> = ({ stats, types }) => {
         {!!halfDamageFrom.length && (
           <Col>
             <h4 className={`${styles.cardTabsContentHeading} mt-4 mb-4`}>
-              HALF DAMAGE TO
+              HALF DAMAGE FROM
             </h4>
             {halfDamageFrom.map(name => (
               <p key={name} className={`${styles.cardType} bg-${name}`}>

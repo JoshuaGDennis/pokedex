@@ -27,7 +27,7 @@ const PokemonDetailCard: React.FC<iProps> = ({
 }) =>  (
   <Card className={styles.cardSplit}>
     <Card.Body>
-      <Tabs className={`${styles.cardTabs} justify-content-center mb-4`}>
+      <Tabs className={`${styles.cardTabs} ${styles[`cardTabsColor${types[0].name}`]} justify-content-center mb-4`}>
         <Tab eventKey="profile" title="PROFILE">
           <PokemonDetailCardProfileTab
             description={species.description}
