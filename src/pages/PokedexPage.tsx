@@ -1,3 +1,5 @@
+import Card from 'components/Card'
+import Image from 'components/Image'
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import PokedexCard from "components/PokedexCard";
@@ -6,7 +8,7 @@ import { GenerationResponse } from "helpers/types";
 import VisibleElement from "components/VisibleElement";
 import React, { useEffect, useRef, useState } from "react";
 import GenerationDropdown from "components/GenerationDropdown";
-import { useGen } from "helpers";
+import { getPokemonSprite, useGen } from "helpers";
 
 const PokedexPage: React.FC = () => {
   const INITIAL_LOAD_ID = 0;
@@ -35,22 +37,38 @@ const PokedexPage: React.FC = () => {
   }, [currentGen, maximum]);
 
   return (
-    <Container>
+    <Container className="wide">
       <Row>
         <Col>
           <GenerationDropdown />
         </Col>
       </Row>
       <Row>
-        {items.map((pkm, i) => (
-          <Col key={pkm.name} xs={12} md={4}>
-            <PokedexCard
-              id={pkm.name}
-              startLoad={loadId === i}
-              loaded={() => setLoadId((s) => s + 1)}
-            />
-          </Col>
-        ))}
+        <Col>
+          <Card className="selectable">
+            <Row>
+              <Col>#1</Col>
+            </Row>
+            <Row>
+              <Col>
+                <Image src={getPokemonSprite(1)} />
+              </Col>
+            </Row>
+            <Row>
+              <Col><h1>Bulbasuar</h1></Col>
+            </Row>
+            <Row>
+              <Col>
+                <p>Grass</p>
+              </Col>
+              <Col>
+                <p>Poison</p>
+              </Col>
+            </Row>
+          </Card>
+        </Col>
+        <Col></Col>
+        <Col></Col>
       </Row>
       <Row>
         <Col>
