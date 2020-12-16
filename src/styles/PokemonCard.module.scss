@@ -15,6 +15,10 @@
   &SplitDark {
     @extend .cardSplit;
     background-color: $card-bg-dark;
+
+    &, h4, p {
+      color: #fff !important;
+    }
   }
 
   &LargeText {
