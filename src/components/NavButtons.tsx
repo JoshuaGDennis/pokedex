@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import PromiseLoader from "./PromiseLoader";
 import { getPokemonForm } from "helpers/api";
 import styles from "styles/NavButtons.module.scss";
-import { PokemonFormResponse, useGen } from "helpers";
+import { PokemonFormResponse, useGen, useTheme } from "helpers";
 
 interface iProps {
   currentID: number;
@@ -12,6 +12,7 @@ interface iProps {
 
 const NavButtons: React.FC<iProps> = ({ currentID }) => {
   const { currentGen } = useGen();
+  const theme = useTheme()
 
   if (!currentGen) return null;
 
@@ -30,7 +31,7 @@ const NavButtons: React.FC<iProps> = ({ currentID }) => {
           {previous && (
             <Link
               to={`/pokemon/${previous.name}`}
-              className={`${styles.link} ${styles.left}`}
+              className={`${styles.link} ${theme === 'dark' ? styles.linkDark : ''}   ${styles.left}`}
             >
               <Image src={previous.image} fluid noAnimate />
             </Link>
@@ -39,7 +40,7 @@ const NavButtons: React.FC<iProps> = ({ currentID }) => {
           {next && (
             <Link
               to={`/pokemon/${next.name}`}
-              className={`${styles.link} ${styles.right}`}
+              className={`${styles.link} ${theme === 'dark' ? styles.linkDark : ''} ${styles.right}`}
             >
               <Image src={next.image} fluid noAnimate />
             </Link>
