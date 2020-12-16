@@ -23,13 +23,17 @@
 
   &LargeText {
     margin: 0;
+    z-index: 1; 
     color: white;
     font-size: 2.5rem;
+    position: relative;
   }
 
   &SmallText {
+    z-index: 1;
     color: white;
     font-size: 0.8rem;
+    position: relative;
   }
 
   &Image {
@@ -152,6 +156,36 @@
     margin-bottom: 0.5rem;
     border-radius: 0.2rem;
     display: inline-block;
+  }
+
+  @media only screen and (max-width: 500px) {
+
+    &LargeText {
+      font-size: 1.5rem;
+    }
+
+    &Image {
+      width: 12rem;
+      margin-top: 0;
+    }
+
+    &Pokeball {
+      top: 0;
+      width: 15rem;
+      height: 15rem;
+
+      div {
+        width: 10rem;
+        height: 10rem;
+      }
+    }
+
+    &Tabs {
+      a {
+        font-size: .8rem;
+        padding: .5rem;
+      }
+    }
   }
 }
 

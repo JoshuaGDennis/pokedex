@@ -57,7 +57,7 @@ const PokemonPage: React.FC = () => {
                       PokemonTypeResponse[]
                     ]) => (
                       <>
-                        <Col className="pr-0">
+                        <Col className="pr-md-0">
                           <PokemonShowCard
                             id={pokemon.id}
                             name={pokemon.name}
@@ -66,7 +66,7 @@ const PokemonPage: React.FC = () => {
                             type={pokemon.types[0]}
                           />
                         </Col>
-                        <Col className="pl-0">
+                        <Col className="pl-md-0">
                           <PokemonDetailCard
                             data={pokemon}
                             types={types}
@@ -78,10 +78,10 @@ const PokemonPage: React.FC = () => {
                     )}
                     renderLoading={() => (
                       <>
-                        <Col className="pr-0">
+                        <Col className="p-md-0">
                           <PokemonShowCardLoading />
                         </Col>
-                        <Col className="pl-0">
+                        <Col className="pl-md-0">
                           <PokemonDetailCardLoading />
                         </Col>
                       </>
