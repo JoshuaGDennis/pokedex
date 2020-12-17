@@ -6,7 +6,7 @@ import Container from "react-bootstrap/Container";
 import { GenerationResponse } from "helpers/types";
 import VisibleElement from "components/VisibleElement";
 import React, { useEffect, useRef, useState } from "react";
-import GenerationDropdown from "components/GenerationDropdown";
+import GenDropdown from "components/GenDropdown";
 
 const PokedexPage: React.FC = () => {
   const INITIAL_LOAD_ID = 0;
@@ -38,7 +38,7 @@ const PokedexPage: React.FC = () => {
     <Container className="wide">
       <Row>
         <Col>
-          <GenerationDropdown />
+          <GenDropdown />
         </Col>
       </Row>
       <Row>

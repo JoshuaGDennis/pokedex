@@ -1,4 +1,4 @@
-import "./GenerationDropdown.scss";
+import "./GenDropdown.scss";
 import React, { useState } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import { GenerationResponse, useGen } from "helpers";
@@ -18,11 +18,12 @@ const GenerationDropdown: React.FC = () => {
   if (!currentGen) return null;
 
   return (
-    <Dropdown>
+    <Dropdown className="gen-dropdown">
       <Dropdown.Toggle as={DropdownToggle} gen={currentGen} />
       <Dropdown.Menu as={DropdownMenu} show={show}>
         {generations.map((gen) => (
           <Dropdown.Item
+            key={gen.id}
             as={DropdownItem}
             gen={gen}
             onSelected={handleChange}

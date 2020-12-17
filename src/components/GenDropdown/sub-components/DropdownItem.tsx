@@ -11,7 +11,8 @@ interface iProps {
 const DropdownItem = forwardRef<HTMLDivElement, iProps>(
   ({ gen, className, onSelected }, ref) => (
     <div className={className} ref={ref} onClick={() => onSelected(gen)}>
-      <div>
+      <p>Generation {gen.id}</p>
+      <div className="dropdown-item__images">
         <Image src={getPokemonSprite(gen.pokemon[0].id)} noAnimate />
         <Image src={getPokemonSprite(gen.pokemon[3].id)} noAnimate />
         <Image src={getPokemonSprite(gen.pokemon[6].id)} noAnimate />

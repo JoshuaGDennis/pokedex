@@ -1,1 +1,1 @@
-export { default } from './GenerationDropdown'
+export { default } from './GenDropdown'
