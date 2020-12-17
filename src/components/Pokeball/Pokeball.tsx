@@ -4,8 +4,8 @@ interface iProps {
   className?: string
 }
 
-const Pokeball: React.FC<iProps> = () => (
-  <div className="pokeball">
+const Pokeball: React.FC<iProps> = ({ className }) => (
+  <div className={`pokeball ${className || ''}`}>
     <div />
   </div>
 )

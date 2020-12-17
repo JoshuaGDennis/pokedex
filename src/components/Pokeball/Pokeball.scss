@@ -14,10 +14,13 @@
 }
 
 .pokeball {
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 4;
     width: 70px;
-    top: 0.5rem;
+    margin: auto;
     height: 70px;
-    right: 0.5rem;
     overflow: hidden;
     position: absolute;
     border-radius: 50%;
@@ -34,21 +37,27 @@
     }
 
     &::after {
+        top: 0;
         left: 0;
+        bottom: 0;
+        margin: auto;
         height: 10px;
-        top: calc(50% - 5px);
     }
 
     div {
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
         width: 40px;
-        height: 40px;
         z-index: 10;
+        margin: auto;
+        height: 40px;
         border-width: 5px;
         position: absolute;
         border-radius: 50%;
         border-style: solid;
-        top: calc(50% - 20px);
-        left: calc(50% - 20px);
         transition: $transition;
+        border-color: transparent;
       }
 }

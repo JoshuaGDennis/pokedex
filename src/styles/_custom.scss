@@ -1,5 +1,6 @@
 // BOOTSTRAP OVERRIDING STYLES
 
+@import "mixins";
 @import "variables";
 @import "~bootstrap/scss/bootstrap";
 
@@ -15,6 +16,16 @@
 body {
   &.theme--dark {
     background-color: $body-bg-dark;
+
+    .loading {
+      @include load-anim(scale-color($card-bg-dark, $lightness: +20%))
+    }
+  }
+
+  &.theme--light {
+    .loading {
+      @include load-anim(#d4d0d0);
+    }
   }
 
   transition: background-color 0.2s;

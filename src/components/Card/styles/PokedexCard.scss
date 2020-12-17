@@ -1,3 +1,4 @@
+@import "../../../styles/mixins";
 @import "../../../styles/variables";
 
 .pokedex-card {
@@ -18,8 +19,10 @@
         
         img {
             width: 80%;
+            z-index: 5;
             height: 100%;
             margin: 0 auto;
+            position: relative;
         }
     }
 
@@ -31,10 +34,30 @@
         font-size: 2rem;
         font-weight: bold;
         position: absolute;
+        transition: $transition;
+    }
+
+    .pokeball {
+        width: 15rem;
+        height: 15rem;
+        bottom: 0;
+        margin: auto;
+
+        &::after {
+            height: 2rem;
+        }
+
+        div {
+            width: 8rem;
+            height: 8rem;
+            border-width: 1rem;
+        }
+
     }
 
     .card-body {
         padding-bottom: 0;
+        position: relative;
     }
 
     .card-footer {
@@ -42,9 +65,24 @@
         padding: .5rem;
         background-color: $white;
 
+        h1.loading,
+        p.loading {
+            position: relative;
+            margin: 0 auto;
+            margin-bottom: 1rem;
+        }
+
         p {
             font-weight: bold;
             letter-spacing: 0.1rem;
+        }
+    }
+
+    @media only screen and (max-width: $breakpoint-mobile) {    
+        margin-bottom: 1rem;
+            
+        &__image-col {
+            height: 14rem;
         }
     }
 }

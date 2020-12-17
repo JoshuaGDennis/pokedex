@@ -4,12 +4,14 @@ import "../styles/PokedexCard.scss"
 import Image from 'components/Image'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Pokeball from 'components/Pokeball'
 import { getPokemonSprite } from 'helpers'
 
 const PokedexCard: React.FC = () => (
     <Card className="pokedex-card bg-grass">
         <Card.Body>
             <p className="pokedex-card__id">#1</p>
+            <Pokeball className="type-grass" />
             <Row>
                 <Col className="pokedex-card__image-col">
                     <Image src={getPokemonSprite(1)} />

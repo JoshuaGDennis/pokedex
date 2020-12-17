@@ -1,3 +1,4 @@
+@import "../../../styles/mixins";
 @import "../../../styles/variables";
 
 .card-link {
@@ -24,9 +25,16 @@
         overflow: hidden;
         transition: $transition;
     }
+
+    .card-footer {
+        z-index: 6;
+    }
 }
 
-body.theme--dark .card {
-    color: $white;
-    background-color: $card-bg-dark !important;
+body.theme--dark {
+    .card,
+    .card-footer {
+        color: $white;
+        background-color: $card-bg-dark !important;
+    }
 }
