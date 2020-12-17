@@ -4,7 +4,6 @@ import Col from "react-bootstrap/Col";
 import { PokedexCard } from "components/Card";
 import Container from "react-bootstrap/Container";
 import { GenerationResponse } from "helpers/types";
-import VisibleElement from "components/VisibleElement";
 import React, { useEffect, useRef, useState } from "react";
 import GenDropdown from "components/GenDropdown";
 
@@ -34,6 +33,8 @@ const PokedexPage: React.FC = () => {
     }
   }, [currentGen, maximum]);
 
+  console.log(loadId);
+
   return (
     <Container className="wide">
       <Row>
@@ -42,22 +43,15 @@ const PokedexPage: React.FC = () => {
         </Col>
       </Row>
       <Row>
-        <Col xs={12} sm={6} md={4}>
-          <PokedexCard />
-        </Col>
-        <Col xs={12} sm={6} md={4}>
-          <PokedexCard />
-        </Col>
-        <Col xs={12} sm={6} md={4}>
-          <PokedexCard />
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          {loadId === maximum && (
-            <VisibleElement onVisible={() => setMaximum((s) => s + 3)} />
-          )}
-        </Col>
+        {items.map((item, i) => (
+          <Col xs={12} sm={6} md={4} key={item.id}>
+            <PokedexCard
+              id={item.name}
+              startLoad={loadId === i}
+              onLoaded={() => setLoadId((s) => s + 1)}
+            />
+          </Col>
+        ))}
       </Row>
     </Container>
   );
