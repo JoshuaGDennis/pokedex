@@ -43,13 +43,13 @@ const PokedexPage: React.FC = () => {
         </Col>
       </Row>
       <Row>
-        <Col sm={12} md={4}>
+        <Col xs={12} sm={6} md={4}>
           <PokedexCard />
         </Col>
-        <Col sm={12} md={4}>
+        <Col xs={12} sm={6} md={4}>
           <PokedexCard />
         </Col>
-        <Col sm={12} md={4}>
+        <Col xs={12} sm={6} md={4}>
           <PokedexCard />
         </Col>
       </Row>

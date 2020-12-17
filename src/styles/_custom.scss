@@ -60,3 +60,13 @@ body {
     box-shadow: 0 0 5px 0 scale-color($color, $lightness: +20%) !important;
   }
 }
+
+@media only screen and (max-width: $breakpoint-tablet) {
+  h1, h2 {
+    font-size: 2rem !important;
+  }
+
+  p {
+    font-size: .8rem !important;
+  }
+}
