@@ -1,0 +1,17 @@
+@import "variables";
+
+@mixin pokeball-colors($color, $secondary: $color) {
+    &,
+    &::before,
+    div {
+       background-color: scale-color($color, $lightness: +20%); 
+    }
+
+    &::after {
+        background-color: $secondary
+    }
+
+    div {
+        border-color: $secondary;
+    }
+}
