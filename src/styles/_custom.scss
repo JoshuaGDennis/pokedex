@@ -20,9 +20,13 @@ body {
   transition: background-color 0.2s;
 }
 
+.color-white {
+  color: $white;
+}
+
 @each $type, $color in $allTypes {
   .bg-#{$type} {
-    background-color: $color;
+    background-color: $color !important;
   }
 
   .bg-#{$type}--lighter {

@@ -31,7 +31,7 @@ const PokemonShowCardLoading: React.FC = () => {
             </p>
           </Col>
         </Row>
-        <Pokeball className={styles.cardPokeballDefault} type="steel" />
+        <Pokeball className={styles.cardPokeballDefault}/>
       </Card.Body>
     </Card>
   );

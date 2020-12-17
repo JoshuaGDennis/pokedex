@@ -44,7 +44,7 @@ const PokemonShowCard: React.FC<iProps> = ({
         <Row>
           <Col>
             <Image className={styles.cardImage} src={image} noAnimate fluid />
-            <Pokeball className={styles.cardPokeball} type={type} />
+            <Pokeball className={styles.cardPokeball}/>
           </Col>
         </Row>
       </Card.Body>

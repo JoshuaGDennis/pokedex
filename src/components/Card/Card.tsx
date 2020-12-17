@@ -1,6 +1,5 @@
 import React from 'react'
 import "./styles/Card.scss"
-import { useTheme } from 'helpers'
 import Card from 'react-bootstrap/Card'
 import { Link } from "react-router-dom";
 
@@ -10,24 +9,29 @@ interface iProps {
     children: React.ReactNode
 }
 
-const CustomCard: React.FC<iProps> = ({ children, className, to }) => {
-    const theme = useTheme()
+interface iCardCompound {
+    Body: React.FC<{children: React.ReactNode}>
+    Footer: React.FC<{children: React.ReactNode}>
+}
+
+const CustomCard: React.FC<iProps> & iCardCompound  = ({ children, className, to }) => {
 
     const comp = (
-        <Card className={`card ${theme === 'dark' ? 'card-dark' : ''} ${className}`}>
-            <Card.Body>
-                {children}
-            </Card.Body>
+        <Card className={className}>
+            {children}
         </Card>
     )
 
     if(to) return (
-        <Link className="car-link" to={to}>
+        <Link className="card-link" to={to}>
             {comp}
         </Link>
     )
 
     return comp
 }
+
+CustomCard.Body = Card.Body
+CustomCard.Footer = Card.Footer
 
 export default CustomCard

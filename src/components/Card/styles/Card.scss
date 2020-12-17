@@ -14,31 +14,19 @@
 
 .card {
     border: none;
-    margin: 1rem;
     overflow: hidden;
+    transition: $transition;
     background-color: $card-bg;
-    transition: background-color 0.2s;
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
-
-    &.card-dark {
-        background-color: $card-bg-dark;
-        color: $white;
-    }
-
-    &.selectable {
-        cursor: pointer;
-
-        transition: $transition;
-
-        &:hover {
-            transform: translate(-1rem -1rem);
-            box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.1);
-        }
-    }
 
     .card-body {
         padding: 1rem;
         overflow: hidden;
-        transition: background-color 0.2s;
+        transition: $transition;
     }
+}
+
+body.theme--dark .card {
+    color: $white;
+    background-color: $card-bg-dark !important;
 }

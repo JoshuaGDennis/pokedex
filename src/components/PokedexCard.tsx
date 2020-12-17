@@ -57,7 +57,7 @@ const PokedexCard: React.FC<iProps> = ({ id, startLoad, loaded }) => {
           styles[theme === "light" ? typeColor : `${typeColor}--dark`]
         }`}
       >
-        <Pokeball type={pokemon.types[0]} />
+        <Pokeball/>
 
         <Card.Body className={[styles.body, `bg-${typeColor}`].join(" ")}>
           <Row>

@@ -1,8 +1,7 @@
-import Card from 'components/Card'
+import { Card, PokedexCard } from 'components/Card'
 import Image from 'components/Image'
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import PokedexCard from "components/PokedexCard";
 import Container from "react-bootstrap/Container";
 import { GenerationResponse } from "helpers/types";
 import VisibleElement from "components/VisibleElement";
@@ -44,31 +43,15 @@ const PokedexPage: React.FC = () => {
         </Col>
       </Row>
       <Row>
-        <Col>
-          <Card className="selectable">
-            <Row>
-              <Col>#1</Col>
-            </Row>
-            <Row>
-              <Col>
-                <Image src={getPokemonSprite(1)} />
-              </Col>
-            </Row>
-            <Row>
-              <Col><h1>Bulbasuar</h1></Col>
-            </Row>
-            <Row>
-              <Col>
-                <p>Grass</p>
-              </Col>
-              <Col>
-                <p>Poison</p>
-              </Col>
-            </Row>
-          </Card>
+        <Col sm={12} md={4}>
+          <PokedexCard />
         </Col>
-        <Col></Col>
-        <Col></Col>
+        <Col sm={12} md={4}>
+          <PokedexCard />
+        </Col>
+        <Col sm={12} md={4}>
+          <PokedexCard />
+        </Col>
       </Row>
       <Row>
         <Col>

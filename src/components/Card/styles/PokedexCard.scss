@@ -1,0 +1,50 @@
+@import "../../../styles/variables";
+
+.pokedex-card {
+    cursor: pointer;
+    transition: $transition;
+
+    &:hover {
+        box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.1);
+
+        img {
+            transform: translateY(-10px);
+        }
+    }
+
+    &__image-col {
+        height: 18rem;
+        margin-top: 2rem;
+        
+        img {
+            width: 80%;
+            height: 100%;
+            margin: 0 auto;
+        }
+    }
+
+    &__id {
+        margin: 0;
+        top: .5rem;
+        right: .5rem;
+        color: $white;
+        font-size: 2rem;
+        font-weight: bold;
+        position: absolute;
+    }
+
+    .card-body {
+        padding-bottom: 0;
+    }
+
+    .card-footer {
+        border: none;
+        padding: .5rem;
+        background-color: $white;
+
+        p {
+            font-weight: bold;
+            letter-spacing: 0.1rem;
+        }
+    }
+}
