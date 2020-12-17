@@ -1,13 +1,12 @@
-import { Card, PokedexCard } from 'components/Card'
-import Image from 'components/Image'
+import { useGen } from "helpers";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import { PokedexCard } from "components/Card";
 import Container from "react-bootstrap/Container";
 import { GenerationResponse } from "helpers/types";
 import VisibleElement from "components/VisibleElement";
 import React, { useEffect, useRef, useState } from "react";
 import GenerationDropdown from "components/GenerationDropdown";
-import { getPokemonSprite, useGen } from "helpers";
 
 const PokedexPage: React.FC = () => {
   const INITIAL_LOAD_ID = 0;
