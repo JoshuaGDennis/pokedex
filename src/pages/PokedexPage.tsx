@@ -6,6 +6,7 @@ import Container from "react-bootstrap/Container";
 import { GenerationResponse } from "helpers/types";
 import React, { useEffect, useRef, useState } from "react";
 import GenDropdown from "components/GenDropdown";
+import VisibleElement from "components/VisibleElement";
 
 const PokedexPage: React.FC = () => {
   const INITIAL_LOAD_ID = 0;
@@ -50,6 +51,13 @@ const PokedexPage: React.FC = () => {
             />
           </Col>
         ))}
+      </Row>
+      <Row>
+        <Col>
+          {loadId === maximum && (
+            <VisibleElement onVisible={() => setMaximum((s) => s + 3)} />
+          )}
+        </Col>
       </Row>
     </Container>
   );

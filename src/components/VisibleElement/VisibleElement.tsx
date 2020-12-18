@@ -1,6 +1,6 @@
+import "./VisibleElement.scss";
 import React, { useRef } from "react";
 import useVisibility from "helpers/useVisibility";
-import styles from "styles/VisibleElement.module.scss";
 
 interface iProps {
   onVisible?(): any;
@@ -9,7 +9,7 @@ interface iProps {
   children?: React.ReactNode;
 }
 
-const VisibilityElement: React.FC<iProps> = ({
+const VisibleElement: React.FC<iProps> = ({
   onVisible = () => {},
   className,
   once,
@@ -20,10 +20,10 @@ const VisibilityElement: React.FC<iProps> = ({
   useVisibility(ref, { fn: onVisible, once });
 
   return (
-    <div ref={ref} className={`${styles.loader} ${className}`}>
+    <div ref={ref} className={`visible-loader ${className || ""}`}>
       {children}
     </div>
   );
 };
 
-export default VisibilityElement;
+export default VisibleElement;
