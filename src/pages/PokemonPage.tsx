@@ -13,7 +13,6 @@ import {
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
-import NavButtons from "components/NavButtons";
 import Container from "react-bootstrap/Container";
 import React, { useEffect, useState } from "react";
 import styles from "styles/PokemonCard.module.scss";
@@ -40,7 +39,6 @@ const PokemonPage: React.FC = () => {
       <Link to="/pokedex">Back to pokedex</Link>
       {pokemon && (
         <>
-          <NavButtons currentID={pokemon.id} />
           <Row className="justify-content-center mt-3">
             <Col xs={12}>
               <Card className={styles.card}>

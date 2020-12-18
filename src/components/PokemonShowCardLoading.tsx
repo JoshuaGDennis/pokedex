@@ -5,14 +5,19 @@ import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import { capitalise, useTheme } from "helpers";
 import styles from "styles/PokemonCard.module.scss";
-import loadingStyles from "styles/PokedexCardLoading.module.scss";
+import loadingStyles from "styles/PokemonCard.module.scss";
 
 const PokemonShowCardLoading: React.FC = () => {
-
-  const theme = useTheme()
+  const theme = useTheme();
 
   return (
-    <Card className={`${theme === 'light' ? `${styles.cardSplit} bg-steel}` : styles.cardSplitDark}`}>
+    <Card
+      className={`${
+        theme === "light"
+          ? `${styles.cardSplit} bg-steel}`
+          : styles.cardSplitDark
+      }`}
+    >
       <Card.Body>
         <Row>
           <Col>
@@ -31,10 +36,10 @@ const PokemonShowCardLoading: React.FC = () => {
             </p>
           </Col>
         </Row>
-        <Pokeball className={styles.cardPokeballDefault}/>
+        <Pokeball className={styles.cardPokeballDefault} />
       </Card.Body>
     </Card>
   );
-}
+};
 
 export default PokemonShowCardLoading;

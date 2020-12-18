@@ -1,0 +1,23 @@
+body.theme--dark .nav-button {
+  background-color: $card-bg-dark;
+}
+
+.nav-button {
+  top: 0;
+  bottom: 3rem;
+  margin: auto;
+  display: block;
+  border-radius: 50%;
+  position: absolute;
+  height: fit-content;
+  background-color: $card-bg;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+
+  &.left {
+    left: 2rem;
+  }
+
+  &.right {
+    right: 2rem;
+  }
+}

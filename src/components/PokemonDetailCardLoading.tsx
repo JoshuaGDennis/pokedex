@@ -2,15 +2,16 @@ import React from "react";
 import Nav from "react-bootstrap/Nav";
 import Card from "react-bootstrap/Card";
 import styles from "styles/PokemonCard.module.scss";
-import loadingStyles from "styles/PokedexCardLoading.module.scss";
+import loadingStyles from "styles/PokemonCard.module.scss";
 import { useTheme } from "helpers";
 
 const PokemonDetailCardLoading: React.FC = () => {
-
-  const theme = useTheme()
+  const theme = useTheme();
 
   return (
-    <Card className={theme === 'light' ? styles.cardSplit : styles.cardSplitDark}>
+    <Card
+      className={theme === "light" ? styles.cardSplit : styles.cardSplitDark}
+    >
       <Card.Body>
         <Nav className="justify-content-center">
           <Nav.Item>
@@ -32,6 +33,6 @@ const PokemonDetailCardLoading: React.FC = () => {
       </Card.Body>
     </Card>
   );
-}
+};
 
 export default PokemonDetailCardLoading;
