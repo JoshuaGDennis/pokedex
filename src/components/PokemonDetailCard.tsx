@@ -13,6 +13,7 @@ import styles from "styles/PokemonCard.module.scss";
 import PokemonDetailCardStatsTab from "./PokemonDetailCardStatsTab";
 import PokemonDetailCardProfileTab from "./PokemonDetailCardProfileTab";
 import PokemonDetailCardEvolutionsTab from "./PokemonDetailCardEvolutionsTab";
+import DetailTabs from "./DetailTabs";
 interface iProps {
   data: PokemonResponse;
   types: PokemonTypeResponse[];
@@ -25,14 +26,15 @@ const PokemonDetailCard: React.FC<iProps> = ({
   types,
   abilities,
   species,
-}) =>  {
-  const theme = useTheme()
-  const [ key, setKey ] = useState<string | null>('profile')
+}) => {
+  const theme = useTheme();
+  const [key, setKey] = useState<string | null>("profile");
 
   return (
     <Card className={styles[theme === "light" ? "cardSplit" : "cardSplitDark"]}>
       <Card.Body>
-        <Tabs 
+        <DetailTabs data={data} species={species} />
+        {/* <Tabs 
           activeKey={key} 
           onSelect={(k) => setKey(k)} 
           className={`${styles.cardTabs} ${styles[`cardTabsColor${types[0].name}`]} justify-content-center mb-4`}
@@ -55,10 +57,10 @@ const PokemonDetailCard: React.FC<iProps> = ({
           <Tab eventKey="evolutions" title="EVOLUTIONS" tabClassName={key === 'evolutions' ? styles.cardTabsActive : ''}>
             <PokemonDetailCardEvolutionsTab chainID={species.evolutionChainId} type={data.types[0]} />
           </Tab>
-        </Tabs>
+        </Tabs> */}
       </Card.Body>
     </Card>
   );
-}
+};
 
 export default PokemonDetailCard;
