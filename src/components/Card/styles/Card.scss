@@ -2,39 +2,39 @@
 @import "../../../styles/variables";
 
 .card-link {
-    h1, h2, h3, p, a {
-        color: initial
+  &:hover {
+    h1,
+    h2,
+    h3,
+    p,
+    a {
+      text-decoration: none;
     }
-
-    &:hover {
-        h1, h2, h3, p, a {
-            text-decoration: none;
-        }
-    }
+  }
 }
 
 .card {
-    border: none;
+  border: none;
+  overflow: hidden;
+  transition: $transition;
+  background-color: $card-bg;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+
+  .card-body {
+    padding: 1rem;
     overflow: hidden;
     transition: $transition;
-    background-color: $card-bg;
-    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+  }
 
-    .card-body {
-        padding: 1rem;
-        overflow: hidden;
-        transition: $transition;
-    }
-
-    .card-footer {
-        z-index: 6;
-    }
+  .card-footer {
+    z-index: 6;
+  }
 }
 
 body.theme--dark {
-    .card,
-    .card-footer {
-        color: $white;
-        background-color: $card-bg-dark !important;
-    }
+  .card,
+  .card-footer {
+    color: $white;
+    background-color: $card-bg-dark !important;
+  }
 }

@@ -18,7 +18,7 @@ body {
     background-color: $body-bg-dark;
 
     .loading {
-      @include load-anim(scale-color($card-bg-dark, $lightness: +20%))
+      @include load-anim(scale-color($card-bg-dark, $lightness: +20%));
     }
   }
 
@@ -33,6 +33,10 @@ body {
 
 .color-white {
   color: $white;
+}
+
+.color-black {
+  color: $black;
 }
 
 @each $type, $color in $allTypes {
@@ -62,11 +66,12 @@ body {
 }
 
 @media only screen and (max-width: $breakpoint-tablet) {
-  h1, h2 {
+  h1,
+  h2 {
     font-size: 2rem !important;
   }
 
   p {
-    font-size: .8rem !important;
+    font-size: 0.8rem !important;
   }
 }

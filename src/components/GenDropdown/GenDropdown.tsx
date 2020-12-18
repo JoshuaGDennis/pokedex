@@ -12,6 +12,7 @@ const GenerationDropdown: React.FC = () => {
 
   const handleChange = (gen: GenerationResponse) => {
     setShow(false);
+    console.log("here");
     setCurrentGen(gen);
   };
 

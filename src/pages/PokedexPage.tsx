@@ -33,8 +33,6 @@ const PokedexPage: React.FC = () => {
     }
   }, [currentGen, maximum]);
 
-  console.log(loadId);
-
   return (
     <Container className="wide">
       <Row>
