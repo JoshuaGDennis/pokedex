@@ -2,62 +2,62 @@
 @import "../../styles/variables";
 
 @each $type, $color in $allTypes {
-    body {
-        &.theme--light .pokeball.type-#{$type} {
-            @include pokeball-colors($color)
-        }
-
-        &.theme--dark .pokeball.type-#{$type} {
-            @include pokeball-colors($color, $card-bg-dark)
-        }
+  body {
+    &.theme--light .pokeball.type-#{$type} {
+      @include pokeball-colors($color);
     }
+
+    &.theme--dark .pokeball.type-#{$type} {
+      @include pokeball-colors($color, $card-bg-dark);
+    }
+  }
 }
 
 .pokeball {
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 4;
+  width: 70px;
+  margin: auto;
+  height: 70px;
+  overflow: hidden;
+  position: absolute;
+  border-radius: 50%;
+
+  &::before,
+  &::after {
+    content: "";
+    width: 100%;
+    position: absolute;
+  }
+
+  &::before {
+    height: 50%;
+  }
+
+  &::after {
+    top: 0;
+    left: 0;
+    bottom: 0;
+    margin: auto;
+    height: 10px;
+  }
+
+  div {
     top: 0;
     left: 0;
     right: 0;
-    z-index: 4;
-    width: 70px;
+    bottom: 0;
+    width: 40px;
+    z-index: 10;
     margin: auto;
-    height: 70px;
-    overflow: hidden;
+    height: 40px;
+    border-width: 5px;
     position: absolute;
     border-radius: 50%;
-
-    &::before,
-    &::after {
-        content: "";
-        width: 100%;
-        position: absolute;
-    }
-
-    &::before {
-        height: 50%;
-    }
-
-    &::after {
-        top: 0;
-        left: 0;
-        bottom: 0;
-        margin: auto;
-        height: 10px;
-    }
-
-    div {
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        width: 40px;
-        z-index: 10;
-        margin: auto;
-        height: 40px;
-        border-width: 5px;
-        position: absolute;
-        border-radius: 50%;
-        border-style: solid;
-        transition: $transition;
-        border-color: transparent;
-      }
+    border-style: solid;
+    transition: $transition;
+    border-color: transparent;
+  }
 }

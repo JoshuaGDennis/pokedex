@@ -9,7 +9,7 @@ const PokedexCardLoading = forwardRef<HTMLDivElement>((_, ref) => (
   <Card className="pokedex-card bg-steel" ref={ref}>
     <Card.Body>
       <p className="pokedex-card__id loading">#00</p>
-      <Pokeball className="type-steel" />
+      <Pokeball className="loading-ball" />
       <Row>
         <Col className="pokedex-card__image-col"></Col>
       </Row>

@@ -1,98 +1,116 @@
 @import "../../../styles/mixins";
 @import "../../../styles/variables";
 
+// body.theme--dark .pokedex-card .pokeball.loading {
+//   @include pokeball-colors(
+//     scale-color($card-bg-dark, $lightness: +20%),
+//     $card-bg-dark
+//   );
+// }
+
+body {
+  &.theme--dark .pokedex-card .pokeball.loading-ball {
+    @include pokeball-colors(
+      scale-color($card-bg-dark, $lightness: +20%),
+      $card-bg-dark
+    );
+  }
+
+  &.theme--light .pokedex-card .pokeball.loading-ball {
+    @include pokeball-colors($steel);
+  }
+}
+
 .pokedex-card {
-    cursor: pointer;
-    margin-bottom: 1rem;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  transition: $transition;
+
+  &:hover {
+    box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.1);
+
+    img {
+      transform: translateY(-10px);
+    }
+  }
+
+  &__image-col {
+    height: 18rem;
+    margin-top: 2rem;
+
+    img {
+      width: 80%;
+      z-index: 5;
+      height: 100%;
+      margin: 0 auto;
+      position: relative;
+    }
+  }
+
+  &__id {
+    margin: 0;
+    top: 0.5rem;
+    right: 0.5rem;
+    color: $white;
+    font-size: 2rem;
+    font-weight: bold;
+    position: absolute;
     transition: $transition;
+  }
 
-    &:hover {
-        box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.1);
+  .pokeball {
+    width: 15rem;
+    height: 15rem;
+    bottom: 0;
+    margin: auto;
 
-        img {
-            transform: translateY(-10px);
-        }
+    &::after {
+      height: 2rem;
     }
 
+    div {
+      width: 8rem;
+      height: 8rem;
+      border-width: 1rem;
+    }
+  }
+
+  .card-body {
+    padding-bottom: 0;
+    position: relative;
+  }
+
+  .card-footer {
+    border: none;
+    padding: 0.5rem;
+    background-color: $white;
+
+    h1.loading,
+    p.loading {
+      position: relative;
+      margin: 0 auto;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-weight: bold;
+      letter-spacing: 0.1rem;
+    }
+  }
+
+  @media only screen and (max-width: $breakpoint-tablet) {
     &__image-col {
-        height: 18rem;
-        margin-top: 2rem;
-        
-        img {
-            width: 80%;
-            z-index: 5;
-            height: 100%;
-            margin: 0 auto;
-            position: relative;
-        }
-    }
-
-    &__id {
-        margin: 0;
-        top: .5rem;
-        right: .5rem;
-        color: $white;
-        font-size: 2rem;
-        font-weight: bold;
-        position: absolute;
-        transition: $transition;
+      height: 12rem;
     }
 
     .pokeball {
-        width: 15rem;
-        height: 15rem;
-        bottom: 0;
-        margin: auto;
+      width: 12rem;
+      height: 12rem;
 
-        &::after {
-            height: 2rem;
-        }
-
-        div {
-            width: 8rem;
-            height: 8rem;
-            border-width: 1rem;
-        }
-
+      div {
+        width: 7rem;
+        height: 7rem;
+      }
     }
-
-    .card-body {
-        padding-bottom: 0;
-        position: relative;
-    }
-
-    .card-footer {
-        border: none;
-        padding: .5rem;
-        background-color: $white;
-
-        h1.loading,
-        p.loading {
-            position: relative;
-            margin: 0 auto;
-            margin-bottom: 1rem;
-        }
-
-        p {
-            font-weight: bold;
-            letter-spacing: 0.1rem;
-        }
-    }
-
-    @media only screen and (max-width: $breakpoint-tablet) {
-        &__image-col {
-            height: 12rem;
-        }
-
-        .pokeball {
-            width: 12rem;
-            height: 12rem;
-
-            div {
-                width: 7rem;
-                height: 7rem;
-            }
-
-        }
-    }
+  }
 }
