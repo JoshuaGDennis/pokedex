@@ -7,8 +7,8 @@ import Col from "react-bootstrap/Col";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import Pokeball from "components/Pokeball";
-import { capitalise, PokemonResponse, SpeciesResponse } from "helpers";
 import { EvolutionsTab, ProfileTab, StatsTab } from "components/Tabs";
+import { capitalise, PokemonResponse, SpeciesResponse } from "helpers";
 
 interface iProps {
   data: PokemonResponse;

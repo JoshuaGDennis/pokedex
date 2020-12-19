@@ -1,8 +1,8 @@
-import React, { forwardRef } from "react";
 import Card from "../Card";
 import "../styles/PokedexCard.scss";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import React, { forwardRef } from "react";
 import Pokeball from "components/Pokeball";
 
 const PokedexCardLoading = forwardRef<HTMLDivElement>((_, ref) => (

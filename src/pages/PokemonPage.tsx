@@ -4,15 +4,15 @@ import {
   SpeciesResponse,
   useGen,
 } from "helpers";
-import { Link, useParams } from "react-router-dom";
-import Container from "react-bootstrap/Container";
-import React, { useEffect, useState } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { getPokemon, getPokemonForm, getPokemonSpecies } from "helpers/api";
-import { PokemonCard } from "components/Card";
-import NavButton from "components/NavButton";
 import Pokeball from "components/Pokeball";
+import NavButton from "components/NavButton";
+import { useParams } from "react-router-dom";
+import { PokemonCard } from "components/Card";
+import Container from "react-bootstrap/Container";
+import React, { useEffect, useState } from "react";
+import { getPokemon, getPokemonForm, getPokemonSpecies } from "helpers/api";
 
 const PokemonPage: React.FC = () => {
   const { currentGen } = useGen();

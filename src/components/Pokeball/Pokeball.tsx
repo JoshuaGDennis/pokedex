@@ -1,13 +1,14 @@
-import "./Pokeball.scss"
+import "./Pokeball.scss";
 import React from "react";
+
 interface iProps {
-  className?: string
+  className?: string;
 }
 
 const Pokeball: React.FC<iProps> = ({ className }) => (
-  <div className={`pokeball ${className || ''}`}>
+  <div className={`pokeball ${className || ""}`}>
     <div />
   </div>
-)
+);
 
 export default Pokeball;

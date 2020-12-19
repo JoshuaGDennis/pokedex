@@ -1,11 +1,11 @@
+import React, {
+  ForwardRefExoticComponent,
+  RefAttributes,
+  forwardRef,
+} from "react";
 import "./styles/Card.scss";
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
-import React, {
-  forwardRef,
-  ForwardRefExoticComponent,
-  RefAttributes,
-} from "react";
 
 interface iProps {
   to?: string;

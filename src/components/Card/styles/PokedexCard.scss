@@ -1,13 +1,6 @@
 @import "../../../styles/mixins";
 @import "../../../styles/variables";
 
-// body.theme--dark .pokedex-card .pokeball.loading {
-//   @include pokeball-colors(
-//     scale-color($card-bg-dark, $lightness: +20%),
-//     $card-bg-dark
-//   );
-// }
-
 body {
   &.theme--dark .pokedex-card .pokeball.loading-ball {
     @include pokeball-colors(

@@ -1,21 +1,21 @@
 import { 
-    PokemonAbilityResource, 
-    PokemonAbilityResponse, 
-    PokemonFormResource, 
-    PokemonFormResponse, 
-    PokemonResource,
-    PokemonResponse,
-    PokemonTypeResource,
-    PokemonTypeResponse,
-    SpeciesResource,
-    SpeciesResponse,
-    APIResource,
-    GenerationResponse,
-    GenerationResource,
     PokemonEvolutionResponse,
     PokemonEvolutionResource,
+    PokemonAbilityResource, 
+    PokemonAbilityResponse, 
+    PokemonTypeResponse,
+    PokemonFormResource, 
+    PokemonTypeResource,
+    PokemonFormResponse, 
+    GenerationResponse,
+    GenerationResource,
+    PokemonResource,
+    PokemonResponse,
+    SpeciesResource,
+    SpeciesResponse,
     EvolutionChain,
-    PokemonEvolution
+    PokemonEvolution,
+    APIResource
 } from "./types"
 import { capitalise, getEnglishFlavorText, getIdFromUrl, getNames } from "./strings"
 
