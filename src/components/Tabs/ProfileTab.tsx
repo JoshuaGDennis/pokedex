@@ -4,7 +4,7 @@ import {
   SpeciesResponse,
   capitalise,
 } from "helpers";
-import "../styles/ProfileTab.scss";
+import "./styles/ProfileTab.scss";
 import Tab from "react-bootstrap/Tab";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";

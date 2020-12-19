@@ -5,6 +5,10 @@ body.theme--dark .pokemon-card {
   &__detail-card {
     background-color: $card-bg-dark;
   }
+
+  &__detail-card .nav-tabs a.active {
+    color: $white !important;
+  }
 }
 
 .pokemon-card {
@@ -73,5 +77,20 @@ body.theme--dark .pokemon-card {
   }
 
   &__detail-card {
+    .nav-tabs {
+      margin-bottom: 1rem;
+      justify-content: center;
+
+      a {
+        font-weight: bold;
+        border: none !important;
+        letter-spacing: 0.2rem;
+        background-color: transparent !important;
+
+        &.active {
+          color: $card-bg-dark !important;
+        }
+      }
+    }
   }
 }

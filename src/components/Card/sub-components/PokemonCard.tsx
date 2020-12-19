@@ -4,8 +4,11 @@ import "../styles/PokemonCard.scss";
 import Image from "components/Image";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Tab from "react-bootstrap/Tab";
+import Tabs from "react-bootstrap/Tabs";
 import Pokeball from "components/Pokeball";
 import { capitalise, PokemonResponse, SpeciesResponse } from "helpers";
+import { EvolutionsTab, ProfileTab, StatsTab } from "components/Tabs";
 
 interface iProps {
   data: PokemonResponse;
@@ -38,7 +41,34 @@ const PokemonCard: React.FC<iProps> = ({ data, species }) => (
       </Col>
       <Col>
         <Card className="pokemon-card__detail-card">
-          <Card.Body>DETAIL</Card.Body>
+          <Card.Body>
+            <Tabs>
+              <Tab
+                eventKey="profile"
+                title="PROFILE"
+                tabClassName={`color-${data.types[0]}`}
+              >
+                <ProfileTab data={data} species={species} />
+              </Tab>
+              <Tab
+                eventKey="stats"
+                title="STATS"
+                tabClassName={`color-${data.types[0]}`}
+              >
+                <StatsTab stats={data.stats} types={data.types} />
+              </Tab>
+              <Tab
+                eventKey="evolutions"
+                title="EVOLUTIONS"
+                tabClassName={`color-${data.types[0]}`}
+              >
+                <EvolutionsTab
+                  id={species.evolutionChainId}
+                  type={data.types[0]}
+                />
+              </Tab>
+            </Tabs>
+          </Card.Body>
         </Card>
       </Col>
     </Row>

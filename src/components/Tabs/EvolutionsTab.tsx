@@ -1,5 +1,5 @@
 import Image from "components/Image";
-import "../styles/EvolutionsTab.scss";
+import "./styles/EvolutionsTab.scss";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Tab from "react-bootstrap/Tab";

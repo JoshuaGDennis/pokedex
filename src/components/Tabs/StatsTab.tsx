@@ -1,4 +1,4 @@
-import "../styles/StatsTab.scss";
+import "./styles/StatsTab.scss";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Tab from "react-bootstrap/Tab";
