@@ -1,33 +1,21 @@
-import "./NavButtons.scss";
+import React from "react";
+import "./NavButton.scss";
 import Image from "components/Image";
 import { Link } from "react-router-dom";
-import { getPokemonForm } from "helpers/api";
-import React, { useEffect, useState } from "react";
-import { PokemonFormResponse, useGen } from "helpers";
+import { PokemonFormResponse } from "helpers";
 
 interface iProps {
-  id: number;
   className?: string;
+  children?: React.ReactNode;
+  form?: PokemonFormResponse;
+  to: string;
 }
 
-const NavButton: React.FC<iProps> = ({ id, className }) => {
-  const { currentGen } = useGen();
-  const [pokemon, setPokemon] = useState<PokemonFormResponse | null>(null);
-
-  useEffect(() => {
-    getPokemonForm(id).then(setPokemon);
-  }, [id]);
-
-  if (!currentGen || !pokemon) return null;
-
-  return (
-    <Link
-      to={`/pokemon/${pokemon.name}`}
-      className={`nav-button ${className || ""}`}
-    >
-      <Image src={pokemon.image} fluid noAnimate />
-    </Link>
-  );
-};
+const NavButton: React.FC<iProps> = ({ className, children, form, to }) => (
+  <Link to={to} className={`nav-button ${className || ""}`}>
+    {form && <Image src={form.image} fluid noAnimate />}
+    {children}
+  </Link>
+);
 
 export default NavButton;

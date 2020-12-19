@@ -1,23 +1,81 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
 body.theme--dark .nav-button {
+  &.middle {
+    background-color: transparent;
+
+    .pokeball {
+      div {
+        border-color: $card-bg-dark;
+      }
+
+      &::after {
+        background-color: $card-bg-dark;
+      }
+    }
+  }
+
   background-color: $card-bg-dark;
 }
 
 .nav-button {
-  top: 0;
-  bottom: 3rem;
-  margin: auto;
-  display: block;
-  border-radius: 50%;
-  position: absolute;
-  height: fit-content;
+  width: 5rem;
+  display: flex;
+  position: relative;
+  border-radius: 2rem;
+  transition: $transition;
   background-color: $card-bg;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
 
+  &:hover {
+    box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  img {
+    height: 5rem;
+  }
+
+  span {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
   &.left {
-    left: 2rem;
+    border-top-left-radius: 10rem;
+    border-bottom-left-radius: 2rem;
+
+    img {
+      margin-left: 0.4rem;
+    }
   }
 
   &.right {
-    right: 2rem;
+    margin-left: auto;
+    border-top-right-radius: 10rem;
+    border-bottom-right-radius: 2rem;
+
+    img {
+      margin-right: 0.4rem;
+    }
+  }
+
+  &.middle {
+    box-shadow: none;
+    transition: $transition;
+    background-color: transparent;
+
+    .pokeball {
+      @each $type, $color in $allTypes {
+        &.transparent-#{$type} {
+          @include pokeball-colors($color, $white);
+        }
+      }
+    }
+
+    &:hover {
+      transform: rotate(-15deg);
+    }
   }
 }
