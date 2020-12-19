@@ -23,7 +23,7 @@ const DetailTabs: React.FC<iProps> = ({ data, species }) => (
     </Tab>
 
     <Tab eventKey="stats" title="STATS" tabClassName={`color-${data.types[0]}`}>
-      {/* <StatsTab stats={data.stats} types={[]} /> */}
+      <StatsTab stats={data.stats} types={data.types} />
     </Tab>
 
     <Tab

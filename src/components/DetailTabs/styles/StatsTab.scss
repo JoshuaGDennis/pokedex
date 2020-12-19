@@ -1,0 +1,58 @@
+@import "../../../styles/variables";
+
+.stats-tab {
+  .stat-section {
+    width: 30rem;
+    margin: 0 auto;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    .stat-bar {
+      width: 100%;
+      height: 1rem;
+      display: flex;
+      overflow: hidden;
+      position: relative;
+      border-radius: 1rem;
+
+      span {
+        height: 100%;
+        position: relative;
+        border-radius: 1rem;
+        display: inline-block;
+      }
+
+      @each $type, $color in $allTypes {
+        &.color-#{$type} {
+          span {
+            background-color: $color;
+          }
+        }
+      }
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+
+  .damage-section {
+    margin: 2rem 0;
+
+    h4 {
+      font-weight: 600;
+      font-size: 1rem;
+      color: #6c757d;
+      letter-spacing: 0.1rem;
+    }
+
+    p {
+      color: white;
+      padding: 0.5rem;
+      margin-right: 0.5rem;
+      margin-bottom: 0.5rem;
+      border-radius: 0.2rem;
+      display: inline-block;
+    }
+  }
+}

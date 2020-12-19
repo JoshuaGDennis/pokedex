@@ -1,0 +1,77 @@
+@import "../../../styles/variables";
+
+body.theme--dark .pokemon-card {
+  &__show-card,
+  &__detail-card {
+    background-color: $card-bg-dark;
+  }
+}
+
+.pokemon-card {
+  height: 70vh;
+  overflow: hidden;
+  background-color: transparent;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+
+  &__show-card,
+  &__detail-card {
+    height: 100%;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  &__show-card {
+    h1 {
+      margin: 0;
+      z-index: 1;
+      color: white;
+      font-size: 2.5rem;
+      position: relative;
+    }
+
+    h2 {
+      z-index: 1;
+      color: white;
+      font-size: 0.8rem;
+      position: relative;
+    }
+
+    img {
+      z-index: 11;
+      width: 20rem;
+      margin: 0 auto;
+      margin-top: 3rem;
+      position: relative;
+    }
+
+    .pokeball {
+      left: 0;
+      right: 0;
+      top: 5rem;
+      bottom: 0;
+      margin: auto;
+      width: 25rem;
+      height: 25rem;
+
+      div {
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        margin: auto;
+        width: 20rem;
+        height: 20rem;
+        border-width: 2rem;
+      }
+
+      &::after {
+        height: 2rem;
+        top: calc(50% - 1rem);
+      }
+    }
+  }
+
+  &__detail-card {
+  }
+}

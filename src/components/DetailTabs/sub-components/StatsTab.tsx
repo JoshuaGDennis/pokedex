@@ -1,7 +1,9 @@
-import React from "react";
+import "../styles/StatsTab.scss";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Tab from "react-bootstrap/Tab";
+import { getPokemonType } from "helpers/api";
+import React, { useEffect, useState } from "react";
 import { capitalise, PokemonTypeResponse } from "helpers";
 
 interface iProps {
@@ -9,28 +11,37 @@ interface iProps {
     name: string;
     value: number;
   }[];
-  types: PokemonTypeResponse[];
+  types: string[];
 }
 
 const StatsTab: React.FC<iProps> = ({ stats, types }) => {
+  const [typesDetail, setTypesDetail] = useState<PokemonTypeResponse[]>([]);
+
+  useEffect(() => {
+    Promise.all(types.map((type) => getPokemonType(type))).then(setTypesDetail);
+  }, [types]);
+
   const doubleDamageFrom = [
-    ...new Set(types.map((t) => t.doubleDamageFrom.map((n) => n)).flat()),
+    ...new Set(typesDetail.map((t) => t.doubleDamageFrom.map((n) => n)).flat()),
   ]
-    .filter((x) => !types.find((t) => t.name === x))
+    .filter((x) => !typesDetail.find((t) => t.name === x))
     .map((name) => name);
 
-  const halfDamageFrom = types[0] ? types[0].halfDamageFrom : [];
+  const halfDamageFrom = typesDetail[0] ? typesDetail[0].halfDamageFrom : [];
 
   return (
     <Tab.Content className="stats-tab">
       {stats.map(({ name, value }) => (
-        <Row key={name}>
+        <Row key={name} className="stat-section">
           <Col md={4}>
             <p>{capitalise(name)}</p>
           </Col>
           <Col md={6}>
-            <div className={`stats-bar color-${types[0].name}`}>
-              <span style={{ width: `${(value / 200) * 100}%` }} />
+            <div className="stat-bar">
+              <span
+                className={`bg-${types[0]}`}
+                style={{ width: `${(value / 200) * 100}%` }}
+              />
             </div>
           </Col>
           <Col md={2}>
