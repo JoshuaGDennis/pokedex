@@ -2,8 +2,10 @@ import React from "react";
 import "./styles/DetailTabs.scss";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
-import { PokemonResponse, SpeciesResponse } from "helpers";
+import StatsTab from "./sub-components/StatsTab";
 import ProfileTab from "./sub-components/ProfileTab";
+import { PokemonResponse, SpeciesResponse } from "helpers";
+import EvolutionsTab from "./sub-components/EvolutionsTab";
 
 interface iProps {
   data: PokemonResponse;
@@ -17,11 +19,11 @@ const DetailTabs: React.FC<iProps> = ({ data, species }) => (
       title="PROFILE"
       tabClassName={`color-${data.types[0]}`}
     >
-      <ProfileTab data={data} species={species} abilities={[]} />
+      <ProfileTab data={data} species={species} />
     </Tab>
 
     <Tab eventKey="stats" title="STATS" tabClassName={`color-${data.types[0]}`}>
-      STUFF HERE
+      {/* <StatsTab stats={data.stats} types={[]} /> */}
     </Tab>
 
     <Tab
@@ -29,7 +31,7 @@ const DetailTabs: React.FC<iProps> = ({ data, species }) => (
       title="EVOLUTIONS"
       tabClassName={`color-${data.types[0]}`}
     >
-      STUFF HERE
+      <EvolutionsTab id={species.evolutionChainId} type={data.types[0]} />
     </Tab>
   </Tabs>
 );
