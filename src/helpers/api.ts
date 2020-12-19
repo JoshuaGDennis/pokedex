@@ -33,7 +33,7 @@ const getPokemonSpecies = (id: string | number): Promise<SpeciesResponse> =>
       name: data.name,
       color: data.color.name,
       evolutionChainId: getIdFromUrl(data.evolution_chain.url),
-      description: getEnglishFlavorText(data.flavor_text_entries),
+      description: getEnglishFlavorText(data.flavor_text_entries).replace(/[^a-zA-Z0-9. :]/gm, " "),
       isLegendary: data.is_legendary,
       isMythical: data.is_mythical,
     }))

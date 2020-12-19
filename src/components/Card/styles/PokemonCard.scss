@@ -70,15 +70,18 @@ body.theme--dark .pokemon-card {
       }
 
       &::after {
-        height: 2rem;
-        top: calc(50% - 1rem);
+        height: 3rem;
       }
     }
   }
 
   &__detail-card {
+    .tab-content {
+      padding: 0 1rem;
+    }
+
     .nav-tabs {
-      margin-bottom: 1rem;
+      margin-bottom: 2rem;
       justify-content: center;
 
       a {

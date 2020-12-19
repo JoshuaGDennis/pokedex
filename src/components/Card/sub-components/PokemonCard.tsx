@@ -17,14 +17,14 @@ interface iProps {
 
 const PokemonCard: React.FC<iProps> = ({ data, species }) => (
   <Card className="pokemon-card">
-    <Row>
-      <Col>
+    <Row className="h-100">
+      <Col className="pr-0">
         <Card className={`pokemon-card__show-card bg-${data.types[0]}`}>
           <Card.Body>
             <Row>
               <Col>
                 <h1>{capitalise(data.name)}</h1>
-                <h2>The {species.description}</h2>
+                <h2>The {species.genera}</h2>
               </Col>
               <Col>
                 <h1 className="text-right">#{data.id}</h1>
@@ -33,13 +33,13 @@ const PokemonCard: React.FC<iProps> = ({ data, species }) => (
             <Row>
               <Col>
                 <Image src={data.image} noAnimate fluid />
-                <Pokeball />
+                <Pokeball className={`type-${data.types[0]}`} />
               </Col>
             </Row>
           </Card.Body>
         </Card>
       </Col>
-      <Col>
+      <Col className="pl-0">
         <Card className="pokemon-card__detail-card">
           <Card.Body>
             <Tabs>
