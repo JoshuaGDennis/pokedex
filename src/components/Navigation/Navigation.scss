@@ -1,21 +1,6 @@
-@import "../../styles/mixins";
 @import "../../styles/variables";
 
 body.theme--dark .nav-button {
-  &.middle {
-    background-color: transparent;
-
-    .pokeball {
-      div {
-        border-color: $card-bg-dark;
-      }
-
-      &::after {
-        background-color: $card-bg-dark;
-      }
-    }
-  }
-
   background-color: $card-bg-dark;
 }
 
@@ -58,24 +43,6 @@ body.theme--dark .nav-button {
 
     img {
       margin-right: 0.4rem;
-    }
-  }
-
-  &.middle {
-    box-shadow: none;
-    transition: $transition;
-    background-color: transparent;
-
-    .pokeball {
-      @each $type, $color in $allTypes {
-        &.transparent-#{$type} {
-          @include pokeball-colors($color, $white);
-        }
-      }
-    }
-
-    &:hover {
-      transform: rotate(-15deg);
     }
   }
 }

@@ -3,12 +3,24 @@
 
 @each $type, $color in $allTypes {
   body {
-    &.theme--light .pokeball.type-#{$type} {
-      @include pokeball-colors($color);
+    &.theme--light .pokeball {
+      &.type-#{$type} {
+        @include pokeball-colors($color);
+      }
+
+      &.transparent-#{$type} {
+        @include pokeball-colors($color, $white);
+      }
     }
 
-    &.theme--dark .pokeball.type-#{$type} {
-      @include pokeball-colors($color, $card-bg-dark);
+    &.theme--dark .pokeball {
+      &.type-#{$type} {
+        @include pokeball-colors($color, $card-bg-dark);
+      }
+
+      &.transparent-#{$type} {
+        @include pokeball-colors($color, $card-bg-dark);
+      }
     }
   }
 }
@@ -42,6 +54,16 @@
     bottom: 0;
     margin: auto;
     height: 10px;
+  }
+
+  @each $type, $color in $allTypes {
+    &.transparent-#{$type} {
+      transition: $transition;
+
+      &:hover {
+        transform: rotate(-15deg);
+      }
+    }
   }
 
   div {

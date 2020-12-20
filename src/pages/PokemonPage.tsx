@@ -1,18 +1,12 @@
-import {
-  PokemonFormResponse,
-  PokemonResponse,
-  SpeciesResponse,
-  useGen,
-} from "helpers";
+import { PokemonResponse, SpeciesResponse, useGen } from "helpers";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Pokeball from "components/Pokeball";
-import NavButton from "components/NavButton";
 import { useParams } from "react-router-dom";
-import { PokemonCard } from "components/Card";
+import Navigation from "components/Navigation";
 import Container from "react-bootstrap/Container";
 import React, { useEffect, useState } from "react";
-import { getPokemon, getPokemonForm, getPokemonSpecies } from "helpers/api";
+import { getPokemon, getPokemonSpecies } from "helpers/api";
+import { PokemonCard, PokemonCardLoading } from "components/Card";
 
 const PokemonPage: React.FC = () => {
   const { currentGen } = useGen();
@@ -22,65 +16,35 @@ const PokemonPage: React.FC = () => {
   const [pokemon, setPokemon] = useState<PokemonResponse | null>(null);
   const [species, setSpecies] = useState<SpeciesResponse | null>(null);
 
-  const [next, setNext] = useState<PokemonFormResponse | null>(null);
-  const [previous, setPrevious] = useState<PokemonFormResponse | null>(null);
+  const genLength = currentGen ? currentGen.pokemon.length - 1 : 0;
 
   useEffect(() => {
     Promise.all([getPokemon(id), getPokemonSpecies(id)]).then(([pkm, spc]) => {
       setPokemon(pkm);
       setSpecies(spc);
-
-      if (currentGen) {
-        const genLength = currentGen.pokemon.length - 1;
-        const prevId = pkm.id === 1 ? genLength : pkm.id - 1;
-        const nextId = pkm.id === genLength ? 1 : pkm.id + 1;
-
-        Promise.all([getPokemonForm(prevId), getPokemonForm(nextId)]).then(
-          ([prev, next]) => {
-            setPrevious(prev);
-            setNext(next);
-            setIsLoading(false);
-          }
-        );
-      }
+      setIsLoading(false);
     });
-  }, [id, currentGen]);
+  }, [id]);
 
   return (
     <Container className="wide">
+      {pokemon && (
+        <Navigation
+          previousID={pokemon.id === 1 ? genLength : pokemon.id - 1}
+          nextID={pokemon.id === genLength ? 1 : pokemon.id + 1}
+          type={pokemon ? pokemon.types[0] : "steel"}
+        />
+      )}
+
       <Row>
-        <Col>
-          {previous && (
-            <NavButton
-              to={`/pokemon/${previous.name}`}
-              className="left"
-              form={previous}
-            />
-          )}
-        </Col>
-        {pokemon && (
-          <NavButton to="/pokedex" className="middle">
-            <Pokeball className={`transparent-${pokemon.types[0]}`} />
-          </NavButton>
-        )}
-        <Col>
-          {next && (
-            <NavButton
-              to={`/pokemon/${next.name}`}
-              className="right"
-              form={next}
-            />
+        <Col xs={12}>
+          {!isLoading && pokemon && species ? (
+            <PokemonCard data={pokemon} species={species} />
+          ) : (
+            <PokemonCardLoading />
           )}
         </Col>
       </Row>
-
-      {!isLoading && pokemon && species && (
-        <Row className="justify-content-center mt-3">
-          <Col xs={12}>
-            <PokemonCard data={pokemon} species={species} />
-          </Col>
-        </Row>
-      )}
     </Container>
   );
 };
