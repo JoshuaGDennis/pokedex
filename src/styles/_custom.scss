@@ -13,6 +13,10 @@
   }
 }
 
+a {
+  position: relative;
+}
+
 body {
   &.theme--dark {
     background-color: $body-bg-dark;
@@ -26,6 +30,10 @@ body {
     .loading {
       @include load-anim(#d4d0d0);
     }
+  }
+
+  .loading {
+    cursor: default;
   }
 
   transition: background-color 0.2s;

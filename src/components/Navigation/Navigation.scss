@@ -5,10 +5,11 @@ body.theme--dark .nav-button {
 }
 
 .nav-button {
-  width: 5rem;
   display: flex;
   position: relative;
   border-radius: 2rem;
+  width: 5rem !important;
+  height: 5rem !important;
   transition: $transition;
   background-color: $card-bg;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
@@ -28,8 +29,8 @@ body.theme--dark .nav-button {
   }
 
   &.left {
-    border-top-left-radius: 10rem;
-    border-bottom-left-radius: 2rem;
+    border-top-left-radius: 10rem !important;
+    border-bottom-left-radius: 2rem !important;
 
     img {
       margin-left: 0.4rem;
@@ -38,8 +39,8 @@ body.theme--dark .nav-button {
 
   &.right {
     margin-left: auto;
-    border-top-right-radius: 10rem;
-    border-bottom-right-radius: 2rem;
+    border-top-right-radius: 10rem !important;
+    border-bottom-right-radius: 2rem !important;
 
     img {
       margin-right: 0.4rem;

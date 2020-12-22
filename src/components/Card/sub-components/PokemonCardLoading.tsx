@@ -14,13 +14,13 @@ const PokemonCardLoading: React.FC = () => (
             <Row>
               <Col>
                 <h1 className="loading">PKMN NAME</h1>
-                <h2 className="loading">THE PKMN GENERA</h2>
+                <h2 className="loading mt-3">THE PKMN GENERA</h2>
               </Col>
               <Col>
-                <h1 className="text-right loading">#00</h1>
+                <h1 className="text-right loading float-right">#00</h1>
               </Col>
             </Row>
-            <Row>
+            <Row className="h-75">
               <Col>
                 <Pokeball className="type-steel" />
               </Col>

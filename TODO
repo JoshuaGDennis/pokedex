@@ -1,9 +1,5 @@
-- POKEMON PAGE
-    - remove second type from half damage to section @done
-    - build evolutions tab @done
-- POKEDEX PAGE
-    - Update generation dropdown look & feel @done
-    - Update styles of pokedex cards @done
-- OTHER
-    - Build up dark mode solution @done
-    - Build up responsiveness
+- Build up responsiveness
+- Routing issue for pokemon with double name e.g. arceus-normal and shaymin-land
+- Layout issue of nav buttons on pokemon page @done
+- Pokemon loading card layout issues @done
+- Build Pokemon not found page
