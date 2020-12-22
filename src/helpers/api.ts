@@ -23,6 +23,14 @@ const POKE_API_URL = 'https://pokeapi.co/api/v2'
 
 const apiFetch = (url: string) => fetch(`${POKE_API_URL}${url}`).then(res => res.json())
 
+const getAllPokemon = (): Promise<{id: number, name: string}[]> => 
+    apiFetch(`/pokemon`).then((data: APIResource) => {
+        return data.results.map(({ name, url }) => ({
+            id: getIdFromUrl(url),
+            name: name
+        }))
+    })
+
 const getPokemonSpecies = (id: string | number): Promise<SpeciesResponse> => 
     apiFetch(`/pokemon-species/${id}`).then((data: SpeciesResource) => ({
         id: data.id,
@@ -139,4 +147,4 @@ const getGeneration = (id: string | number): Promise<GenerationResponse> =>
         }
     })
 
-export { getPokemonSpecies, getPokemonForm, getPokemon, getPokemonAbility, getPokemonType, getPokemonEvolutions, getAllGenerations, getGeneration }
+export { getAllPokemon, getPokemonSpecies, getPokemonForm, getPokemon, getPokemonAbility, getPokemonType, getPokemonEvolutions, getAllGenerations, getGeneration }
