@@ -28,10 +28,38 @@ body.theme--dark {
   width: fit-content;
   margin-top: 1.3rem;
 
+  button {
+    border-color: $grass;
+    background-color: $grass;
+
+    &:active,
+    &:focus {
+      box-shadow: none !important;
+      border-color: $grass !important;
+      background-color: $grass !important;
+    }
+
+    &:hover {
+      border-color: $grass;
+      background-color: scale-color($grass, $lightness: +10%);
+    }
+  }
+
+  &-submit {
+    margin-right: 0.5rem;
+    padding: 0.2rem 0.5rem;
+  }
+
+  &-options {
+    padding: 0.5rem;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
   &-error {
     top: 0;
     bottom: 0;
-    right: 2rem;
+    right: 6.8rem;
     margin: auto;
     width: 1.5rem;
     height: 1.5rem;
@@ -43,7 +71,7 @@ body.theme--dark {
       content: "!";
       color: $white;
       display: block;
-      line-height: 0.7;
+      line-height: 1.1;
       font-weight: 600;
       font-size: 1.2rem;
       text-align: center;
@@ -54,11 +82,16 @@ body.theme--dark {
     display: flex;
     overflow: hidden;
     position: relative;
+    align-items: center;
     border-radius: 3rem;
     transition: $transition;
     background-color: $card-bg;
     border: 1px solid transparent;
     box-shadow: 0 0 12px -5px rgba(0, 0, 0, 0.1);
+
+    &:hover {
+      box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.1);
+    }
 
     &.error {
       border-color: $error;
@@ -66,7 +99,6 @@ body.theme--dark {
 
     & > * {
       flex: 1;
-      padding: 5px;
     }
 
     input {
@@ -78,25 +110,10 @@ body.theme--dark {
         border: none;
         outline: none;
       }
-    }
 
-    button {
-      padding: 0.5rem;
-      border-color: $fire;
-      background-color: $fire;
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-
-      &:active,
-      &:focus {
-        box-shadow: none !important;
-        border-color: $fire !important;
-        background-color: $fire !important;
-      }
-
-      &:hover {
-        border-color: $fire;
-        background-color: scale-color($fire, $lightness: +10%);
+      &,
+      &::placeholder {
+        color: scale-color($steel, $lightness: -20%);
       }
     }
   }
