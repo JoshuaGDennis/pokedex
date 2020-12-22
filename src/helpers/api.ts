@@ -24,7 +24,7 @@ const POKE_API_URL = 'https://pokeapi.co/api/v2'
 const apiFetch = (url: string) => fetch(`${POKE_API_URL}${url}`).then(res => res.json())
 
 const getAllPokemon = (): Promise<{id: number, name: string}[]> => 
-    apiFetch(`/pokemon`).then((data: APIResource) => {
+    apiFetch(`/pokemon?limit=9999`).then((data: APIResource) => {
         return data.results.map(({ name, url }) => ({
             id: getIdFromUrl(url),
             name: name
