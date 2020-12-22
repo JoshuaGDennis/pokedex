@@ -6,6 +6,7 @@ import Container from "react-bootstrap/Container";
 import { GenerationResponse } from "helpers/types";
 import React, { useEffect, useRef, useState } from "react";
 import GenDropdown from "components/GenDropdown";
+import Search from "components/Search";
 import VisibleElement from "components/VisibleElement";
 
 const PokedexPage: React.FC = () => {
@@ -39,6 +40,9 @@ const PokedexPage: React.FC = () => {
       <Row>
         <Col>
           <GenDropdown />
+        </Col>
+        <Col>
+          <Search />
         </Col>
       </Row>
       <Row>

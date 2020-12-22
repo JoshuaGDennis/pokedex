@@ -1,0 +1,103 @@
+@import "../../styles/variables";
+
+body.theme--dark {
+  .search-control-inner {
+    &,
+    input {
+      background-color: $card-bg-dark;
+      color: $white;
+    }
+
+    input::placeholder {
+      color: $white;
+    }
+  }
+}
+
+#search-control-error {
+  .arrow::before {
+    border-bottom-color: $error;
+  }
+  .tooltip-inner {
+    background-color: $error;
+  }
+}
+
+.search-control {
+  margin-left: auto;
+  width: fit-content;
+  margin-top: 1.3rem;
+
+  &-error {
+    top: 0;
+    bottom: 0;
+    right: 2rem;
+    margin: auto;
+    width: 1.5rem;
+    height: 1.5rem;
+    position: absolute;
+    border-radius: 50%;
+    background-color: $error;
+
+    &::before {
+      content: "!";
+      color: $white;
+      display: block;
+      line-height: 0.7;
+      font-weight: 600;
+      font-size: 1.2rem;
+      text-align: center;
+    }
+  }
+
+  &-inner {
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    border-radius: 3rem;
+    transition: $transition;
+    background-color: $card-bg;
+    border: 1px solid transparent;
+    box-shadow: 0 0 12px -5px rgba(0, 0, 0, 0.1);
+
+    &.error {
+      border-color: $error;
+    }
+
+    & > * {
+      flex: 1;
+      padding: 5px;
+    }
+
+    input {
+      border: none;
+      padding-left: 1rem;
+      padding-right: 1.5rem;
+
+      &:focus {
+        border: none;
+        outline: none;
+      }
+    }
+
+    button {
+      padding: 0.5rem;
+      border-color: $fire;
+      background-color: $fire;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+
+      &:active,
+      &:focus {
+        box-shadow: none !important;
+        border-color: $fire !important;
+        background-color: $fire !important;
+      }
+
+      &:hover {
+        border-color: $fire;
+        background-color: scale-color($fire, $lightness: +10%);
+      }
+    }
+  }
+}
