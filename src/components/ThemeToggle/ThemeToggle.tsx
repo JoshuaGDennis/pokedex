@@ -1,5 +1,7 @@
-import "./ThemeToggle.scss";
 import * as React from "react";
+import "./styles/ThemeToggle.scss";
+import Sun from "./sub-components/Sun";
+import Moon from "./sub-components/Moon";
 
 const { useEffect, useState } = React;
 
@@ -13,9 +15,10 @@ const ThemeToggle: React.FC = () => {
 
   return (
     <div className="toggle-switch" onClick={() => setUseDarkTheme((s) => !s)}>
-      <div
-        className={`toggle-switch-inner ${useDarkTheme ? "on" : "off"}`}
-      ></div>
+      <div className={`toggle-switch-inner ${useDarkTheme ? "on" : "off"}`}>
+        <Sun show={!useDarkTheme} />
+        <Moon show={useDarkTheme} />
+      </div>
     </div>
   );
 };

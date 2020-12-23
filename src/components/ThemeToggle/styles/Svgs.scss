@@ -1,0 +1,65 @@
+@import "../../../styles/variables";
+
+.toggle-svg {
+  left: 0;
+  z-index: 1;
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  transition: 0.4s all ease;
+}
+
+.sun-svg {
+  opacity: 0;
+  left: 20px;
+
+  &.show {
+    left: 0;
+    opacity: 1;
+  }
+}
+
+.moon-svg {
+  opacity: 0;
+
+  &.show {
+    opacity: 1;
+    left: 20px;
+  }
+
+  .cls-1 {
+    font-weight: 700;
+    stroke: #231815;
+    font-size: 161.72px;
+    stroke-miterlimit: 10;
+    font-family: DINAlternate-Bold, DIN Alternate;
+  }
+  .cls-1,
+  .cls-2 {
+    fill: #fff;
+  }
+  .cls-3 {
+    fill: #231815;
+  }
+  .cls-4 {
+    fill: #f4ec90;
+  }
+}
+
+.sun-svg {
+  .cls-1 {
+    fill: #f8b62d;
+  }
+  .cls-1,
+  .cls-2 {
+    stroke: #231815;
+    stroke-miterlimit: 10;
+  }
+  .cls-2,
+  .cls-4 {
+    fill: #231815;
+  }
+  .cls-3 {
+    fill: #fff;
+  }
+}
