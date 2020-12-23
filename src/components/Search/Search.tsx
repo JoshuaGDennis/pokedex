@@ -1,14 +1,15 @@
 import "./Search.scss"
 import * as React from 'react'
-import Button from 'react-bootstrap/Button'
-import { getAllPokemon } from "helpers/api";
+import * as helpers from 'helpers'
 import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
 
 interface iProps {
   onSubmit(results: {id: number, name: string}[]): void
   onReset(): void
 }
 
+const { getAllPokemon } = helpers
 const { useEffect, useState} = React;
 
 const Search: React.FC<iProps> = ({ onSubmit, onReset }) => {
