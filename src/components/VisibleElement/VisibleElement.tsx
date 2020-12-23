@@ -1,6 +1,8 @@
+import * as React from 'react'
 import "./VisibleElement.scss";
-import React, { useRef } from "react";
 import useVisibility from "helpers/useVisibility";
+
+const { useRef } = React
 
 interface iProps {
   onVisible?(): any;

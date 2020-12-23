@@ -1,19 +1,21 @@
-import { useGen } from "helpers";
+import * as React from 'react'
+import * as helpers from 'helpers'
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { PokedexCard } from "components/Card";
-import Container from "react-bootstrap/Container";
-import { GenerationResponse } from "helpers/types";
-import React, { useEffect, useRef, useState } from "react";
-import GenDropdown from "components/GenDropdown";
 import Search from "components/Search";
+import { PokedexCard } from "components/Card";
+import GenDropdown from "components/GenDropdown";
+import Container from "react-bootstrap/Container";
 import VisibleElement from "components/VisibleElement";
+
+const { useEffect, useRef, useState } = React
+const { useGen } = helpers
 
 const PokedexPage: React.FC = () => {
   const INITIAL_LOAD_ID = 0;
   const INITIAL_MAXIMUM = 6;
 
-  const lastGen = useRef<GenerationResponse>()
+  const lastGen = useRef<helpers.GenerationResponse>()
 
   const [useSearch, setUseSearch] = useState(false)
 

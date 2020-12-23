@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { PokedexPage, PokemonPage } from "pages";
 import { Route, Switch } from "react-router-dom";
 

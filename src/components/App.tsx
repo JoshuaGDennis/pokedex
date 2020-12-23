@@ -1,8 +1,9 @@
-import React from "react";
 import Routes from "./Routes";
-import { GenProvider } from "helpers/ApiContext"
+import * as React from "react";
+import * as helpers from 'helpers'
 import { BrowserRouter } from "react-router-dom";
-import { ThemeProvider } from "helpers/ThemeContext";
+
+const { GenProvider, ThemeProvider } = helpers
 
 const App: React.FC = () => (
   <ThemeProvider>

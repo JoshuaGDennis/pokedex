@@ -1,6 +1,9 @@
-import { RefObject, useEffect, useState } from "react";
+// import { RefObject, useEffect, useState } from "react";
+import * as React from 'react'
 
-const useVisibility = (ref: RefObject<HTMLDivElement>, options?: {fn?: () => any, once?: boolean}) => {
+const { useEffect, useState } = React
+
+const useVisibility = (ref: React.RefObject<HTMLDivElement>, options?: {fn?: () => any, once?: boolean}) => {
   const [inView, setInView] = useState(false);
 
   useEffect(() => {
