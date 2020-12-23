@@ -4,9 +4,14 @@ import Button from 'react-bootstrap/Button'
 import { getAllPokemon } from "helpers/api";
 import Form from 'react-bootstrap/Form'
 
+interface iProps {
+  onSubmit(results: {id: number, name: string}[]): void
+  onReset(): void
+}
+
 const { useEffect, useState} = React;
 
-const Search: React.FC = () => {
+const Search: React.FC<iProps> = ({ onSubmit, onReset }) => {
   const [value, setValue] = useState("")
   const [isInvalid, setIsInvalid] = useState(false)
   const [isValidated, setIsValidated] = useState(false)
@@ -20,9 +25,10 @@ const Search: React.FC = () => {
   const handleChange = (event: React.ChangeEvent<any>) => {
     const val = event.target.value
 
-    if(val.length === 0 || val === "" || !!val) {
+    if(val.length === 0 || val === "" || !val) {
       setIsInvalid(false)
       setIsValidated(false)
+      onReset()
     }
 
     setValue(val)
@@ -38,7 +44,7 @@ const Search: React.FC = () => {
       setIsInvalid(true)
     } else {
       setIsInvalid(false)
-      console.log(allPokemon.filter(({ name }) => name.indexOf(value) > -1 && name.indexOf('-') === -1))
+      onSubmit(allPokemon.filter(({ name }) => name.indexOf(value) > -1 && name.indexOf('-') === -1))
     }
 
     setIsValidated(true)

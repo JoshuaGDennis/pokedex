@@ -13,13 +13,29 @@ const PokedexPage: React.FC = () => {
   const INITIAL_LOAD_ID = 0;
   const INITIAL_MAXIMUM = 6;
 
-  const lastGen = useRef<GenerationResponse>();
+  const lastGen = useRef<GenerationResponse>()
+
+  const [useSearch, setUseSearch] = useState(false)
 
   const [loadId, setLoadId] = useState(INITIAL_LOAD_ID);
   const [maximum, setMaximum] = useState(INITIAL_MAXIMUM);
+
   const [items, setItems] = useState<{ id: number; name: string }[]>([]);
+  const [searchItems, setSearchItems] = useState<{ id: number; name: string }[]>([])
 
   const { currentGen } = useGen();
+
+  const onSearchReset = () => {
+    setSearchItems([])
+    setUseSearch(false)
+    setLoadId(INITIAL_LOAD_ID)
+  }
+
+  const onSearchSubmit = (results: {id: number, name: string}[]) => {
+    setUseSearch(true)
+    setSearchItems(results)
+    setLoadId(INITIAL_LOAD_ID)
+  }
 
   useEffect(() => {
     if (currentGen) {
@@ -42,11 +58,14 @@ const PokedexPage: React.FC = () => {
           <GenDropdown />
         </Col>
         <Col>
-          <Search />
+          <Search
+            onReset={onSearchReset}
+            onSubmit={onSearchSubmit}
+          />
         </Col>
       </Row>
       <Row>
-        {items.map((item, i) => (
+        {(useSearch ? searchItems : items).map((item, i) => (
           <Col xs={12} sm={6} md={4} key={item.id}>
             <PokedexCard
               id={item.name}
