@@ -1,18 +1,18 @@
 import Routes from "./Routes";
 import * as React from "react";
-import * as Context from 'context'
+import * as Context from "context";
+import ThemeToggle from "./ThemeToggle";
 import { BrowserRouter } from "react-router-dom";
 
-const { GenProvider, ThemeProvider } = Context
+const { GenProvider } = Context;
 
 const App: React.FC = () => (
-  <ThemeProvider>
-    <GenProvider>
-      <BrowserRouter>
-        <Routes />
-      </BrowserRouter>
-    </GenProvider>
-  </ThemeProvider>
+  <GenProvider>
+    <ThemeToggle />
+    <BrowserRouter>
+      <Routes />
+    </BrowserRouter>
+  </GenProvider>
 );
 
 export default App;

@@ -1,0 +1,81 @@
+@import "../../styles/variables";
+
+$switch-size: 32px;
+$ball-spacing: 2px;
+$stretch-factor: 1.625;
+$ball-size: $switch-size - ($ball-spacing * 2);
+$ball-slide-size: ($switch-size * ($stretch-factor - 1) + $ball-spacing);
+
+$ball-color: $white;
+$inactive-color: $fire;
+$active-color: $card-bg-dark;
+
+body.theme--dark .toggle-switch {
+  background-color: $card-bg-dark;
+}
+
+.toggle-switch {
+  top: 1rem;
+  left: 1rem;
+  height: 2rem;
+  width: 3.2rem;
+  position: absolute;
+  border-radius: 1rem;
+
+  &-inner {
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+    height: $switch-size;
+    width: $switch-size * $stretch-factor;
+
+    &.on,
+    &.off {
+      &::before,
+      &::after {
+        left: 0;
+        content: " ";
+        position: absolute !important;
+      }
+
+      &::before {
+        width: inherit;
+        height: inherit;
+        will-change: background;
+        border-radius: $switch-size / 2;
+        transition: background 0.4s 0.3s ease-out;
+      }
+
+      &::after {
+        width: $ball-size;
+        top: $ball-spacing;
+        height: $ball-size;
+        will-change: transform;
+        border-radius: $ball-size / 2;
+        background: $ball-color !important;
+        transition: transform 0.4s ease-out;
+      }
+    }
+
+    &.on {
+      &::before {
+        background-color: $active-color !important;
+      }
+
+      &::after {
+        transform: translateX($ball-slide-size);
+      }
+    }
+
+    &.off {
+      &::before {
+        background-color: $inactive-color !important;
+      }
+
+      &::after {
+        transform: translateX($ball-spacing);
+      }
+    }
+  }
+}
