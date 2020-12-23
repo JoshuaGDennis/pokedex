@@ -1,120 +1,66 @@
 @import "../../styles/variables";
 
-body.theme--dark {
-  .search-control-inner {
+body.theme--dark .search-control {
+  background-color: $card-bg-dark;
+
+  input {
     &,
-    input {
-      background-color: $card-bg-dark;
+    &::placeholder {
       color: $white;
     }
-
-    input::placeholder {
-      color: $white;
-    }
-  }
-}
-
-#search-control-error {
-  .arrow::before {
-    border-bottom-color: $error;
-  }
-  .tooltip-inner {
-    background-color: $error;
   }
 }
 
 .search-control {
+  padding: .5rem;
+  margin-top: 1rem;
   margin-left: auto;
   width: fit-content;
-  margin-top: 1.3rem;
+  border-radius: 3rem;
+  transition: $transition;
+  background-color: $white;
+  background-color: $card-bg;
+  border: 1px solid transparent;
+  box-shadow: 0 0 12px -5px rgba(0, 0, 0, 0.1);
 
-  button {
-    border-color: $grass;
-    background-color: $grass;
-
-    &:active,
-    &:focus {
-      box-shadow: none !important;
-      border-color: $grass !important;
-      background-color: $grass !important;
-    }
-
-    &:hover {
-      border-color: $grass;
-      background-color: scale-color($grass, $lightness: +10%);
-    }
+  &.invalid {
+    border-color: $error;
   }
 
-  &-submit {
-    margin-right: 0.5rem;
-    padding: 0.2rem 0.5rem;
-  }
-
-  &-options {
-    padding: 0.5rem;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-
-  &-error {
-    top: 0;
-    bottom: 0;
-    right: 6.8rem;
-    margin: auto;
-    width: 1.5rem;
-    height: 1.5rem;
-    position: absolute;
-    border-radius: 50%;
-    background-color: $error;
-
-    &::before {
-      content: "!";
-      color: $white;
-      display: block;
-      line-height: 1.1;
-      font-weight: 600;
-      font-size: 1.2rem;
-      text-align: center;
-    }
-  }
-
-  &-inner {
-    display: flex;
-    overflow: hidden;
-    position: relative;
-    align-items: center;
-    border-radius: 3rem;
-    transition: $transition;
-    background-color: $card-bg;
-    border: 1px solid transparent;
-    box-shadow: 0 0 12px -5px rgba(0, 0, 0, 0.1);
-
-    &:hover {
-      box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.1);
-    }
-
-    &.error {
-      border-color: $error;
-    }
-
-    & > * {
-      flex: 1;
-    }
-
-    input {
-      border: none;
-      padding-left: 1rem;
-      padding-right: 1.5rem;
+  .form-control {
+    &,
+    &:valid,
+    &:invalid {
+      padding-right: initial;
 
       &:focus {
-        border: none;
-        outline: none;
-      }
-
-      &,
-      &::placeholder {
-        color: scale-color($steel, $lightness: -20%);
+        box-shadow: none;
       }
     }
+
+    &:valid {
+      background: none;
+    }
+
+    background-color: transparent;
+  }
+
+  .invalid-feedback {
+    top: -1rem;
+    position: absolute;
+  }
+
+  input {
+    border: none;
+
+
+    &:focus {
+      box-shadow: none;
+    }
+  }
+
+  button {
+    border-radius: 3rem;
+    padding: 0.2rem .5rem;
   }
 }
