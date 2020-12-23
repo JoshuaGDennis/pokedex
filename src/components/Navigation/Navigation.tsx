@@ -1,6 +1,6 @@
 import "./Navigation.scss";
 import * as React from 'react'
-import * as Hooks from 'hooks'
+import * as Hooks from 'helpers/hooks'
 import * as helpers from 'helpers'
 import Image from "components/Image";
 import Row from "react-bootstrap/Row";

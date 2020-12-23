@@ -1,6 +1,6 @@
 import Card from "../Card";
 import * as React from 'react'
-import * as Hooks from 'hooks'
+import * as Hooks from 'helpers/hooks'
 import * as helpers from 'helpers'
 import "../styles/PokedexCard.scss";
 import Image from "components/Image";

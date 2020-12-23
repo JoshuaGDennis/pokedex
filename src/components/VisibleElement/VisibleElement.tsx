@@ -1,5 +1,5 @@
 import * as React from 'react'
-import * as Hooks from 'hooks'
+import * as Hooks from 'helpers/hooks'
 import "./VisibleElement.scss";
 
 const { useRef } = React

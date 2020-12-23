@@ -1,6 +1,6 @@
 import "./GenDropdown.scss";
 import * as React from 'react'
-import * as Hooks from 'hooks'
+import * as Hooks from 'helpers/hooks'
 import * as helpers from 'helpers'
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownItem from "./sub-components/DropdownItem";
