@@ -2,9 +2,9 @@ import * as React from 'react'
 import * as helpers from 'helpers'
 
 const { getAllGenerations, getGeneration } = helpers
-const { createContext, useContext, useEffect, useState, } = React
+const { createContext, useEffect, useState, } = React
 
-interface iContext {
+export interface iGenerationContext {
   isLoading: boolean;
   generations: helpers.GenerationResponse[];
   currentGen: helpers.GenerationResponse | null;
@@ -15,11 +15,9 @@ interface iProvider {
   children: React.ReactNode;
 }
 
-const ApiContext = createContext<iContext | null>(null);
+export const ApiContext = createContext<iGenerationContext | null>(null);
 
-const useGen = () => useContext(ApiContext) as iContext;
-
-const GenProvider: React.FC<iProvider> = ({ children }) => {
+export const GenProvider: React.FC<iProvider> = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [generations, setGenerations] = useState<helpers.GenerationResponse[]>([]);
   const [currentGen, setCurrentGen] = useState<helpers.GenerationResponse | null>(null);
@@ -49,5 +47,3 @@ const GenProvider: React.FC<iProvider> = ({ children }) => {
     </ApiContext.Provider>
   );
 };
-
-export { useGen, GenProvider };

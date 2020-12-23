@@ -1,4 +1,5 @@
 import * as React from 'react'
+import * as Hooks from 'hooks'
 import * as helpers from 'helpers'
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -8,8 +9,8 @@ import GenDropdown from "components/GenDropdown";
 import Container from "react-bootstrap/Container";
 import VisibleElement from "components/VisibleElement";
 
+const { useGeneration } = Hooks
 const { useEffect, useRef, useState } = React
-const { useGen } = helpers
 
 const PokedexPage: React.FC = () => {
   const INITIAL_LOAD_ID = 0;
@@ -25,7 +26,7 @@ const PokedexPage: React.FC = () => {
   const [items, setItems] = useState<{ id: number; name: string }[]>([]);
   const [searchItems, setSearchItems] = useState<{ id: number; name: string }[]>([])
 
-  const { currentGen } = useGen();
+  const { currentGen } = useGeneration();
 
   const onSearchReset = () => {
     setSearchItems([])

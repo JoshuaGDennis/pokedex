@@ -1,18 +1,9 @@
 import * as React from 'react'
 
-const { createContext, useContext, useEffect, useState } = React
+const { createContext, useEffect, useState } = React
 
 const ThemeContext = createContext("light");
 
-const useTheme = () => {
-  const context = useContext(ThemeContext);
-
-  if (context === undefined) {
-    throw new Error(`'useTheme' must be used within a ThemeProvider!`);
-  }
-
-  return context;
-};
 
 const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const [theme, setTheme] = useState("light");
@@ -40,4 +31,4 @@ const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export { useTheme, ThemeProvider };
+export { ThemeProvider };

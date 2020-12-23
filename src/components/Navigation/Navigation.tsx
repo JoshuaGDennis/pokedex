@@ -1,5 +1,6 @@
 import "./Navigation.scss";
 import * as React from 'react'
+import * as Hooks from 'hooks'
 import * as helpers from 'helpers'
 import Image from "components/Image";
 import Row from "react-bootstrap/Row";
@@ -7,8 +8,9 @@ import Col from "react-bootstrap/Col";
 import { Link } from "react-router-dom";
 import Pokeball from "components/Pokeball";
 
+const { useGeneration } = Hooks
+const { getPokemonForm } = helpers
 const { useEffect, useState } = React
-const { getPokemonForm, useGen } = helpers
 
 interface iProps {
   pokemon: helpers.PokemonResponse | null
@@ -16,7 +18,7 @@ interface iProps {
 }
 
 const Navigation: React.FC<iProps> = ({ pokemon, loading }) => {
-  const { currentGen } = useGen();
+  const { currentGen } = useGeneration();
 
   const [next, setNext] = useState<helpers.PokemonFormResponse | null>(null);
   const [previous, setPrevious] = useState<helpers.PokemonFormResponse | null>(null);
