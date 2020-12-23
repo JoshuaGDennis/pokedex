@@ -1,38 +1,22 @@
-import { 
-    PokemonEvolutionResponse,
-    PokemonEvolutionResource,
-    PokemonAbilityResource, 
-    PokemonAbilityResponse, 
-    PokemonTypeResponse,
-    PokemonFormResource, 
-    PokemonTypeResource,
-    PokemonFormResponse, 
-    GenerationResponse,
-    GenerationResource,
-    PokemonResource,
-    PokemonResponse,
-    SpeciesResource,
-    SpeciesResponse,
-    EvolutionChain,
-    PokemonEvolution,
-    APIResource
-} from "./types"
-import { capitalise, getEnglishFlavorText, getIdFromUrl, getNames } from "./strings"
+import * as Types from './types'
+import * as Strings from './strings'
+
+const { capitalise, getEnglishFlavorText, getIdFromUrl, getNames } = Strings
 
 const POKE_API_URL = 'https://pokeapi.co/api/v2'
 
 const apiFetch = (url: string) => fetch(`${POKE_API_URL}${url}`).then(res => res.json())
 
 const getAllPokemon = (): Promise<{id: number, name: string}[]> => 
-    apiFetch(`/pokemon?limit=9999`).then((data: APIResource) => {
+    apiFetch(`/pokemon?limit=9999`).then((data: Types.API_Response) => {
         return data.results.map(({ name, url }) => ({
             id: getIdFromUrl(url),
             name: name
         }))
     })
 
-const getPokemonSpecies = (id: string | number): Promise<SpeciesResponse> => 
-    apiFetch(`/pokemon-species/${id}`).then((data: SpeciesResource) => ({
+const getPokemonSpecies = (id: string | number): Promise<Types.Species> => 
+    apiFetch(`/pokemon-species/${id}`).then((data: Types.Species_Raw) => ({
         id: data.id,
       captureRate: data.capture_rate,
       growthRate: data.growth_rate.name.replace("-", "/"),
@@ -46,15 +30,15 @@ const getPokemonSpecies = (id: string | number): Promise<SpeciesResponse> =>
       isMythical: data.is_mythical,
     }))
 
-const getPokemonForm = (id: string | number): Promise<PokemonFormResponse> => 
-    apiFetch(`/pokemon-form/${id}`).then((data: PokemonFormResource) => ({
+const getPokemonForm = (id: string | number): Promise<Types.Form> => 
+    apiFetch(`/pokemon-form/${id}`).then((data: Types.Form_Raw) => ({
       id: data.id,
       name: data.name,
       image: data.sprites.front_default,
     }))
 
-const getPokemon = (id: string | number): Promise<PokemonResponse> =>
-    apiFetch(`/pokemon/${id}`).then((data: PokemonResource) => ({
+const getPokemon = (id: string | number): Promise<Types.Pokemon> =>
+    apiFetch(`/pokemon/${id}`).then((data: Types.Pokemon_Raw) => ({
         id: data.id,
         abilities: data.abilities.map(({ ability }) => ability.name),
         exp: data.base_experience,
@@ -71,8 +55,8 @@ const getPokemon = (id: string | number): Promise<PokemonResponse> =>
         weight: data.weight,
     }))
 
-const getPokemonAbility = (id: string | number): Promise<PokemonAbilityResponse> =>
-    apiFetch(`/ability/${id}`).then((data: PokemonAbilityResource) => {
+const getPokemonAbility = (id: string | number): Promise<Types.Ability> =>
+    apiFetch(`/ability/${id}`).then((data: Types.Ability_Raw) => {
         const effectEntry = data.effect_entries.find(e => e.language.name === "en")
         return ({
             id: data.id,
@@ -82,8 +66,8 @@ const getPokemonAbility = (id: string | number): Promise<PokemonAbilityResponse>
         })
     })
 
-const getPokemonType = (id: string | number): Promise<PokemonTypeResponse> =>
-    apiFetch(`/type/${id}`).then((data: PokemonTypeResource) =>  ({
+const getPokemonType = (id: string | number): Promise<Types.Type> =>
+    apiFetch(`/type/${id}`).then((data: Types.Type_Raw) =>  ({
         id: data.id,
         name: data.name,
         doubleDamageFrom: getNames(data.damage_relations.double_damage_from),
@@ -94,11 +78,11 @@ const getPokemonType = (id: string | number): Promise<PokemonTypeResponse> =>
         noDamageTo: getNames(data.damage_relations.no_damage_to)
     }));
 
-const getPokemonEvolutions = (id: number): Promise<PokemonEvolutionResponse> => 
-    apiFetch(`/evolution-chain/${id}`).then((data: PokemonEvolutionResource) => {
-        const pokemon: PokemonEvolution[] = []
+const getPokemonEvolutions = (id: number): Promise<Types.Evolution> => 
+    apiFetch(`/evolution-chain/${id}`).then((data: Types.Evolution_Raw) => {
+        const pokemon: Types.Evolution_Item[] = []
 
-        const getNextEvolution = (obj: EvolutionChain) => {
+        const getNextEvolution = (obj: Types.Evolution_Chain) => {
             if (!obj.evolution_details.length) {
                 pokemon.push({
                     id: getIdFromUrl(obj.species.url),
@@ -128,11 +112,11 @@ const getPokemonEvolutions = (id: number): Promise<PokemonEvolutionResponse> =>
         }
     })
 
-const getAllGenerations = (): Promise<APIResource> =>
-    apiFetch('/generation').then((data: APIResource) => data)
+const getAllGenerations = (): Promise<Types.API_Response> =>
+    apiFetch('/generation').then((data: Types.API_Response) => data)
 
-const getGeneration = (id: string | number): Promise<GenerationResponse> =>
-    apiFetch(`/generation/${id}`).then((data: GenerationResource) => {
+const getGeneration = (id: string | number): Promise<Types.Generation> =>
+    apiFetch(`/generation/${id}`).then((data: Types.Generation_Raw) => {
         const format = (n: string) => n.split('-').map(str => capitalise(str)).join('/')
         return {
             id: data.id,

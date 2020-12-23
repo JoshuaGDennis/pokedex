@@ -1,20 +1,23 @@
 import * as React from 'react'
-import * as helpers from 'helpers'
+import * as API from 'helpers/api';
 import "../styles/ProfileTab.scss";
 import Tab from "react-bootstrap/Tab";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import * as Types from 'helpers/types';
+import * as Strings from 'helpers/strings'
 
+const { capitalise } = Strings
+const { getPokemonAbility } = API
 const { useEffect, useState } = React
-const { capitalise, getPokemonAbility } = helpers
 
 interface iProps {
-  data: helpers.PokemonResponse;
-  species: helpers.SpeciesResponse;
+  data: Types.Pokemon;
+  species: Types.Species;
 }
 
 const ProfileTab: React.FC<iProps> = ({ data, species }) => {
-  const [abilities, setAbilities] = useState<helpers.PokemonAbilityResponse[]>([]);
+  const [abilities, setAbilities] = useState<Types.Ability[]>([]);
 
   useEffect(() => {
     Promise.all(data.abilities.map((name) => getPokemonAbility(name))).then(

@@ -1,14 +1,17 @@
-import * as React from 'react'
-import * as helpers from 'helpers'
+import * as React from 'react';
+import * as API from 'helpers/api';
 import Image from "components/Image";
 import "../styles/EvolutionsTab.scss";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Tab from "react-bootstrap/Tab";
+import * as Types from 'helpers/types';
 import { Link } from "react-router-dom";
+import * as Strings from 'helpers/strings';
 
+const { getPokemonEvolutions } = API
 const { useEffect, useState } = React
-const { capitalise, getPokemonSprite, getPokemonEvolutions } = helpers
+const { capitalise, getPokemonSprite } = Strings
 
 interface iProps {
   id: number;
@@ -16,7 +19,7 @@ interface iProps {
 }
 
 const EvolutionsTab: React.FC<iProps> = ({ id, type }) => {
-  const [evolutions, setEvolutions] = useState<helpers.PokemonEvolutionResponse | null>(
+  const [evolutions, setEvolutions] = useState<Types.Evolution | null>(
     null
   );
 

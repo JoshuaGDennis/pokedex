@@ -1,332 +1,334 @@
-export type APIItem = {
-  name: string;
+export type API_Item = {
   url: string;
-};
-
-type PokemonSprites = {
-  back_default: string;
-  back_female: string | null;
-  back_shiny: string;
-  front_default: string;
-  front_female: string | null;
-  front_shiny: string;
-  front_shiny_female: string | null;
-  other: {
-    dream_world: {
-      front_default: string;
-      front_female: string | null;
-    };
-    "official-artwork": {
-      front_default: string;
-    };
-  };
+  name: string;
 }
 
-export type FlavorTextEntry = {
+export type TextEntry = {
+  language: API_Item;
   flavor_text: string;
-  language: APIItem;
-};
+}
 
-export type APIResource = {
+export type API_Response = {
   count: number
+  results: API_Item[]
   next: string | null
   previous: string | null
-  results: APIItem[]
 }
 
-export type GenerationResponse = {
-  id: number;
-  name: string;
-  versions: string[];
+export type Generation = {
   pokemon: {
     name: string
     id: number
   }[];
-};
-
-export type GenerationResource = {
   id: number;
-  main_region: APIItem;
-  moves: APIItem[];
   name: string;
+  versions: string[];
+}
+
+export type Generation_Raw = {
   names: {
-    language: APIItem;
+    language: API_Item;
     name: string;
   }[];
-  pokemon_species: APIItem[];
-  types: APIItem[];
-  version_groups: APIItem[];
-};
-
-export type SpeciesResponse = {
   id: number;
-  happiness: number
-  captureRate: number
-  growthRate: string
-  genera: string
+  name: string;
+  moves: API_Item[];
+  types: API_Item[];
+  main_region: API_Item;
+  version_groups: API_Item[];
+  pokemon_species: API_Item[];
+}
+
+export type Species = {
+  id: number;
+  genera: string;
   name: string;
   color: string;
-  evolutionChainId: number;
+  happiness: number;
+  growthRate: string;
+  captureRate: number;
   description: string;
-  isLegendary: boolean;
   isMythical: boolean;
-};
+  isLegendary: boolean;
+  evolutionChainId: number;
+}
 
-export type SpeciesResource = {
-  base_happiness: number;
+export type Species_Raw = {
+  id: number;
+  name: string;
+  order: number;
+  shape: API_Item;
+  color: API_Item;
+  is_baby: boolean;
+  habitat: API_Item;
+  gender_rate: number;
+  is_mythical: boolean;
   capture_rate: number;
-  color: APIItem;
-  egg_groups: APIItem[];
+  generation: API_Item;
+  hatch_counter: number;
+  is_legendary: boolean;
+  growth_rate: API_Item;
+  base_happiness: number;
+  egg_groups: API_Item[];
+  forms_switchable: boolean;
+  form_descriptions: API_Item[];
+  evolves_from_species: API_Item;
+  has_gender_differences: boolean;
+  flavor_text_entries: TextEntry[];
   evolution_chain: {
     url: string;
   };
-  evolves_from_species: APIItem;
-  flavor_text_entries: FlavorTextEntry[];
-  form_descriptions: APIItem[];
-  forms_switchable: boolean;
-  gender_rate: number;
   genera: {
+    language: API_Item;
     genus: string;
-    language: APIItem;
   }[];
-  generation: APIItem;
-  growth_rate: APIItem;
-  habitat: APIItem;
-  has_gender_differences: boolean;
-  hatch_counter: number;
-  id: number;
-  is_baby: boolean;
-  is_legendary: boolean;
-  is_mythical: boolean;
-  name: string;
   names: {
-    language: APIItem;
+    language: API_Item;
     name: string;
   }[];
-  order: number;
   pal_park_encounters: {
-    area: APIItem;
     base_score: number;
+    area: API_Item;
     rate: number;
   }[];
   pokedex_numbers: {
     entry_number: number;
-    pokedex: APIItem;
+    pokedex: API_Item;
   }[];
-  shape: APIItem;
   varieties: {
     is_default: boolean;
-    pokemon: APIItem;
+    pokemon: API_Item;
   }[];
-};
+}
 
-export type PokemonResponse = {
-  abilities: string[];
-  exp: number;
+export type Sprites = {
+  back_shiny: string;
+  front_shiny: string;
+  back_default: string;
+  front_default: string;
+  back_female: string | null;
+  front_female: string | null;
+  front_shiny_female: string | null;
+  other: {
+    "official-artwork": {
+      front_default: string;
+    };
+    dream_world: {
+      front_female: string | null;
+      front_default: string;
+    };
+  };
+}
+
+export type Pokemon = {
   id: number;
+  exp: number;
   name: string;
-  moves: string[];
-  sprite: string;
   image: string;
-  stats: {
-    name: string;
-    value: number;
-  }[];
+  sprite: string;
+  height: number;
+  weight: number;
+  moves: string[];
   types: string[];
-  height: number
-  weight: number
-};
+  abilities: string[];
+  stats: {
+    value: number;
+    name: string;
+  }[];
+}
 
-export type PokemonResource = {
+export type Pokemon_Raw = {
   abilities: {
-    ability: APIItem;
     is_hidden: boolean;
+    ability: API_Item;
     slot: number;
   }[];
-  base_experience: number;
-  forms: APIItem[];
   game_indices: {
     game_index: number;
-    version: APIItem;
+    version: API_Item;
   }[];
-  height: number;
   held_items: {
-    item: APIItem;
+    item: API_Item;
     version_details: {
+      version: API_Item;
       rarity: number;
-      version: APIItem;
     }[];
   }[];
-  id: number;
-  is_default: boolean;
-  location_area_encounters: string;
   moves: {
-    move: APIItem;
+    move: API_Item;
     version_group_details: {
       level_learned_at: number;
-      move_learn_method: APIItem;
-      version_group: APIItem;
+      move_learn_method: API_Item;
+      version_group: API_Item;
     }[];
   }[];
-  name: string;
-  order: number;
-  species: APIItem;
-  sprites: PokemonSprites
   stats: {
     base_stat: number;
     effort: number;
-    stat: APIItem;
+    stat: API_Item;
   }[];
   types: {
     slot: number;
-    type: APIItem;
+    type: API_Item;
   }[];
-  weight: number
-};
-
-export type PokemonFormResponse = {
-  id: number
-  name: string
-  image: string
+  id: number;
+  name: string;
+  order: number;
+  weight: number;
+  height: number;
+  sprites: Sprites;
+  species: API_Item;
+  forms: API_Item[];
+  is_default: boolean;
+  base_experience: number;
+  location_area_encounters: string;
 }
 
-export type PokemonFormResource = {
-  form_name: string
-  form_names: string[]
-  form_order: number
-  id: number
-  is_battle_only: boolean
-  is_default: boolean
-  is_mega: boolean
-  name: string
-  names: string[]
-  order: number
-  pokemon: APIItem
-  sprites: PokemonSprites
-  version_group: APIItem
+export type Form = {
+  id: number;
+  name: string;
+  image: string;
 }
 
-export type PokemonAbilityResponse = {
-  id: number
-  name: string
-  description: string
-  effect: string
+export type Form_Raw = {
+  id: number;
+  name: string;
+  order: number;
+  names: string[];
+  is_mega: boolean;
+  sprites: Sprites;
+  pokemon: API_Item;
+  form_name: string;
+  form_order: number;
+  is_default: boolean;
+  form_names: string[];
+  is_battle_only: boolean;
+  version_group: API_Item;
 }
 
-export type PokemonAbilityResource = {
+export type Ability = {
+  id: number;
+  name: string;
+  effect: string;
+  description: string;
+}
+
+export type Ability_Raw = {
   effect_changes: {
     effect_entries: {
-      effect: string
-      language: APIItem
+      language: API_Item;
+      effect: string;
     }[]
-    version_group: APIItem
+    version_group: API_Item;
   }[]
   effect_entries: {
-    effect: string
-    language: APIItem
+    language: API_Item;
+    effect: string;
   }[]
-  flavor_text_entries: FlavorTextEntry[]
-  generation: APIItem
-  id: number
-  is_main_series: boolean
-  name: string
   names: {
-    language: APIItem
-    name: string
+    language: API_Item;
+    name: string;
   }[]
   pokemon: {
-    is_hidden: boolean
-    pokemon: APIItem
-    slot: number
+    is_hidden: boolean;
+    pokemon: API_Item;
+    slot: number;
   }[]
+  id: number;
+  name: string;
+  generation: API_Item;
+  is_main_series: boolean;
+  flavor_text_entries: TextEntry[];
 }
 
-export type PokemonTypeResource = {
+export type Type = {
+  id: number;
+  name: string;
+  noDamageTo: string[];
+  halfDamageTo: string[];
+  noDamageFrom: string[];
+  doubleDamageTo: string[];
+  halfDamageFrom: string[];
+  doubleDamageFrom: string[];
+}
+
+export type Type_Raw = {
   damage_relations: {
-    double_damage_from: APIItem[]
-    double_damage_to: APIItem[]
-    half_damage_from: APIItem[]
-    half_damage_to: APIItem[]
-    no_damage_from: APIItem[]
-    no_damage_to: APIItem[]
+    double_damage_from: API_Item[];
+    half_damage_from: API_Item[];
+    double_damage_to: API_Item[];
+    half_damage_to: API_Item[];
+    no_damage_from: API_Item[];
+    no_damage_to: API_Item[];
   }
   game_indices: {
-    game_index: number
-    generation: APIItem
+    generation: API_Item;
+    game_index: number;
   }[]
-  generation: APIItem
-  id: number
-  move_damage_class: APIItem
-  moves: APIItem[]
-  name: string
   names: {
-    language: APIItem
-    name: string
+    language: API_Item;
+    name: string;
   }[]
   pokemon: {
-    pokemon: APIItem
-    slot: number
+    pokemon: API_Item;
+    slot: number;
   }[]
+  id: number;
+  name: string;
+  moves: API_Item[];
+  generation: API_Item;
+  move_damage_class: API_Item;
 }
 
-export type PokemonTypeResponse = {
-  id: number
-  name: string
-  doubleDamageFrom: string[]
-  doubleDamageTo: string[]
-  halfDamageFrom: string[]
-  halfDamageTo: string[]
-  noDamageFrom: string[]
-  noDamageTo: string[]
+export type Evolution_Item_Raw = {
+  min_level: number;
+  trigger: API_Item;
+  time_of_day: string;
+  item: API_Item | null;
+  gender: API_Item | null;
+  turn_upside_down: boolean;
+  min_beauty: number | null;
+  location: API_Item | null;
+  held_item: API_Item | null;
+  known_move: API_Item | null;
+  party_type: API_Item | null;
+  min_affection: number | null;
+  min_happiness: number | null;
+  needs_overworld_rain: boolean;
+  relative_physical_stats: null;
+  party_species: API_Item | null;
+  trade_species: API_Item | null;
+  known_move_type: API_Item | null;
 }
 
-type EvolutionDetail = {
-  gender: APIItem | null
-  held_item: APIItem | null
-  item: APIItem | null
-  known_move: APIItem | null
-  known_move_type: APIItem | null
-  location: APIItem | null
-  min_affection: number | null
-  min_beauty: number | null
-  min_happiness: number | null
-  min_level: number
-  needs_overworld_rain: boolean
-  party_species: APIItem | null
-  party_type: APIItem | null
-  relative_physical_stats: null
-  time_of_day: string
-  trade_species: APIItem | null
-  trigger: APIItem
-  turn_upside_down: boolean
+export type Evolution_Item = {
+  id: number;
+  name: string;
+  level: number;
+  trigger: string;
 }
 
-export type PokemonEvolution = {
-  id: number
-  name: string
-  trigger: string
-  level: number
+export type Evolution_Chain = {
+  is_baby: boolean;
+  species: API_Item;
+  evolves_to: Evolution_Chain[];
+  evolution_details: Evolution_Item_Raw[];
 }
 
-export type EvolutionChain = {
-  evolution_details: EvolutionDetail[]
-  evolves_to: EvolutionChain[]
-  is_baby: boolean
-  species: APIItem
-}
-
-export type PokemonEvolutionResource = {
-  baby_trigger_item: APIItem | null
+export type Evolution_Raw = {
   chain: {
-    evolution_details: EvolutionDetail[]
-    evolves_to: EvolutionChain[]
-    is_baby: boolean
-    species: APIItem
+    evolution_details: Evolution_Item_Raw[];
+    evolves_to: Evolution_Chain[];
+    species: API_Item;
+    is_baby: boolean;
   }
-  id: number
+  id: number;
+  baby_trigger_item: API_Item | null;
 }
 
-export type PokemonEvolutionResponse = {
-  id: number
-  pokemon: PokemonEvolution[]
+export type Evolution = {
+  id: number;
+  pokemon: Evolution_Item[];
 }
+
+

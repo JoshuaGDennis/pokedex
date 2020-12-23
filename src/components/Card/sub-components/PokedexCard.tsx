@@ -1,17 +1,19 @@
 import Card from "../Card";
 import * as React from 'react'
-import * as Hooks from 'helpers/hooks'
-import * as helpers from 'helpers'
+import * as API from 'helpers/api'
 import "../styles/PokedexCard.scss";
 import Image from "components/Image";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import * as Hooks from 'helpers/hooks';
+import * as Types from 'helpers/types';
+import * as Strings from 'helpers/strings';
 import Pokeball from "components/Pokeball";
-import { PokemonResponse } from 'helpers/types'
 import PokedexCardLoading from "./PokedexCardLoading";
 
+const { getPokemon } = API
+const { capitalise } = Strings
 const { useVisibility } = Hooks
-const { capitalise, getPokemon } = helpers
 const { useEffect, useRef, useState } = React
 
 interface iProps {
@@ -22,7 +24,7 @@ interface iProps {
 
 const PokedexCard: React.FC<iProps> = ({ id, startLoad, onLoaded }) => {
   const [isLoading, setIsLoading] = useState(true);
-  const [pokemon, setPokemon] = useState<PokemonResponse | null>(null);
+  const [pokemon, setPokemon] = useState<Types.Pokemon | null>(null);
 
   const ref = useRef<HTMLDivElement>(null);
 

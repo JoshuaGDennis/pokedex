@@ -1,7 +1,7 @@
 import "./GenDropdown.scss";
 import * as React from 'react'
 import * as Hooks from 'helpers/hooks'
-import * as helpers from 'helpers'
+import * as Types from 'helpers/types'
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownItem from "./sub-components/DropdownItem";
 import DropdownMenu from "./sub-components/DropdownMenu";
@@ -14,7 +14,7 @@ const GenerationDropdown: React.FC = () => {
   const [show, setShow] = useState(false);
   const { generations, currentGen, setCurrentGen } = useGeneration();
 
-  const handleChange = (gen: helpers.GenerationResponse) => {
+  const handleChange = (gen: Types.Generation) => {
     setShow(false);
     setCurrentGen(gen);
   };

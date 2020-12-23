@@ -1,27 +1,28 @@
 import "./Navigation.scss";
-import * as React from 'react'
-import * as Hooks from 'helpers/hooks'
-import * as helpers from 'helpers'
+import * as React from 'react';
+import * as API from 'helpers/api';
 import Image from "components/Image";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import * as Types from 'helpers/types';
+import * as Hooks from 'helpers/hooks';
 import { Link } from "react-router-dom";
 import Pokeball from "components/Pokeball";
 
+const { getPokemonForm } = API
 const { useGeneration } = Hooks
-const { getPokemonForm } = helpers
 const { useEffect, useState } = React
 
 interface iProps {
-  pokemon: helpers.PokemonResponse | null
   loading: boolean
+  pokemon: Types.Pokemon | null
 }
 
 const Navigation: React.FC<iProps> = ({ pokemon, loading }) => {
   const { currentGen } = useGeneration();
 
-  const [next, setNext] = useState<helpers.PokemonFormResponse | null>(null);
-  const [previous, setPrevious] = useState<helpers.PokemonFormResponse | null>(null);
+  const [next, setNext] = useState<Types.Form | null>(null);
+  const [previous, setPrevious] = useState<Types.Form | null>(null);
 
   useEffect(() => {
     if(!loading && pokemon && currentGen) {

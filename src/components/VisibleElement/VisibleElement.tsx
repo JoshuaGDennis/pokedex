@@ -1,6 +1,6 @@
 import * as React from 'react'
-import * as Hooks from 'helpers/hooks'
 import "./VisibleElement.scss";
+import * as Hooks from 'helpers/hooks'
 
 const { useRef } = React
 const { useVisibility } = Hooks

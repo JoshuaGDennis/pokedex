@@ -1,21 +1,21 @@
 import Card from "../Card";
 import * as React from "react";
-import * as helpers from 'helpers'
 import "../styles/PokemonCard.scss";
 import Image from "components/Image";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Tab from "react-bootstrap/Tab";
+import * as Types from 'helpers/types';
 import Tabs from "react-bootstrap/Tabs";
+import * as Strings from 'helpers/strings';
 import Pokeball from "components/Pokeball";
-import { PokemonResponse, SpeciesResponse } from "helpers/types";
 import { EvolutionsTab, ProfileTab, StatsTab } from "components/Tabs";
 
-const { capitalise } = helpers
+const { capitalise } = Strings
 
 interface iProps {
-  data: PokemonResponse;
-  species: SpeciesResponse;
+  data: Types.Pokemon;
+  species: Types.Species;
 }
 
 const PokemonCard: React.FC<iProps> = ({ data, species }) => (

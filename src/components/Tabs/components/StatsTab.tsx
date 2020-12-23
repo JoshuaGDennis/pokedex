@@ -1,12 +1,15 @@
 import * as React from 'react'
 import "../styles/StatsTab.scss";
-import * as helpers from 'helpers'
+import * as API from 'helpers/api';
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Tab from "react-bootstrap/Tab";
+import * as Types from 'helpers/types';
+import * as Strings from 'helpers/strings';
 
+const { capitalise } = Strings
+const { getPokemonType } = API
 const { useEffect, useState } = React
-const { capitalise, getPokemonType } = helpers
 
 interface iProps {
   stats: {
@@ -17,7 +20,7 @@ interface iProps {
 }
 
 const StatsTab: React.FC<iProps> = ({ stats, types }) => {
-  const [typesDetail, setTypesDetail] = useState<helpers.PokemonTypeResponse[]>([]);
+  const [typesDetail, setTypesDetail] = useState<Types.Type[]>([]);
 
   useEffect(() => {
     Promise.all(types.map((type) => getPokemonType(type))).then(setTypesDetail);

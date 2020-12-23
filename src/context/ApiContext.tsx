@@ -1,14 +1,15 @@
 import * as React from 'react'
-import * as helpers from 'helpers'
+import * as API from 'helpers/api'
+import * as Types from 'helpers/types'
 
-const { getAllGenerations, getGeneration } = helpers
+const { getAllGenerations, getGeneration } = API
 const { createContext, useEffect, useState, } = React
 
 export interface iGenerationContext {
   isLoading: boolean;
-  generations: helpers.GenerationResponse[];
-  currentGen: helpers.GenerationResponse | null;
-  setCurrentGen: React.Dispatch<React.SetStateAction<helpers.GenerationResponse | null>>;
+  generations: Types.Generation[];
+  currentGen: Types.Generation | null;
+  setCurrentGen: React.Dispatch<React.SetStateAction<Types.Generation | null>>;
 }
 
 interface iProvider {
@@ -19,8 +20,8 @@ export const ApiContext = createContext<iGenerationContext | null>(null);
 
 export const GenProvider: React.FC<iProvider> = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
-  const [generations, setGenerations] = useState<helpers.GenerationResponse[]>([]);
-  const [currentGen, setCurrentGen] = useState<helpers.GenerationResponse | null>(null);
+  const [generations, setGenerations] = useState<Types.Generation[]>([]);
+  const [currentGen, setCurrentGen] = useState<Types.Generation | null>(null);
 
   useEffect(() => {
     setIsLoading(true)
