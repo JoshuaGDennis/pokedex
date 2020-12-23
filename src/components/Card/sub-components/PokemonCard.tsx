@@ -1,5 +1,6 @@
-import React from "react";
 import Card from "../Card";
+import * as React from "react";
+import * as helpers from 'helpers'
 import "../styles/PokemonCard.scss";
 import Image from "components/Image";
 import Row from "react-bootstrap/Row";
@@ -7,8 +8,10 @@ import Col from "react-bootstrap/Col";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import Pokeball from "components/Pokeball";
+import { PokemonResponse, SpeciesResponse } from "helpers/types";
 import { EvolutionsTab, ProfileTab, StatsTab } from "components/Tabs";
-import { capitalise, PokemonResponse, SpeciesResponse } from "helpers";
+
+const { capitalise } = helpers
 
 interface iProps {
   data: PokemonResponse;

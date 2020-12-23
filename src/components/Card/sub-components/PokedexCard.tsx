@@ -1,13 +1,16 @@
 import Card from "../Card";
+import * as React from 'react'
+import * as helpers from 'helpers'
 import "../styles/PokedexCard.scss";
 import Image from "components/Image";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { getPokemon } from "helpers/api";
 import Pokeball from "components/Pokeball";
+import { PokemonResponse } from 'helpers/types'
 import PokedexCardLoading from "./PokedexCardLoading";
-import React, { useEffect, useRef, useState } from "react";
-import { capitalise, PokemonResponse, useVisibility } from "helpers";
+
+const { useEffect, useRef, useState } = React
+const { capitalise, useVisibility, getPokemon } = helpers
 
 interface iProps {
   id: string;
