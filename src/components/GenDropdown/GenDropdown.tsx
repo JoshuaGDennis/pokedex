@@ -1,16 +1,19 @@
 import "./GenDropdown.scss";
-import React, { useState } from "react";
+import * as React from 'react'
+import * as helpers from 'helpers'
 import Dropdown from "react-bootstrap/Dropdown";
-import { GenerationResponse, useGen } from "helpers";
 import DropdownItem from "./sub-components/DropdownItem";
 import DropdownMenu from "./sub-components/DropdownMenu";
 import DropdownToggle from "./sub-components/DropdownToggle";
+
+const { useState } = React
+const { useGen } = helpers
 
 const GenerationDropdown: React.FC = () => {
   const [show, setShow] = useState(false);
   const { generations, currentGen, setCurrentGen } = useGen();
 
-  const handleChange = (gen: GenerationResponse) => {
+  const handleChange = (gen: helpers.GenerationResponse) => {
     setShow(false);
     setCurrentGen(gen);
   };

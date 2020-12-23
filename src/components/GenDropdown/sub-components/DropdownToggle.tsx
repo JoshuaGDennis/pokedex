@@ -1,10 +1,13 @@
+import * as React from 'react'
+import * as helpers from 'helpers'
 import Image from "components/Image";
-import React, { forwardRef } from "react";
-import { GenerationResponse, getPokemonSprite } from "helpers";
+
+const { forwardRef } = React
+const { getPokemonSprite } = helpers
 
 interface iProps {
   className: string;
-  gen: GenerationResponse;
+  gen: helpers.GenerationResponse;
   onClick(e: React.MouseEvent<HTMLDivElement, MouseEvent>): void;
 }
 

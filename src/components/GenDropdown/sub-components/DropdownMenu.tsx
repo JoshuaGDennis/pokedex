@@ -1,4 +1,6 @@
-import React, { forwardRef } from "react";
+import * as React from 'react'
+
+const { forwardRef } = React
 
 interface iProps {
   className: string;

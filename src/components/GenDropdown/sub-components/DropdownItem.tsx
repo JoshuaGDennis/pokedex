@@ -1,11 +1,14 @@
+import * as React from 'react'
+import * as helpers from "helpers";
 import Image from "components/Image";
-import React, { forwardRef } from "react";
-import { GenerationResponse, getPokemonSprite } from "helpers";
+
+const { forwardRef } = React
+const { getPokemonSprite } = helpers
 
 interface iProps {
-  gen: GenerationResponse;
+  gen: helpers.GenerationResponse;
   className: string;
-  onSelected(gen: GenerationResponse): void;
+  onSelected(gen: helpers.GenerationResponse): void;
 }
 
 const DropdownItem = forwardRef<HTMLDivElement, iProps>(
