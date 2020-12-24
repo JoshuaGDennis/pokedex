@@ -4,7 +4,6 @@ import * as Hooks from 'helpers/hooks'
 import * as Types from 'helpers/types'
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownItem from "./sub-components/DropdownItem";
-import DropdownMenu from "./sub-components/DropdownMenu";
 import DropdownToggle from "./sub-components/DropdownToggle";
 
 const { useState } = React
@@ -24,15 +23,18 @@ const GenerationDropdown: React.FC = () => {
   return (
     <Dropdown className="gen-dropdown">
       <Dropdown.Toggle as={DropdownToggle} gen={currentGen} />
-      <Dropdown.Menu as={DropdownMenu} show={show}>
-        {generations.map((gen) => (
-          <Dropdown.Item
-            key={gen.id}
-            as={DropdownItem}
-            gen={gen}
-            onSelected={handleChange}
-          />
-        ))}
+      <Dropdown.Menu show={show}>
+        <Dropdown.Header className="dropdown-menu__title">Generations</Dropdown.Header>
+        <div className="dropdown-menu__inner">
+          {generations.map((gen) => (
+            <Dropdown.Item
+              key={gen.id}
+              as={DropdownItem}
+              gen={gen}
+              onSelected={handleChange}
+            />
+          ))}
+        </div>
       </Dropdown.Menu>
     </Dropdown>
   );

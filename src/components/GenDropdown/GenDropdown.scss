@@ -62,10 +62,11 @@ body.theme--dark .gen-dropdown {
   }
 
   .dropdown-menu {
-    top: 95%;
     width: 100%;
     border: none;
+    inset: -5px auto auto 0px;
     background-color: $card-bg;
+    box-shadow: 0px 5px 5px -5px rgba(0, 0, 0, 0.3);
 
     &__inner {
       height: 20rem;
@@ -77,7 +78,8 @@ body.theme--dark .gen-dropdown {
 
     &__title {
       margin: 0;
-      font-size: 1.5rem;
+      padding: .5rem;
+      font-size: 1.2rem;
       font-weight: bold;
       text-align: center;
       box-shadow: 0px 5px 5px -5px rgba(0, 0, 0, 0.1);

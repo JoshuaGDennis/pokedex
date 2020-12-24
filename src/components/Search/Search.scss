@@ -23,6 +23,15 @@ body.theme--dark .search-control {
   border: 1px solid transparent;
   box-shadow: 0 0 12px -5px rgba(0, 0, 0, 0.1);
 
+  &-dropdown {
+    display: flex;
+    align-items: center;
+
+    .dropdown-toggle::after {
+      vertical-align: .2rem;
+    }
+  }
+
   &.invalid {
     border-color: $error;
   }
