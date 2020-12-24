@@ -1,10 +1,29 @@
 import * as React from 'react'
 import * as Context from 'context'
+import * as API from 'helpers/api'
 
+const { getAllPokemon } = API
 const { ApiContext } = Context
 const { useContext, useEffect, useState } = React
 
 export const useGeneration = () => useContext(ApiContext) as Context.iGenerationContext;
+
+export const useSearch = (searchValue: string) => {
+  const [matches, setMatches] = useState<{id: number, name: string}[]>([]) 
+  const [allPokemon, setAllPokemon] = useState<{id: number, name: string}[]>([])
+
+  useEffect(() => {
+    getAllPokemon().then(setAllPokemon)
+  }, [])
+
+  useEffect(() => {
+    if(!!allPokemon.length) {
+      setMatches(allPokemon.filter(({ name }) => name.indexOf(searchValue) > -1 && name.indexOf('-') === -1))
+    }
+  }, [allPokemon, searchValue])
+
+  return matches
+}
 
 export const useVisibility = (ref: React.RefObject<HTMLDivElement>, options?: {fn?: () => any, once?: boolean}) => {
     const [inView, setInView] = useState(false);

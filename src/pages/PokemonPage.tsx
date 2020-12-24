@@ -6,8 +6,8 @@ import * as Types from 'helpers/types';
 import { useParams } from "react-router-dom";
 import Navigation from "components/Navigation";
 import Container from "react-bootstrap/Container";
-import { PokemonCard, PokemonCardLoading } from "components/Card";
 import NoPokemonFoundPage from './NoPokemonFoundPage';
+import { PokemonCard, PokemonCardLoading } from "components/Card";
 
 const { useEffect, useState } = React
 const { getPokemon, getPokemonSpecies } = API

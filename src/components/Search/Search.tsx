@@ -1,6 +1,6 @@
 import "./Search.scss"
 import * as React from 'react'
-import * as API from 'helpers/api'
+import * as Hooks from 'helpers/hooks'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Dropdown from 'react-bootstrap/Dropdown'
@@ -11,21 +11,18 @@ interface iProps {
   onReset(): void
 }
 
-const { getAllPokemon } = API
-const { useEffect, useState} = React;
+const { useState} = React;
+const { useSearch } = Hooks
 
 const Search: React.FC<iProps> = ({ onSubmit, onReset }) => {
   const [value, setValue] = useState("")
+
+  const searchResults = useSearch(value)
 
   const [isInvalid, setIsInvalid] = useState(false)
   const [isValidated, setIsValidated] = useState(false)
   const [ searchType, setSearchType ] = useState<'NAME' | 'ID'>('NAME')
 
-  const [allPokemon, setAllPokemon] = useState<{id: number, name: string}[]>([])
-
-  useEffect(() => {
-    getAllPokemon().then(setAllPokemon)
-  }, [])
 
   const resetSearch = () => {
     setIsInvalid(false)
@@ -59,7 +56,7 @@ const Search: React.FC<iProps> = ({ onSubmit, onReset }) => {
       setIsInvalid(true)
     } else {
       setIsInvalid(false)
-      onSubmit(allPokemon.filter(({ name }) => name.indexOf(value) > -1 && name.indexOf('-') === -1))
+      onSubmit(searchResults)
     }
 
     setIsValidated(true)
@@ -94,7 +91,7 @@ const Search: React.FC<iProps> = ({ onSubmit, onReset }) => {
           <Form.Control.Feedback type="invalid">SOME ERROR HERE</Form.Control.Feedback>
         </InputGroup>
       </Form.Group>
-      {allPokemon.length ? <Button type="submit" disabled={isInvalid}>Search</Button> : null}
+      <Button type="submit" disabled={isInvalid}>Search</Button>
     </Form>
   )
 }
