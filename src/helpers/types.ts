@@ -1,3 +1,23 @@
+interface ServiceInit {
+  status: 'Init'
+}
+
+interface ServiceLoading {
+  status: 'loading'
+}
+
+interface ServiceLoaded<T> {
+  status: 'loaded'
+  payload: T
+}
+
+interface ServiceError {
+  status: 'error'
+  error: Error
+}
+
+export type Service<T> = | ServiceInit | ServiceLoading | ServiceLoaded<T> | ServiceError
+
 export type API_Item = {
   url: string;
   name: string;
@@ -330,5 +350,4 @@ export type Evolution = {
   id: number;
   pokemon: Evolution_Item[];
 }
-
 

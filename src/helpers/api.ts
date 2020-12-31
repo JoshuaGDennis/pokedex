@@ -131,4 +131,4 @@ const getGeneration = (id: string | number): Promise<Types.Generation> =>
         }
     })
 
-export { getAllPokemon, getPokemonSpecies, getPokemonForm, getPokemon, getPokemonAbility, getPokemonType, getPokemonEvolutions, getAllGenerations, getGeneration }
+export { apiFetch, getAllPokemon, getPokemonSpecies, getPokemonForm, getPokemon, getPokemonAbility, getPokemonType, getPokemonEvolutions, getAllGenerations, getGeneration }
