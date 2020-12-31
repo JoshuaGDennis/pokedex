@@ -22,6 +22,7 @@ const PokemonPage: React.FC = () => {
   const [noPokemonFound, setNoPokemonFound] = useState(false)
 
   useEffect(() => {
+    setIsLoading(true)
     Promise.all([
       getPokemon(id).catch(err => console.log('No Pokemon found!')), 
       getPokemonSpecies(id).catch(err => console.log('No Species found!'))
@@ -43,8 +44,9 @@ const PokemonPage: React.FC = () => {
   return (
     <Container className="wide">
       <Navigation 
-        pokemon={pokemon}
-        loading={isLoading}
+        id={pokemon ? pokemon.id : 0}
+        color={pokemon ? pokemon.types[0] : 'steel'}
+        loadingPokemon={isLoading}
       />
 
       <Row className="mt-3">
