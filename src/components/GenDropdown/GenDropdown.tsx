@@ -1,43 +1,45 @@
 import "./GenDropdown.scss";
-import * as React from 'react'
-import * as Hooks from 'helpers/hooks'
-import * as Types from 'helpers/types'
+import React, { useState } from 'react'
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownItem from "./sub-components/DropdownItem";
 import DropdownToggle from "./sub-components/DropdownToggle";
+import { useGenerationContext } from 'context/GenerationContext'
 
-const { useState } = React
-const { useGeneration } = Hooks 
+interface iProps {
+  onChange(): void
+}
 
-const GenerationDropdown: React.FC = () => {
-  const [show, setShow] = useState(false);
-  const { generations, currentGen, setCurrentGen } = useGeneration();
+const GenDropdown: React.FC<iProps> = ({ onChange }) => {
+  const [show, setShow] = useState(false)
 
-  const handleChange = (gen: Types.Generation) => {
-    setShow(false);
-    setCurrentGen(gen);
-  };
+  const gens = useGenerationContext()
 
-  if (!currentGen) return null;
+  if(gens.status !== 'loaded') return null
 
   return (
     <Dropdown className="gen-dropdown">
-      <Dropdown.Toggle as={DropdownToggle} gen={currentGen} />
+      <Dropdown.Toggle as={DropdownToggle} gen={gens.current} />
       <Dropdown.Menu show={show}>
         <Dropdown.Header className="dropdown-menu__title">Generations</Dropdown.Header>
         <div className="dropdown-menu__inner">
-          {generations.map((gen) => (
+          {gens.generations.map((gen) => (
             <Dropdown.Item
               key={gen.id}
               as={DropdownItem}
               gen={gen}
-              onSelected={handleChange}
+              onSelected={() => {
+                setShow(false)
+                if(gen.id !== gens.current.id) {
+                  gens.updateCurrent(gen.id)
+                  onChange()
+                }
+              }}
             />
           ))}
         </div>
       </Dropdown.Menu>
     </Dropdown>
-  );
-};
+  )
+}
 
-export default GenerationDropdown;
+export default GenDropdown

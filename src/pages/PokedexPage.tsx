@@ -1,92 +1,64 @@
-import * as React from 'react'
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Search from "components/Search";
-import * as Hooks from 'helpers/hooks';
-import * as Types from 'helpers/types';
-import { PokedexCard } from "components/Card";
-import GenDropdown from "components/GenDropdown";
+import Search from 'components/Search'
+import { API_List } from 'helpers/types'
+import useAllService from 'hooks/useAllService'
+import GenDropdown from 'components/GenDropdown'
 import Container from "react-bootstrap/Container";
-import VisibleElement from "components/VisibleElement";
-
-const { useGeneration } = Hooks
-const { useEffect, useRef, useState } = React
+import PokedexLoader from 'components/PokedexLoader'
+import React, { useEffect, useRef, useState } from 'react'
+import { useGenerationContext } from 'context/GenerationContext'
 
 const PokedexPage: React.FC = () => {
-  const INITIAL_LOAD_ID = 0;
-  const INITIAL_MAXIMUM = 6;
 
-  const lastGen = useRef<Types.Generation>()
+  const [searchValue, setSearchValue] = useState("")
 
-  const [useSearch, setUseSearch] = useState(false)
+  const [loadID, setLoadID] = useState(0)
+  const [maximumItems, setMaximumItems] = useState(6)
 
-  const [loadId, setLoadId] = useState(INITIAL_LOAD_ID);
-  const [maximum, setMaximum] = useState(INITIAL_MAXIMUM);
+  const savedItems = useRef<API_List>([])
+  const [items, setItems] = useState<API_List>([])
 
-  const [items, setItems] = useState<{ id: number; name: string }[]>([]);
-  const [searchItems, setSearchItems] = useState<{ id: number; name: string }[]>([])
-
-  const { currentGen } = useGeneration();
-
-  const onSearchReset = () => {
-    setSearchItems([])
-    setUseSearch(false)
-    setLoadId(INITIAL_LOAD_ID)
-  }
-
-  const onSearchSubmit = (results: {id: number, name: string}[]) => {
-    setUseSearch(true)
-    setSearchItems(results)
-    setLoadId(INITIAL_LOAD_ID)
-  }
+  const generations = useGenerationContext()
+  const allPokemon = useAllService('pokemon')
 
   useEffect(() => {
-    if (currentGen) {
-      if (!lastGen.current) {
-        lastGen.current = currentGen;
-      } else if (lastGen.current.name !== currentGen.name) {
-        setLoadId(INITIAL_LOAD_ID);
-        setMaximum(INITIAL_MAXIMUM);
-        lastGen.current = currentGen;
-      }
-
-      setItems(currentGen.pokemon.slice(0, maximum));
+    if(allPokemon.status === 'loaded' && searchValue.length >= 3) {
+      setItems(allPokemon.payload.filter(({ name }) => name.indexOf(searchValue) > -1 && name.indexOf('-') === 1))
+    } else {
+      setLoadID(0)
+      setItems(savedItems.current)
     }
-  }, [currentGen, maximum]);
+  }, [allPokemon, searchValue])
 
+  useEffect(() => {
+    if(generations.status === 'loaded') {
+      const newItems = generations.current.pokemon.slice(0, maximumItems)
+      
+      savedItems.current = newItems
+      setItems(newItems)
+    }
+  }, [generations, maximumItems])
+     
   return (
     <Container className="wide">
       <Row>
         <Col>
-          <GenDropdown />
+          <GenDropdown onChange={() => setLoadID(0)} />
         </Col>
         <Col>
-          <Search
-            onReset={onSearchReset}
-            onSubmit={onSearchSubmit}
-          />
+          <Search value={searchValue} onChange={setSearchValue} />
         </Col>
       </Row>
-      <Row>
-        {(useSearch ? searchItems : items).map((item, i) => (
-          <Col xs={12} sm={6} md={4} key={item.id}>
-            <PokedexCard
-              id={item.name}
-              startLoad={loadId === i}
-              onLoaded={() => setLoadId((s) => s + 1)}
-            />
-          </Col>
-        ))}
-      </Row>
-      <Row>
-        <Col>
-          {loadId === maximum && (
-            <VisibleElement onVisible={() => setMaximum((s) => s + 3)} />
-          )}
-        </Col>
-      </Row>
+      <PokedexLoader 
+        items={items}
+        loadID={loadID} 
+        maximumItems={maximumItems}
+        onCardLoad={() => setLoadID(s => s + 1)}
+        onEndVisible={() => setMaximumItems(s => s + 3)}
+      />
     </Container>
-  );
-};
+  )
+}
 
-export default PokedexPage;
+export default PokedexPage

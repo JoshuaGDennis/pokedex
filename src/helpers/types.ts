@@ -23,6 +23,11 @@ export type API_Item = {
   name: string;
 }
 
+export type API_List = {
+  id: number, 
+  name: string
+}[]
+
 export type TextEntry = {
   language: API_Item;
   flavor_text: string;
