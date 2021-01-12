@@ -1,65 +1,52 @@
-import * as React from 'react'
-import * as API from 'helpers/api'
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import * as Types from 'helpers/types';
 import { useParams } from "react-router-dom";
-import Navigation from "components/Navigation";
+import Navigation from 'components/Navigation'
+import React, { useEffect, useState } from 'react'
 import Container from "react-bootstrap/Container";
-import NoPokemonFoundPage from './NoPokemonFoundPage';
+import useFormService from "hooks/useFormService";
+import usePokemonService from "hooks/usePokemonService";
+import useSpeciesService from "hooks/useSpeciesService";
 import { PokemonCard, PokemonCardLoading } from "components/Card";
-
-const { useEffect, useState } = React
-const { getPokemon, getPokemonSpecies } = API
 
 const PokemonPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
 
-  const [isLoading, setIsLoading] = useState(true);
-  const [pokemon, setPokemon] = useState<Types.Pokemon | null>(null);
-  const [species, setSpecies] = useState<Types.Species | null>(null);
+  const [nextID, setNextID] = useState(0)
+  const [speciesID, setSpeciesID] = useState(0) 
+  const [previousID, setPreviousID] = useState(0)
+  
+  const pokemon = usePokemonService(id)
 
-  const [noPokemonFound, setNoPokemonFound] = useState(false)
+  const nextPokemon = useFormService(nextID, nextID !== 0)
+  const previousPokemon = useFormService(previousID, previousID !== 0)
+  const pokemonSpecies = useSpeciesService(speciesID, speciesID !== 0)
 
   useEffect(() => {
-    setIsLoading(true)
-    Promise.all([
-      getPokemon(id).catch(err => console.log('No Pokemon found!')), 
-      getPokemonSpecies(id).catch(err => console.log('No Species found!'))
-    ])
-      .then(([pkm, spc]) => {
-        if(pkm && spc) {
-          setPokemon(pkm);
-          setSpecies(spc);
-          setIsLoading(false);
-          setNoPokemonFound(false)
-        } else {
-          setNoPokemonFound(true)
-        }
-      })
-  }, [id]);
-
-  if(noPokemonFound) return <NoPokemonFoundPage name={id} />
+    if(pokemon.status === 'loaded') {
+      setSpeciesID(pokemon.payload.id)
+      setNextID(pokemon.payload.nextID)
+      setPreviousID(pokemon.payload.previousID)
+    }
+  }, [pokemon])
 
   return (
     <Container className="wide">
-      <Navigation 
-        id={pokemon ? pokemon.id : 0}
-        color={pokemon ? pokemon.types[0] : 'steel'}
-        loadingPokemon={isLoading}
+      <Navigation
+        nextPokemon={nextPokemon}
+        previousPokemon={previousPokemon}
+        color={pokemon.status === 'loaded' ? pokemon.payload.types[0] : 'steel'}
       />
-
       <Row className="mt-3">
         <Col xs={12}>
-          {!isLoading && pokemon && species ? (
-            <PokemonCard data={pokemon} species={species} />
-          ) : (
-            <PokemonCardLoading />
-          )}
+          {(pokemon.status === 'loaded' && pokemonSpecies.status === 'loaded') 
+            ? <PokemonCard data={pokemon.payload} species={pokemonSpecies.payload} />
+            : <PokemonCardLoading />
+          }
         </Col>
       </Row>
     </Container>
-  );
-};
+  )
+}
 
-export default PokemonPage;
+export default PokemonPage

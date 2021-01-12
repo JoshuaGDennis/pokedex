@@ -40,6 +40,8 @@ const getPokemonForm = (id: string | number): Promise<Types.Form> =>
 const getPokemon = (id: string | number): Promise<Types.Pokemon> =>
     apiFetch(`/pokemon/${id}`).then((data: Types.Pokemon_Raw) => ({
         id: data.id,
+        nextID: 0,
+        previousID: 0,
         abilities: data.abilities.map(({ ability }) => ability.name),
         exp: data.base_experience,
         name: data.name,

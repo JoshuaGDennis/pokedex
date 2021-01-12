@@ -153,8 +153,10 @@ export type Pokemon = {
   sprite: string;
   height: number;
   weight: number;
+  nextID: number;
   moves: string[];
   types: string[];
+  previousID: number;
   abilities: string[];
   stats: {
     value: number;
