@@ -1,5 +1,5 @@
+import React from "react";
 import "../styles/Svgs.scss";
-import * as React from "react";
 
 interface iProps {
   show: boolean;

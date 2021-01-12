@@ -1,9 +1,7 @@
-import * as React from "react";
 import "./styles/ThemeToggle.scss";
 import Sun from "./sub-components/Sun";
 import Moon from "./sub-components/Moon";
-
-const { useEffect, useState } = React;
+import React, { useEffect, useState } from "react";
 
 const ThemeToggle: React.FC = () => {
   const [useDarkTheme, setUseDarkTheme] = useState(false);

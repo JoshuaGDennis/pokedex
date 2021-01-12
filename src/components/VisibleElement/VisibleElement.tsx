@@ -1,9 +1,6 @@
-import * as React from 'react'
 import "./VisibleElement.scss";
-import * as Hooks from 'helpers/hooks'
-
-const { useRef } = React
-const { useVisibility } = Hooks
+import React, { useRef } from 'react'
+import useVisibility from 'hooks/useVisibility'
 
 interface iProps {
   onVisible?(): any;
@@ -12,12 +9,7 @@ interface iProps {
   children?: React.ReactNode;
 }
 
-const VisibleElement: React.FC<iProps> = ({
-  onVisible = () => {},
-  className,
-  once,
-  children,
-}) => {
+const VisibleElement: React.FC<iProps> = ({ onVisible = () => {}, className, once, children }) => {
   const ref = useRef<HTMLDivElement>(null);
 
   useVisibility(ref, { fn: onVisible, once });
@@ -27,6 +19,7 @@ const VisibleElement: React.FC<iProps> = ({
       {children}
     </div>
   );
-};
+}
 
-export default VisibleElement;
+export default VisibleElement
+
