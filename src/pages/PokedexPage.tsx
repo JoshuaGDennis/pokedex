@@ -1,51 +1,23 @@
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Search from "components/Search";
 import { API_List } from "helpers/types";
-import useAllService from "hooks/useAllService";
+import { PokedexCard } from "components/Card";
 import GenDropdown from "components/GenDropdown";
 import Container from "react-bootstrap/Container";
-import React, { useEffect, useRef, useState } from "react";
-import { useGenerationContext } from "context/GenerationContext";
-import { PokedexCard } from "components/Card";
+import React, { useEffect, useState } from "react";
 import VisibleElement from "components/VisibleElement";
+import { useGenerationContext } from "context/GenerationContext";
 
 const PokedexPage: React.FC = () => {
-  const [searchValue, setSearchValue] = useState("");
+  const generations = useGenerationContext();
 
   const [loadID, setLoadID] = useState(0);
   const [maxItems, setMaxItems] = useState(6);
-
   const [items, setItems] = useState<API_List>([]);
 
-  const savedItems = useRef<API_List>([]);
-  const generations = useGenerationContext();
-  const allPokemon = useAllService("pokemon");
-
-  // Search results
-  useEffect(() => {
-    if (searchValue.length >= 3) {
-      if (allPokemon.status === "loaded") {
-        setItems(
-          allPokemon.payload.filter(
-            ({ name }) =>
-              name.indexOf(searchValue) > -1 && name.indexOf("-") === 1
-          )
-        );
-      }
-    } else {
-      setLoadID(0);
-      setItems(savedItems.current);
-    }
-  }, [allPokemon, searchValue]);
-
-  // Generation results
   useEffect(() => {
     if (generations.status === "loaded") {
-      const newItems = generations.current.pokemon.slice(0, maxItems);
-
-      savedItems.current = newItems;
-      setItems(newItems);
+      setItems(generations.current.pokemon.slice(0, maxItems));
     }
   }, [generations, maxItems]);
 
@@ -54,9 +26,6 @@ const PokedexPage: React.FC = () => {
       <Row>
         <Col>
           <GenDropdown onChange={() => setLoadID(0)} />
-        </Col>
-        <Col>
-          <Search value={searchValue} onChange={setSearchValue} />
         </Col>
       </Row>
       <Row>
