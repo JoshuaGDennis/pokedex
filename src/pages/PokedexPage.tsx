@@ -1,45 +1,54 @@
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Search from 'components/Search'
-import { API_List } from 'helpers/types'
-import useAllService from 'hooks/useAllService'
-import GenDropdown from 'components/GenDropdown'
+import Search from "components/Search";
+import { API_List } from "helpers/types";
+import useAllService from "hooks/useAllService";
+import GenDropdown from "components/GenDropdown";
 import Container from "react-bootstrap/Container";
-import PokedexLoader from 'components/PokedexLoader'
-import React, { useEffect, useRef, useState } from 'react'
-import { useGenerationContext } from 'context/GenerationContext'
+import React, { useEffect, useRef, useState } from "react";
+import { useGenerationContext } from "context/GenerationContext";
+import { PokedexCard } from "components/Card";
+import VisibleElement from "components/VisibleElement";
 
 const PokedexPage: React.FC = () => {
+  const [searchValue, setSearchValue] = useState("");
 
-  const [searchValue, setSearchValue] = useState("")
+  const [loadID, setLoadID] = useState(0);
+  const [maxItems, setMaxItems] = useState(6);
 
-  const [loadID, setLoadID] = useState(0)
-  const [maximumItems, setMaximumItems] = useState(6)
+  const [items, setItems] = useState<API_List>([]);
 
-  const savedItems = useRef<API_List>([])
-  const [items, setItems] = useState<API_List>([])
+  const savedItems = useRef<API_List>([]);
+  const generations = useGenerationContext();
+  const allPokemon = useAllService("pokemon");
 
-  const generations = useGenerationContext()
-  const allPokemon = useAllService('pokemon')
-
+  // Search results
   useEffect(() => {
-    if(allPokemon.status === 'loaded' && searchValue.length >= 3) {
-      setItems(allPokemon.payload.filter(({ name }) => name.indexOf(searchValue) > -1 && name.indexOf('-') === 1))
+    if (searchValue.length >= 3) {
+      if (allPokemon.status === "loaded") {
+        setItems(
+          allPokemon.payload.filter(
+            ({ name }) =>
+              name.indexOf(searchValue) > -1 && name.indexOf("-") === 1
+          )
+        );
+      }
     } else {
-      setLoadID(0)
-      setItems(savedItems.current)
+      setLoadID(0);
+      setItems(savedItems.current);
     }
-  }, [allPokemon, searchValue])
+  }, [allPokemon, searchValue]);
 
+  // Generation results
   useEffect(() => {
-    if(generations.status === 'loaded') {
-      const newItems = generations.current.pokemon.slice(0, maximumItems)
-      
-      savedItems.current = newItems
-      setItems(newItems)
+    if (generations.status === "loaded") {
+      const newItems = generations.current.pokemon.slice(0, maxItems);
+
+      savedItems.current = newItems;
+      setItems(newItems);
     }
-  }, [generations, maximumItems])
-     
+  }, [generations, maxItems]);
+
   return (
     <Container className="wide">
       <Row>
@@ -50,15 +59,26 @@ const PokedexPage: React.FC = () => {
           <Search value={searchValue} onChange={setSearchValue} />
         </Col>
       </Row>
-      <PokedexLoader 
-        items={items}
-        loadID={loadID} 
-        maximumItems={maximumItems}
-        onCardLoad={() => setLoadID(s => s + 1)}
-        onEndVisible={() => setMaximumItems(s => s + 3)}
-      />
+      <Row>
+        {items.map((item, i) => (
+          <Col xs={12} sm={6} md={4} key={item.id}>
+            <PokedexCard
+              id={item.name}
+              startLoad={loadID === i}
+              onLoaded={() => setLoadID((s) => s + 1)}
+            />
+          </Col>
+        ))}
+      </Row>
+      <Row>
+        <Col>
+          {loadID === maxItems && (
+            <VisibleElement onVisible={() => setMaxItems((s) => s + 3)} />
+          )}
+        </Col>
+      </Row>
     </Container>
-  )
-}
+  );
+};
 
-export default PokedexPage
+export default PokedexPage;

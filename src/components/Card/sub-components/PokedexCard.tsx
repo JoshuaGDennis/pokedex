@@ -1,20 +1,13 @@
+import React, { useRef } from "react";
 import Card from "../Card";
-import * as React from 'react'
-import * as API from 'helpers/api'
-import "../styles/PokedexCard.scss";
 import Image from "components/Image";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import * as Hooks from 'helpers/hooks';
-import * as Types from 'helpers/types';
-import * as Strings from 'helpers/strings';
 import Pokeball from "components/Pokeball";
 import PokedexCardLoading from "./PokedexCardLoading";
-
-const { getPokemon } = API
-const { capitalise } = Strings
-const { useVisibility } = Hooks
-const { useEffect, useRef, useState } = React
+import usePokemonService from "hooks/usePokemonService";
+import useVisibility from "hooks/useVisibility";
+import { capitalise } from "helpers/strings";
 
 interface iProps {
   id: string;
@@ -23,49 +16,39 @@ interface iProps {
 }
 
 const PokedexCard: React.FC<iProps> = ({ id, startLoad, onLoaded }) => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [pokemon, setPokemon] = useState<Types.Pokemon | null>(null);
-
   const ref = useRef<HTMLDivElement>(null);
+  const isInView = useVisibility(ref, { once: true });
 
-  const inView = useVisibility(ref, { once: true });
+  const pokemon = usePokemonService(id, isInView && startLoad);
 
-  useEffect(() => {
-    if (inView && startLoad) {
-      getPokemon(id).then((data) => {
-        setPokemon(data);
-        setIsLoading(false);
-      });
-    }
-  }, [inView, startLoad, id]);
+  if (pokemon.status !== "loaded") return <PokedexCardLoading ref={ref} />;
 
-  if (!pokemon || isLoading) {
-    return <PokedexCardLoading ref={ref} />;
-  }
+  const { payload } = pokemon;
 
   return (
     <Card
       ref={ref}
-      to={`/pokemon/${pokemon.name}`}
-      className={`pokedex-card bg-${pokemon.types[0]}`}
+      to={`/pokemon/${payload.name}`}
+      className={`pokedex-card bg-${payload.types[0]}`}
     >
       <Card.Body>
-        <p className="pokedex-card__id">#{pokemon.id}</p>
-        <Pokeball className={`type-${pokemon.types[0]}`} />
+        <p className="pokedex-card__id">#{payload.id}</p>
+        <Pokeball className={`type-${payload.types[0]}`} />
         <Row>
           <Col className="pokedex-card__image-col">
-            <Image src={pokemon.image} onLoad={onLoaded} />
+            <Image src={payload.image} onLoad={onLoaded} />
           </Col>
         </Row>
       </Card.Body>
+
       <Card.Footer>
         <Row>
           <Col>
-            <h1 className="text-center">{capitalise(pokemon.name)}</h1>
+            <h1 className="text-center">{capitalise(payload.name)}</h1>
           </Col>
         </Row>
         <Row>
-          {pokemon.types.map((type) => (
+          {payload.types.map((type) => (
             <Col key={type}>
               <p className={`text-center color-${type}`}>
                 {type.toUpperCase()}

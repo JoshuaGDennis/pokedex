@@ -1,5 +1,5 @@
 import "./Pokeball.scss";
-import * as React from "react";
+import React from "react";
 
 interface iProps {
   className?: string;

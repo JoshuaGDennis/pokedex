@@ -1,9 +1,7 @@
 import "./styles/Card.scss";
-import * as React from 'react'
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
-
-const { forwardRef } = React
+import React, { forwardRef } from "react";
 
 interface iProps {
   to?: string;
@@ -12,7 +10,9 @@ interface iProps {
 }
 
 interface iCompounded
-  extends React.ForwardRefExoticComponent<iProps & React.RefAttributes<HTMLDivElement>> {
+  extends React.ForwardRefExoticComponent<
+    iProps & React.RefAttributes<HTMLDivElement>
+  > {
   Body: React.FC<{ children: React.ReactNode }>;
   Footer: React.FC<{ children: React.ReactNode }>;
 }
